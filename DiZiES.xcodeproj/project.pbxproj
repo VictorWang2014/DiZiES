@@ -22,6 +22,10 @@
 		84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7A51B0B8A2C006F413D /* PersonalCenterViewController.m */; };
 		84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7A81B0B8A3C006F413D /* FileManagerViewController.m */; };
 		84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7AB1B0B8A4F006F413D /* HomeViewController.m */; };
+		84F053821B0CD90400C441AC /* UIColor+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053811B0CD90400C441AC /* UIColor+Tool.m */; };
+		84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053851B0E19FD00C441AC /* HomeListTableViewCell.m */; };
+		84F053891B0E1BE800C441AC /* UIImage+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053881B0E1BE800C441AC /* UIImage+Tool.m */; };
+		84F0538F1B0E293B00C441AC /* HomeDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0538E1B0E293B00C441AC /* HomeDataModle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,14 @@
 		84B5D7A81B0B8A3C006F413D /* FileManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileManagerViewController.m; path = Source/ViewControllers/FileDownloadController/FileManagerViewController.m; sourceTree = "<group>"; };
 		84B5D7AA1B0B8A4F006F413D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Source/ViewControllers/HomeController/HomeViewController.h; sourceTree = "<group>"; };
 		84B5D7AB1B0B8A4F006F413D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Source/ViewControllers/HomeController/HomeViewController.m; sourceTree = "<group>"; };
+		84F053801B0CD90400C441AC /* UIColor+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Tool.h"; path = "Utiles/UIColor+Tool.h"; sourceTree = "<group>"; };
+		84F053811B0CD90400C441AC /* UIColor+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Tool.m"; path = "Utiles/UIColor+Tool.m"; sourceTree = "<group>"; };
+		84F053841B0E19FD00C441AC /* HomeListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeListTableViewCell.h; path = Source/Views/HomeListTableViewCell.h; sourceTree = "<group>"; };
+		84F053851B0E19FD00C441AC /* HomeListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeListTableViewCell.m; path = Source/Views/HomeListTableViewCell.m; sourceTree = "<group>"; };
+		84F053871B0E1BE800C441AC /* UIImage+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tool.h"; path = "Utiles/UIImage+Tool.h"; sourceTree = "<group>"; };
+		84F053881B0E1BE800C441AC /* UIImage+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tool.m"; path = "Utiles/UIImage+Tool.m"; sourceTree = "<group>"; };
+		84F0538D1B0E293B00C441AC /* HomeDataModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDataModle.h; path = Source/Modles/HomeDataModle.h; sourceTree = "<group>"; };
+		84F0538E1B0E293B00C441AC /* HomeDataModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataModle.m; path = Source/Modles/HomeDataModle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +160,10 @@
 			children = (
 				84B5D7841B0B891B006F413D /* FileManager.h */,
 				84B5D7851B0B891B006F413D /* FileManager.m */,
+				84F053871B0E1BE800C441AC /* UIImage+Tool.h */,
+				84F053881B0E1BE800C441AC /* UIImage+Tool.m */,
+				84F053801B0CD90400C441AC /* UIColor+Tool.h */,
+				84F053811B0CD90400C441AC /* UIColor+Tool.m */,
 				84B5D7861B0B891B006F413D /* NSObject+Tool.h */,
 				84B5D7871B0B891B006F413D /* NSObject+Tool.m */,
 				84B5D7881B0B891B006F413D /* Tools.h */,
@@ -193,6 +209,8 @@
 		84B5D77F1B0B88A0006F413D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84F053841B0E19FD00C441AC /* HomeListTableViewCell.h */,
+				84F053851B0E19FD00C441AC /* HomeListTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -200,6 +218,8 @@
 		84B5D7801B0B88A6006F413D /* Modles */ = {
 			isa = PBXGroup;
 			children = (
+				84F0538D1B0E293B00C441AC /* HomeDataModle.h */,
+				84F0538E1B0E293B00C441AC /* HomeDataModle.m */,
 			);
 			name = Modles;
 			sourceTree = "<group>";
@@ -332,9 +352,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B5D7A21B0B8A08006F413D /* EBSBaseViewController.m in Sources */,
+				84F053891B0E1BE800C441AC /* UIImage+Tool.m in Sources */,
+				84F0538F1B0E293B00C441AC /* HomeDataModle.m in Sources */,
 				84B5D7A31B0B8A08006F413D /* EBSTabBarViewController.m in Sources */,
 				84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */,
 				84B5D7831B0B88E6006F413D /* AppDelegate.m in Sources */,
+				84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */,
 				84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */,
 				84B5D7931B0B8944006F413D /* DiZiES.xcdatamodeld in Sources */,
 				84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */,
@@ -342,6 +365,7 @@
 				84B5D78B1B0B891B006F413D /* FileManager.m in Sources */,
 				84B5D78C1B0B891B006F413D /* NSObject+Tool.m in Sources */,
 				84B5D78D1B0B891B006F413D /* UIView+Tool.m in Sources */,
+				84F053821B0CD90400C441AC /* UIColor+Tool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +443,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -457,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -470,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DiZiES/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -480,6 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DiZiES/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -538,6 +564,7 @@
 				84B5D7701B0B8608006F413D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84B5D7711B0B8608006F413D /* Build configuration list for PBXNativeTarget "DiZiESTests" */ = {
 			isa = XCConfigurationList;
@@ -546,6 +573,7 @@
 				84B5D7731B0B8608006F413D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

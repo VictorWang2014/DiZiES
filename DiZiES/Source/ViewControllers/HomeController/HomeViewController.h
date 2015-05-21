@@ -10,4 +10,8 @@
 
 @interface HomeViewController : EBSBaseViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *homeListTableView;
+
+@property (weak, nonatomic) IBOutlet UIWebView *homeWebView;
+
 @end

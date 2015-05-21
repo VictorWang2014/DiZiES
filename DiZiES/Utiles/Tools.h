@@ -11,6 +11,8 @@
 
 #import "UIView+Tool.h"
 #import "NSObject+Tool.h"
+#import "UIColor+Tool.h"
+#import "UIImage+Tool.h"
 #import "FileManager.h"
 
 #endif
