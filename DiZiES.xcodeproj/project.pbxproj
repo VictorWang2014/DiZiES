@@ -26,6 +26,20 @@
 		84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053851B0E19FD00C441AC /* HomeListTableViewCell.m */; };
 		84F053891B0E1BE800C441AC /* UIImage+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053881B0E1BE800C441AC /* UIImage+Tool.m */; };
 		84F0538F1B0E293B00C441AC /* HomeDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0538E1B0E293B00C441AC /* HomeDataModle.m */; };
+		84F053C71B10B2AB00C441AC /* EBSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053C61B10B2AB00C441AC /* EBSMainViewController.m */; };
+		84F053CD1B10CA0A00C441AC /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053CC1B10CA0A00C441AC /* MainTableViewCell.m */; };
+		84F053D01B10CA7000C441AC /* MainDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053CF1B10CA7000C441AC /* MainDataModle.m */; };
+		84F053D41B11629700C441AC /* default_userPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053D31B11629700C441AC /* default_userPortrait.png */; };
+		84F053D81B1171C100C441AC /* lefttab_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053D51B1171C100C441AC /* lefttab_1.png */; };
+		84F053D91B1171C100C441AC /* lefttab_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053D61B1171C100C441AC /* lefttab_2.png */; };
+		84F053DA1B1171C100C441AC /* lefttab_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053D71B1171C100C441AC /* lefttab_3.png */; };
+		84F053DE1B11A5EB00C441AC /* lefttab_select_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053DB1B11A5EB00C441AC /* lefttab_select_1.png */; };
+		84F053DF1B11A5EB00C441AC /* lefttab_select_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053DC1B11A5EB00C441AC /* lefttab_select_2.png */; };
+		84F053E01B11A5EB00C441AC /* lefttab_select_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053DD1B11A5EB00C441AC /* lefttab_select_3.png */; };
+		84F053E41B11BCBA00C441AC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053E31B11BCBA00C441AC /* LoginViewController.m */; };
+		84F053E71B11BD5F00C441AC /* UserInfoModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053E61B11BD5F00C441AC /* UserInfoModle.m */; };
+		84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053ED1B121BC000C441AC /* HomeListDataModle.m */; };
+		84F053F11B121BED00C441AC /* HomeDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053F01B121BED00C441AC /* HomeDataHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +90,27 @@
 		84F053881B0E1BE800C441AC /* UIImage+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tool.m"; path = "Utiles/UIImage+Tool.m"; sourceTree = "<group>"; };
 		84F0538D1B0E293B00C441AC /* HomeDataModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDataModle.h; path = Source/Modles/HomeDataModle.h; sourceTree = "<group>"; };
 		84F0538E1B0E293B00C441AC /* HomeDataModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataModle.m; path = Source/Modles/HomeDataModle.m; sourceTree = "<group>"; };
+		84F053C51B10B2AB00C441AC /* EBSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBSMainViewController.h; sourceTree = "<group>"; };
+		84F053C61B10B2AB00C441AC /* EBSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBSMainViewController.m; sourceTree = "<group>"; };
+		84F053CB1B10CA0A00C441AC /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainTableViewCell.h; path = Source/Views/MainTableViewCell.h; sourceTree = "<group>"; };
+		84F053CC1B10CA0A00C441AC /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainTableViewCell.m; path = Source/Views/MainTableViewCell.m; sourceTree = "<group>"; };
+		84F053CE1B10CA7000C441AC /* MainDataModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainDataModle.h; path = Source/Modles/MainDataModle.h; sourceTree = "<group>"; };
+		84F053CF1B10CA7000C441AC /* MainDataModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainDataModle.m; path = Source/Modles/MainDataModle.m; sourceTree = "<group>"; };
+		84F053D31B11629700C441AC /* default_userPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_userPortrait.png; path = Images/default_userPortrait.png; sourceTree = "<group>"; };
+		84F053D51B1171C100C441AC /* lefttab_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_1.png; path = Images/lefttab_1.png; sourceTree = "<group>"; };
+		84F053D61B1171C100C441AC /* lefttab_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_2.png; path = Images/lefttab_2.png; sourceTree = "<group>"; };
+		84F053D71B1171C100C441AC /* lefttab_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_3.png; path = Images/lefttab_3.png; sourceTree = "<group>"; };
+		84F053DB1B11A5EB00C441AC /* lefttab_select_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_select_1.png; path = Images/lefttab_select_1.png; sourceTree = "<group>"; };
+		84F053DC1B11A5EB00C441AC /* lefttab_select_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_select_2.png; path = Images/lefttab_select_2.png; sourceTree = "<group>"; };
+		84F053DD1B11A5EB00C441AC /* lefttab_select_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lefttab_select_3.png; path = Images/lefttab_select_3.png; sourceTree = "<group>"; };
+		84F053E21B11BCBA00C441AC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Source/ViewControllers/LoginViewController/LoginViewController.h; sourceTree = "<group>"; };
+		84F053E31B11BCBA00C441AC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Source/ViewControllers/LoginViewController/LoginViewController.m; sourceTree = "<group>"; };
+		84F053E51B11BD5F00C441AC /* UserInfoModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoModle.h; path = Source/Modles/UserInfoModle.h; sourceTree = "<group>"; };
+		84F053E61B11BD5F00C441AC /* UserInfoModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoModle.m; path = Source/Modles/UserInfoModle.m; sourceTree = "<group>"; };
+		84F053EC1B121BC000C441AC /* HomeListDataModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeListDataModle.h; path = Source/Modles/CoreDataModle/HomeListDataModle.h; sourceTree = "<group>"; };
+		84F053ED1B121BC000C441AC /* HomeListDataModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeListDataModle.m; path = Source/Modles/CoreDataModle/HomeListDataModle.m; sourceTree = "<group>"; };
+		84F053EF1B121BED00C441AC /* HomeDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDataHelper.h; path = Source/Modles/CoreDataModle/HomeDataHelper.h; sourceTree = "<group>"; };
+		84F053F01B121BED00C441AC /* HomeDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataHelper.m; path = Source/Modles/CoreDataModle/HomeDataHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +211,13 @@
 		84B5D77C1B0B8878006F413D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				84F053DB1B11A5EB00C441AC /* lefttab_select_1.png */,
+				84F053DC1B11A5EB00C441AC /* lefttab_select_2.png */,
+				84F053DD1B11A5EB00C441AC /* lefttab_select_3.png */,
+				84F053D51B1171C100C441AC /* lefttab_1.png */,
+				84F053D61B1171C100C441AC /* lefttab_2.png */,
+				84F053D71B1171C100C441AC /* lefttab_3.png */,
+				84F053D31B11629700C441AC /* default_userPortrait.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -195,8 +237,11 @@
 		84B5D77E1B0B8895006F413D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84F053E11B11BC8500C441AC /* LoginViewController */,
 				84B5D79E1B0B8A08006F413D /* EBSBaseViewController.h */,
 				84B5D79F1B0B8A08006F413D /* EBSBaseViewController.m */,
+				84F053C51B10B2AB00C441AC /* EBSMainViewController.h */,
+				84F053C61B10B2AB00C441AC /* EBSMainViewController.m */,
 				84B5D7A01B0B8A08006F413D /* EBSTabBarViewController.h */,
 				84B5D7A11B0B8A08006F413D /* EBSTabBarViewController.m */,
 				84B5D79D1B0B89B3006F413D /* PersonalCenterViewController */,
@@ -211,6 +256,8 @@
 			children = (
 				84F053841B0E19FD00C441AC /* HomeListTableViewCell.h */,
 				84F053851B0E19FD00C441AC /* HomeListTableViewCell.m */,
+				84F053CB1B10CA0A00C441AC /* MainTableViewCell.h */,
+				84F053CC1B10CA0A00C441AC /* MainTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -218,8 +265,13 @@
 		84B5D7801B0B88A6006F413D /* Modles */ = {
 			isa = PBXGroup;
 			children = (
+				84F053EB1B121B9900C441AC /* CoreDataModle */,
 				84F0538D1B0E293B00C441AC /* HomeDataModle.h */,
 				84F0538E1B0E293B00C441AC /* HomeDataModle.m */,
+				84F053CE1B10CA7000C441AC /* MainDataModle.h */,
+				84F053CF1B10CA7000C441AC /* MainDataModle.m */,
+				84F053E51B11BD5F00C441AC /* UserInfoModle.h */,
+				84F053E61B11BD5F00C441AC /* UserInfoModle.m */,
 			);
 			name = Modles;
 			sourceTree = "<group>";
@@ -249,6 +301,26 @@
 				84B5D7A51B0B8A2C006F413D /* PersonalCenterViewController.m */,
 			);
 			name = PersonalCenterViewController;
+			sourceTree = "<group>";
+		};
+		84F053E11B11BC8500C441AC /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84F053E21B11BCBA00C441AC /* LoginViewController.h */,
+				84F053E31B11BCBA00C441AC /* LoginViewController.m */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		84F053EB1B121B9900C441AC /* CoreDataModle */ = {
+			isa = PBXGroup;
+			children = (
+				84F053EC1B121BC000C441AC /* HomeListDataModle.h */,
+				84F053ED1B121BC000C441AC /* HomeListDataModle.m */,
+				84F053EF1B121BED00C441AC /* HomeDataHelper.h */,
+				84F053F01B121BED00C441AC /* HomeDataHelper.m */,
+			);
+			name = CoreDataModle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,9 +403,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F053E01B11A5EB00C441AC /* lefttab_select_3.png in Resources */,
+				84F053DE1B11A5EB00C441AC /* lefttab_select_1.png in Resources */,
+				84F053D81B1171C100C441AC /* lefttab_1.png in Resources */,
+				84F053DF1B11A5EB00C441AC /* lefttab_select_2.png in Resources */,
 				84B5D79A1B0B8967006F413D /* Main.storyboard in Resources */,
+				84F053DA1B1171C100C441AC /* lefttab_3.png in Resources */,
 				84B5D7991B0B8967006F413D /* LaunchScreen.xib in Resources */,
+				84F053D91B1171C100C441AC /* lefttab_2.png in Resources */,
 				84B5D7941B0B8944006F413D /* Images.xcassets in Resources */,
+				84F053D41B11629700C441AC /* default_userPortrait.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F053C71B10B2AB00C441AC /* EBSMainViewController.m in Sources */,
 				84B5D7A21B0B8A08006F413D /* EBSBaseViewController.m in Sources */,
 				84F053891B0E1BE800C441AC /* UIImage+Tool.m in Sources */,
 				84F0538F1B0E293B00C441AC /* HomeDataModle.m in Sources */,
@@ -360,11 +440,17 @@
 				84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */,
 				84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */,
 				84B5D7931B0B8944006F413D /* DiZiES.xcdatamodeld in Sources */,
+				84F053CD1B10CA0A00C441AC /* MainTableViewCell.m in Sources */,
 				84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */,
 				84B5D74E1B0B8608006F413D /* main.m in Sources */,
 				84B5D78B1B0B891B006F413D /* FileManager.m in Sources */,
+				84F053D01B10CA7000C441AC /* MainDataModle.m in Sources */,
+				84F053E41B11BCBA00C441AC /* LoginViewController.m in Sources */,
+				84F053F11B121BED00C441AC /* HomeDataHelper.m in Sources */,
 				84B5D78C1B0B891B006F413D /* NSObject+Tool.m in Sources */,
 				84B5D78D1B0B891B006F413D /* UIView+Tool.m in Sources */,
+				84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */,
+				84F053E71B11BD5F00C441AC /* UserInfoModle.m in Sources */,
 				84F053821B0CD90400C441AC /* UIColor+Tool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#define AppDelegateContext  [[UIApplication sharedApplication] delegate]
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

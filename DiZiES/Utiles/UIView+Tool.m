@@ -34,4 +34,23 @@
     return self.frame.size.width;
 }
 
+- (void)setEBorderColor:(UIColor *)EBorderColor
+{
+    CALayer *layer      = self.layer;
+    layer.borderColor   = EBorderColor.CGColor;
+}
+
+- (void)setEBorderWidth:(CGFloat)EBorderWidth
+{
+    CALayer *layer      = self.layer;
+    layer.borderWidth   = EBorderWidth;
+}
+
+- (void)setECornerRadius:(CGFloat)ECornerRadius
+{
+    self.clipsToBounds  = YES;
+    CALayer *layer      = self.layer;
+    layer.cornerRadius  = ECornerRadius;
+}
+
 @end

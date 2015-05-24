@@ -1,0 +1,165 @@
+//
+//  EBSMainViewController.m
+//  DiZiES
+//
+//  Created by admin on 15/5/23.
+//  Copyright (c) 2015年 DiZiCompanyLimited. All rights reserved.
+//
+
+#import "EBSMainViewController.h"
+#import "EBSTabBarViewController.h"
+
+#import "MainTableViewCell.h"
+
+#import "MainDataModle.h"
+#import "Tools.h"
+
+@interface EBSMainViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    int _selectRow;
+}
+
+@property (nonatomic, strong) IBOutlet UITableView      *tabTableView;
+@property (nonatomic, strong) NSMutableArray            *tabListArray;
+@property (nonatomic, strong) EBSTabBarViewController   *tabbarViewController;
+
+@end
+
+@implementation EBSMainViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self _loadData];
+}
+
+- (void)_loadData// 数据加载
+{
+    _selectRow                      = 1;
+    _tabListArray                   = [NSMutableArray array];
+    
+    PersonDataModle *personData     = [[PersonDataModle alloc] init];
+    personData.nameStr              = @"杨善利";
+    personData.imageNameStr         = @"default_userPortrait.png";
+    [_tabListArray addObject:personData];
+    
+    MainDataModle *data1            = [[MainDataModle alloc] init];
+    data1.titleStr                  = @"文档";
+    data1.imageNameStr              = @"lefttab_1.png";
+    data1.selectImageNaemStr        = @"lefttab_select_1.png";
+    [_tabListArray addObject:data1];
+
+    MainDataModle *data2            = [[MainDataModle alloc] init];
+    data2.titleStr                  = @"下载";
+    data2.imageNameStr              = @"lefttab_2.png";
+    data2.selectImageNaemStr        = @"lefttab_select_2.png";
+    [_tabListArray addObject:data2];
+    
+    MainDataModle *data3            = [[MainDataModle alloc] init];
+    data3.titleStr                  = @"收藏";
+    data3.imageNameStr              = @"lefttab_3.png";
+    data3.selectImageNaemStr        = @"lefttab_select_3.png";
+    [_tabListArray addObject:data3];
+
+    MainDataModle *data4            = [[MainDataModle alloc] init];
+    data4.titleStr                  = @"设置";
+    data4.imageNameStr              = @"lefttab_2.png";
+    data4.selectImageNaemStr        = @"lefttab_select_2.png";
+    [_tabListArray addObject:data4];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"!------goto container view");
+    EBSTabBarViewController *tabbar     = segue.destinationViewController;
+    if ([tabbar isKindOfClass:[EBSTabBarViewController class]])
+        self.tabbarViewController       = tabbar;
+    
+}
+
+#pragma mark - UITableViewDataSource UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        MainPersonTableViewCell *cell       = [tableView dequeueReusableCellWithIdentifier:@"mainpersontableviewcell"];        
+        PersonDataModle *data               = [_tabListArray objectAtIndex:0];
+        cell.titleLabel.text                = data.nameStr;
+        cell.imgeView.ECornerRadius         = 5;
+        cell.imgeView.image                 = [UIImage imageNamed:data.imageNameStr];
+        cell.backgroundColor                = UIColorWith(39, 39, 39);
+        return cell;
+    }
+    else
+    {
+        MainTableViewCell *cell             = [tableView dequeueReusableCellWithIdentifier:@"maintableviewcell"];
+        UIView *selectView                  = [[UIView alloc] init];
+        selectView.backgroundColor          = [UIColor clearColor];
+        cell.selectedBackgroundView         = selectView;
+        
+        MainDataModle *data                 = [_tabListArray objectAtIndex:indexPath.row];
+        if (indexPath.row == _selectRow)
+            [cell setCellSelect:YES data:data];
+        else
+            [cell setCellSelect:NO data:data];
+        cell.backgroundColor                = UIColorWith(39, 39, 39);
+        return cell;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _tabListArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        return 80;
+    }
+    else
+    {
+        return 60;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _selectRow = indexPath.row;
+    [tableView reloadData];
+    
+    if (indexPath.row == 1) {
+        [_tabbarViewController setSelectedIndex:0];
+    }else if (indexPath.row == 2) {
+        [_tabbarViewController setSelectedIndex:1];
+    }else if (indexPath.row == 3) {
+        [_tabbarViewController setSelectedIndex:2];
+    }else if (indexPath.row == 4) {
+        [_tabbarViewController setSelectedIndex:3];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        return NO;
+    }
+    return YES;
+}
+
+- (IBAction)userRowSelect:(UIButton *)sender
+{
+    NSLog(@"!------row select");
+}
+
+@end
+

@@ -16,3 +16,17 @@
 @property (nonatomic, strong) UIImage       *image;
 
 @end
+
+
+@interface HomeListDataModle1 : NSObject
+
+@property (nonatomic, strong) NSString      *fatherNode;
+
+@property (nonatomic, strong) NSString      *currentNode;
+
+@property (nonatomic) BOOL                  canExpand;
+
+@property (nonatomic, strong) NSString      *fileNameStr;
+
+
+@end

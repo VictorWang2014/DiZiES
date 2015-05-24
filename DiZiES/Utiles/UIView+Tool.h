@@ -12,5 +12,8 @@
 
 @property (nonatomic) CGFloat EHeight;
 @property (nonatomic) CGFloat EWidth;
+@property (nonatomic) CGFloat ECornerRadius;
+@property (nonatomic) CGFloat EBorderWidth;
+@property (nonatomic) UIColor *EBorderColor;
 
 @end
