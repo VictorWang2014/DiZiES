@@ -22,4 +22,6 @@
 
 - (NSArray *)fetchItemsMatching:(NSString *)searchStr forAttribute:(NSString *)attribute;
 
+- (void)deleteObjects;
+
 @end

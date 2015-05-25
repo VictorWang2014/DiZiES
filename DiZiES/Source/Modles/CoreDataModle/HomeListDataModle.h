@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSString * currentNode;
 @property (nonatomic, retain) NSNumber * canExpand;
 @property (nonatomic, retain) NSString * fileNameStr;
+@property (nonatomic) NSInteger index;
 
 @end

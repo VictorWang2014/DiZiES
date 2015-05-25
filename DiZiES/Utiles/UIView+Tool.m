@@ -40,10 +40,22 @@
     layer.borderColor   = EBorderColor.CGColor;
 }
 
+- (UIColor *)EBorderColor
+{
+    CALayer *layer      = self.layer;
+    return (UIColor *)layer.borderColor;
+}
+
 - (void)setEBorderWidth:(CGFloat)EBorderWidth
 {
     CALayer *layer      = self.layer;
     layer.borderWidth   = EBorderWidth;
+}
+
+- (CGFloat)EBorderWidth
+{
+    CALayer *layer      = self.layer;
+    return layer.borderWidth;
 }
 
 - (void)setECornerRadius:(CGFloat)ECornerRadius
@@ -51,6 +63,12 @@
     self.clipsToBounds  = YES;
     CALayer *layer      = self.layer;
     layer.cornerRadius  = ECornerRadius;
+}
+
+- (CGFloat)ECornerRadius
+{
+    CALayer *layer      = self.layer;
+    return layer.cornerRadius;
 }
 
 @end

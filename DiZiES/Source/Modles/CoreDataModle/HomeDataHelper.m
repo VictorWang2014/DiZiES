@@ -32,7 +32,7 @@
 
 - (HomeListDataModle *)newObject
 {
-    HomeListDataModle *model        = (HomeListDataModle *)[NSEntityDescription insertNewObjectForEntityForName:@"HomeListDataModle" inManagedObjectContext:_context];
+    HomeListDataModle *model            = (HomeListDataModle *)[NSEntityDescription insertNewObjectForEntityForName:@"HomeListDataModle" inManagedObjectContext:_context];
     return model;
 }
 
@@ -52,13 +52,24 @@
     NSEntityDescription *entity     = [NSEntityDescription entityForName:@"HomeListDataModle" inManagedObjectContext:_context];
     NSFetchRequest *fetchRequest    = [[NSFetchRequest alloc] init];
     fetchRequest.entity             = entity;
-    fetchRequest.predicate          = [NSPredicate predicateWithFormat:@"fatherNode == %@", attribute];
+    if (attribute.length > 0 && searchStr.length > 0)
+    {
+        fetchRequest.predicate          = [NSPredicate predicateWithFormat:@"%K == %@", searchStr, attribute];
+    }
+    fetchRequest.returnsObjectsAsFaults = NO;
     NSError *error;
     NSArray *array = [_context executeFetchRequest:fetchRequest error:&error];
-//    if () {
-//        
-//    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"搜索个数" message:[NSString stringWithFormat:@"%d", array.count] delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+    [alert show];
     return array;
+}
+
+- (void)deleteObjects
+{
+    NSArray *arra = [self fetchItemsMatching:nil forAttribute:nil];
+    for (NSManagedObject *obj in arra) {
+        [_context deleteObject:obj];
+    }
 }
 
 @end

@@ -5,8 +5,9 @@
         <attribute name="currentNode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fatherNode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fileNameStr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HomeListDataModle" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="HomeListDataModle" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

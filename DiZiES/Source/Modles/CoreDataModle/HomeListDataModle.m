@@ -15,5 +15,6 @@
 @dynamic currentNode;
 @dynamic canExpand;
 @dynamic fileNameStr;
+@dynamic index;
 
 @end
