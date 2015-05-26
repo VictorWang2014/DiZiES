@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UITableView      *tabTableView;
 @property (nonatomic, strong) NSMutableArray            *tabListArray;
 @property (nonatomic, strong) EBSTabBarViewController   *tabbarViewController;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *containViewConstraint;
 
 @end
 
@@ -71,16 +72,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+        _containViewConstraint.constant = 0;
+    else
+        _containViewConstraint.constant = -122;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"!------goto container view");
     EBSTabBarViewController *tabbar     = segue.destinationViewController;
     if ([tabbar isKindOfClass:[EBSTabBarViewController class]])
         self.tabbarViewController       = tabbar;
-    
 }
 
 #pragma mark - UITableViewDataSource UITableViewDelegate
@@ -154,6 +157,14 @@
         return NO;
     }
     return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+        _containViewConstraint.constant = 0;
+    else
+        _containViewConstraint.constant = -125;
 }
 
 - (IBAction)userRowSelect:(UIButton *)sender

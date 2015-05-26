@@ -48,7 +48,7 @@
 
 #if 0
     HomeListDataModle *data0            = [HomeDataHelperContext newObject];
-    data0.fatherNode                    = @"node_";
+    data0.fatherNode                    = @"node";
     data0.currentNode                   = @"node_0";
     data0.fileNameStr                   = @"迪姿有限公司";
     data0.canExpand                     = [NSNumber numberWithBool:YES];
@@ -200,6 +200,9 @@
     cell.sepLineImg.image           = [UIImage imageWithColor:UIColorWith(207, 207, 207) size:CGSizeMake(cell.EWidth, 1)];
     HomeListDataModle *data         = [_listDataSourceArray objectAtIndex:indexPath.row];
     cell.titleLabel.text            = data.fileNameStr;
+    
+    NSArray *sepNum                 = [data.currentNode componentsSeparatedByString:@"_"];
+    cell.imgViewLeadingConstraint.constant  = 20 + (sepNum.count-2)*40;
     return cell;
 }
 

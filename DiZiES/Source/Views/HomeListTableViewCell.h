@@ -18,4 +18,6 @@
 
 @property (nonatomic, strong) IBOutlet UILabel      *dataLabel;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgViewLeadingConstraint;
+
 @end
