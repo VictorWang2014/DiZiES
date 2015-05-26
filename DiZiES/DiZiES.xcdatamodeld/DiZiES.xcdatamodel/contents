@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="HomeListDataModle" representedClassName="HomeListDataModle" syncable="YES">
         <attribute name="canExpand" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="currentNode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fatherNode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fileNameStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isExpand" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HomeListDataModle" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="HomeListDataModle" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

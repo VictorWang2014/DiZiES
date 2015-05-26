@@ -40,6 +40,7 @@
 		84F053E71B11BD5F00C441AC /* UserInfoModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053E61B11BD5F00C441AC /* UserInfoModle.m */; };
 		84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053ED1B121BC000C441AC /* HomeListDataModle.m */; };
 		84F053F11B121BED00C441AC /* HomeDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053F01B121BED00C441AC /* HomeDataHelper.m */; };
+		968386671B141BFC004C16CD /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 968386661B141BFC004C16CD /* folder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		84F053ED1B121BC000C441AC /* HomeListDataModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeListDataModle.m; path = Source/Modles/CoreDataModle/HomeListDataModle.m; sourceTree = "<group>"; };
 		84F053EF1B121BED00C441AC /* HomeDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeDataHelper.h; path = Source/Modles/CoreDataModle/HomeDataHelper.h; sourceTree = "<group>"; };
 		84F053F01B121BED00C441AC /* HomeDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataHelper.m; path = Source/Modles/CoreDataModle/HomeDataHelper.m; sourceTree = "<group>"; };
+		968386661B141BFC004C16CD /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder.png; path = Images/folder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 		84B5D77C1B0B8878006F413D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				968386661B141BFC004C16CD /* folder.png */,
 				84F053DB1B11A5EB00C441AC /* lefttab_select_1.png */,
 				84F053DC1B11A5EB00C441AC /* lefttab_select_2.png */,
 				84F053DD1B11A5EB00C441AC /* lefttab_select_3.png */,
@@ -410,6 +413,7 @@
 				84B5D79A1B0B8967006F413D /* Main.storyboard in Resources */,
 				84F053DA1B1171C100C441AC /* lefttab_3.png in Resources */,
 				84B5D7991B0B8967006F413D /* LaunchScreen.xib in Resources */,
+				968386671B141BFC004C16CD /* folder.png in Resources */,
 				84F053D91B1171C100C441AC /* lefttab_2.png in Resources */,
 				84B5D7941B0B8944006F413D /* Images.xcassets in Resources */,
 				84F053D41B11629700C441AC /* default_userPortrait.png in Resources */,

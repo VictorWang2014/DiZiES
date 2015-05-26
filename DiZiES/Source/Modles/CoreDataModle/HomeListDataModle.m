@@ -14,6 +14,7 @@
 @dynamic fatherNode;
 @dynamic currentNode;
 @dynamic canExpand;
+@dynamic isExpand;
 @dynamic fileNameStr;
 @dynamic index;
 

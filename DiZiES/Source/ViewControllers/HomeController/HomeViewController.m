@@ -46,21 +46,141 @@
     _listArray                          = [NSMutableArray array];
     _listDataSourceArray                = [NSMutableArray array];
 
+#if 0
+    HomeListDataModle *data0            = [HomeDataHelperContext newObject];
+    data0.fatherNode                    = @"node_";
+    data0.currentNode                   = @"node_0";
+    data0.fileNameStr                   = @"迪姿有限公司";
+    data0.canExpand                     = [NSNumber numberWithBool:YES];
+    data0.index                         = -1;
+    data0.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data0];
+
+    HomeListDataModle *data1            = [HomeDataHelperContext newObject];
+    data1.fatherNode                    = @"node_0";
+    data1.currentNode                   = @"node_0_1";
+    data1.fileNameStr                   = @"IT部门";
+    data1.canExpand                     = [NSNumber numberWithBool:YES];
+    data1.index                         = -1;
+    data1.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data1];
+
+    HomeListDataModle *data2            = [HomeDataHelperContext newObject];
+    data2.fatherNode                    = @"node_0";
+    data2.currentNode                   = @"node_0_2";
+    data2.fileNameStr                   = @"运维";
+    data2.canExpand                     = [NSNumber numberWithBool:YES];
+    data2.index                         = -1;
+    data2.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data2];
+
+    HomeListDataModle *data3            = [HomeDataHelperContext newObject];
+    data3.fatherNode                    = @"node_0";
+    data3.currentNode                   = @"node_0_3";
+    data3.fileNameStr                   = @"人事";
+    data3.canExpand                     = [NSNumber numberWithBool:YES];
+    data3.index                         = -1;
+    data3.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data3];
+
+    HomeListDataModle *data4            = [HomeDataHelperContext newObject];
+    data4.fatherNode                    = @"node_0_1";
+    data4.currentNode                   = @"node_0_1_1";
+    data4.fileNameStr                   = @"peter组";
+    data4.canExpand                     = [NSNumber numberWithBool:YES];
+    data4.index                         = -1;
+    data4.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data4];
+
+    HomeListDataModle *data5            = [HomeDataHelperContext newObject];
+    data5.fatherNode                    = @"node_0_1";
+    data5.currentNode                   = @"node_0_1_2";
+    data5.fileNameStr                   = @"mike组";
+    data5.canExpand                     = [NSNumber numberWithBool:YES];
+    data5.index                         = -1;
+    data5.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data5];
+
+    HomeListDataModle *data6            = [HomeDataHelperContext newObject];
+    data6.fatherNode                    = @"node_0_1";
+    data6.currentNode                   = @"node_0_1_3";
+    data6.fileNameStr                   = @"tony组";
+    data6.canExpand                     = [NSNumber numberWithBool:YES];
+    data6.index                         = -1;
+    data6.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data6];
+
+    HomeListDataModle *data7            = [HomeDataHelperContext newObject];
+    data7.fatherNode                    = @"node_0_2";
+    data7.currentNode                   = @"node_0_2_1";
+    data7.fileNameStr                   = @"jons组";
+    data7.canExpand                     = [NSNumber numberWithBool:YES];
+    data7.index                         = -1;
+    data7.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data7];
+
+    HomeListDataModle *data8            = [HomeDataHelperContext newObject];
+    data8.fatherNode                    = @"node_0_2";
+    data8.currentNode                   = @"node_0_2_2";
+    data8.fileNameStr                   = @"jons组";
+    data8.canExpand                     = [NSNumber numberWithBool:YES];
+    data8.index                         = -1;
+    data8.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data8];
+
+    HomeListDataModle *data9            = [HomeDataHelperContext newObject];
+    data9.fatherNode                    = @"node_0_2";
+    data9.currentNode                   = @"node_0_2_3";
+    data9.fileNameStr                   = @"allen组";
+    data9.canExpand                     = [NSNumber numberWithBool:YES];
+    data9.index                         = -1;
+    data9.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data9];
+
+    HomeListDataModle *data10           = [HomeDataHelperContext newObject];
+    data10.fatherNode                   = @"node_0_1_2";
+    data10.currentNode                  = @"node_0_1_2_1";
+    data10.fileNameStr                  = @"allen组";
+    data10.canExpand                    = [NSNumber numberWithBool:YES];
+    data10.index                        = -1;
+    data10.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data10];
+
+    HomeListDataModle *data11           = [HomeDataHelperContext newObject];
+    data11.fatherNode                   = @"node_0_1_2";
+    data11.currentNode                  = @"node_0_1_2_2";
+    data11.fileNameStr                  = @"allen组";
+    data11.canExpand                    = [NSNumber numberWithBool:YES];
+    data11.index                        = -1;
+    data11.isExpand                      = [NSNumber numberWithBool:NO];
+    [_listArray addObject:data11];
+    [HomeDataHelperContext save];
+#endif
+    
     _listArray                          = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
     _listDataSourceArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"currentNode" forAttribute:@"node_0"]];
    
     [_homeListTableView reloadData];
 }
 
-- (NSArray *)arrayWithFatherNode:(NSString *)fatherNode
-{
-    return nil;
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (NSArray *)arrayWithCurrentNode:(NSString *)currentNode
+{
+    NSMutableArray *array           = [NSMutableArray array];
+    for (HomeListDataModle *data in _listDataSourceArray)
+    {
+        if ([data.fatherNode rangeOfString:currentNode].location != NSNotFound)
+        {
+            data.isExpand           = [NSNumber numberWithBool:NO];
+            [array addObject:data];
+        }
+    }
+    return array;
 }
 
 /*
@@ -97,113 +217,34 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeListDataModle *data         = [_listDataSourceArray objectAtIndex:indexPath.row];
-    NSArray *array                  = [HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:data.currentNode];
-    [_listDataSourceArray insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(indexPath.row+1,[array count])]];
-    
-    NSMutableArray *insertArrays    = [NSMutableArray array];
-    for (int i = 0; i < array.count; i++)
+    BOOL isExpand                   = [data.isExpand boolValue];
+    if (isExpand)
+    {// 已经展开  则收回  将isExpand 设置为NO
+        data.isExpand               = [NSNumber numberWithBool:NO];
+        
+        NSArray *array                  = [self arrayWithCurrentNode:data.currentNode];// 收缩展开中的数组
+        
+        [_listDataSourceArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(indexPath.row+1, array.count)]];
+        NSMutableArray *deleteArrays    = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++)
+            [deleteArrays addObject:[NSIndexPath indexPathForRow:indexPath.row+1+i inSection:indexPath.section]];
+        
+        [tableView deleteRowsAtIndexPaths:deleteArrays withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else// 没有展开  则执行展开操作 将isExpand 设置为YES
     {
-        [insertArrays addObject:[NSIndexPath indexPathForRow:indexPath.row+1+i inSection:indexPath.section]];
+        data.isExpand               = [NSNumber numberWithBool:YES];
+        
+        NSArray *array                  = [HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:data.currentNode];
+        [_listDataSourceArray insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(indexPath.row+1,[array count])]];
+        NSMutableArray *insertArrays    = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++)
+            [insertArrays addObject:[NSIndexPath indexPathForRow:indexPath.row+1+i inSection:indexPath.section]];
+        
+        [tableView insertRowsAtIndexPaths:insertArrays withRowAnimation:UITableViewRowAnimationFade];
     }
     
-    [tableView insertRowsAtIndexPaths:insertArrays withRowAnimation:UITableViewRowAnimationBottom];
-//    [HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
-//HomeListDataModle *data0            = [HomeDataHelperContext newObject];
-//data0.fatherNode                    = @"node_";
-//data0.currentNode                   = @"node_0";
-//data0.fileNameStr                   = @"迪姿有限公司";
-//data0.canExpand                     = [NSNumber numberWithBool:YES];
-//data0.index                     = -1;
-//[_listArray addObject:data0];
-//
-//HomeListDataModle *data1            = [HomeDataHelperContext newObject];
-//data1.fatherNode                    = @"node_0";
-//data1.currentNode                   = @"node_0_1";
-//data1.fileNameStr                   = @"IT部门";
-//data1.canExpand                     = [NSNumber numberWithBool:YES];
-//data1.index                     = -1;
-//[_listArray addObject:data1];
-//
-//HomeListDataModle *data2            = [HomeDataHelperContext newObject];
-//data2.fatherNode                    = @"node_0";
-//data2.currentNode                   = @"node_0_2";
-//data2.fileNameStr                   = @"运维";
-//data2.canExpand                     = [NSNumber numberWithBool:YES];
-//data2.index                     = -1;
-//[_listArray addObject:data2];
-//
-//HomeListDataModle *data3            = [HomeDataHelperContext newObject];
-//data3.fatherNode                    = @"node_0";
-//data3.currentNode                   = @"node_0_3";
-//data3.fileNameStr                   = @"人事";
-//data3.canExpand                     = [NSNumber numberWithBool:YES];
-//data3.index                     = -1;
-//[_listArray addObject:data3];
-//
-//HomeListDataModle *data4            = [HomeDataHelperContext newObject];
-//data4.fatherNode                    = @"node_0_1";
-//data4.currentNode                   = @"node_0_1_1";
-//data4.fileNameStr                   = @"peter组";
-//data4.canExpand                     = [NSNumber numberWithBool:YES];
-//data4.index                     = -1;
-//[_listArray addObject:data4];
-//
-//HomeListDataModle *data5            = [HomeDataHelperContext newObject];
-//data5.fatherNode                    = @"node_0_1";
-//data5.currentNode                   = @"node_0_1_2";
-//data5.fileNameStr                   = @"mike组";
-//data5.canExpand                     = [NSNumber numberWithBool:YES];
-//data5.index                     = -1;
-//[_listArray addObject:data5];
-//
-//HomeListDataModle *data6            = [HomeDataHelperContext newObject];
-//data6.fatherNode                    = @"node_0_1";
-//data6.currentNode                   = @"node_0_1_3";
-//data6.fileNameStr                   = @"tony组";
-//data6.canExpand                     = [NSNumber numberWithBool:YES];
-//data6.index                     = -1;
-//[_listArray addObject:data6];
-//
-//HomeListDataModle *data7            = [HomeDataHelperContext newObject];
-//data7.fatherNode                    = @"node_0_2";
-//data7.currentNode                   = @"node_0_2_1";
-//data7.fileNameStr                   = @"jons组";
-//data7.canExpand                     = [NSNumber numberWithBool:YES];
-//data7.index                     = -1;
-//[_listArray addObject:data7];
-//
-//HomeListDataModle *data8            = [HomeDataHelperContext newObject];
-//data8.fatherNode                    = @"node_0_2";
-//data8.currentNode                   = @"node_0_2_2";
-//data8.fileNameStr                   = @"jons组";
-//data8.canExpand                     = [NSNumber numberWithBool:YES];
-//data8.index                     = -1;
-//[_listArray addObject:data8];
-//
-//HomeListDataModle *data9            = [HomeDataHelperContext newObject];
-//data9.fatherNode                    = @"node_0_2";
-//data9.currentNode                   = @"node_0_2_3";
-//data9.fileNameStr                   = @"allen组";
-//data9.canExpand                     = [NSNumber numberWithBool:YES];
-//data9.index                     = -1;
-//[_listArray addObject:data9];
-//
-//HomeListDataModle *data10           = [HomeDataHelperContext newObject];
-//data10.fatherNode                   = @"node_0_1_2";
-//data10.currentNode                  = @"node_0_1_2_1";
-//data10.fileNameStr                  = @"allen组";
-//data10.canExpand                    = [NSNumber numberWithBool:YES];
-//data10.index                     = -1;
-//[_listArray addObject:data10];
-//
-//HomeListDataModle *data11           = [HomeDataHelperContext newObject];
-//data11.fatherNode                   = @"node_0_1_2";
-//data11.currentNode                  = @"node_0_1_2_2";
-//data11.fileNameStr                  = @"allen组";
-//data11.canExpand                    = [NSNumber numberWithBool:YES];
-//data11.index                     = -1;
-//[_listArray addObject:data11];
-//[HomeDataHelperContext save];

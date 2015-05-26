@@ -59,8 +59,6 @@
     fetchRequest.returnsObjectsAsFaults = NO;
     NSError *error;
     NSArray *array = [_context executeFetchRequest:fetchRequest error:&error];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"搜索个数" message:[NSString stringWithFormat:@"%d", array.count] delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-    [alert show];
     return array;
 }
 
