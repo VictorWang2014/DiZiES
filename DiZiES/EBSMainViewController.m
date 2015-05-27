@@ -8,10 +8,12 @@
 
 #import "EBSMainViewController.h"
 #import "EBSTabBarViewController.h"
+#import "LoginViewController.h"
 
 #import "MainTableViewCell.h"
 
 #import "MainDataModle.h"
+#import "UserInfoModle.h"
 #import "Tools.h"
 
 @interface EBSMainViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -69,16 +71,23 @@
     [_tabListArray addObject:data4];
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // 判断是否需要弹出登录页面
+    if (AppUserInfo.isLogin == NO)
+    {
+        LoginViewController *vc     = [self.storyboard instantiateViewControllerWithIdentifier:@"loginviewcontroller"];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
+    
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
         _containViewConstraint.constant = 0;
     else
         _containViewConstraint.constant = -122;
-    
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

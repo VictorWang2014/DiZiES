@@ -241,13 +241,13 @@
 		84B5D77E1B0B8895006F413D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				84F053E11B11BC8500C441AC /* LoginViewController */,
 				84B5D79E1B0B8A08006F413D /* EBSBaseViewController.h */,
 				84B5D79F1B0B8A08006F413D /* EBSBaseViewController.m */,
 				84F053C51B10B2AB00C441AC /* EBSMainViewController.h */,
 				84F053C61B10B2AB00C441AC /* EBSMainViewController.m */,
 				84B5D7A01B0B8A08006F413D /* EBSTabBarViewController.h */,
 				84B5D7A11B0B8A08006F413D /* EBSTabBarViewController.m */,
+				84F053E11B11BC8500C441AC /* LoginViewController */,
 				84B5D79D1B0B89B3006F413D /* PersonalCenterViewController */,
 				84B5D79C1B0B899C006F413D /* FileDownloadViewController */,
 				84B5D79B1B0B8989006F413D /* HomeController */,

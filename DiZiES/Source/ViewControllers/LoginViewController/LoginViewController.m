@@ -7,13 +7,26 @@
 //
 
 #import "LoginViewController.h"
+#import "UserInfoModle.h"
+
+@interface LoginViewController ()
+
+@property (strong, nonatomic) IBOutlet UITextField *userNameTextFeild;
+
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextFeild;
+
+@end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
 
+- (IBAction)loginButtonClick:(UIButton *)sender
+{
+    AppUserInfo.isLogin = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
