@@ -77,6 +77,8 @@
         _containViewConstraint.constant = 0;
     else
         _containViewConstraint.constant = -122;
+    
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
