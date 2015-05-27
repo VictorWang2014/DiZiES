@@ -403,7 +403,7 @@
             </objects>
             <point key="canvasLocation" x="-1869.5" y="-610"/>
         </scene>
-        <!--文件管理-->
+        <!--File Manager View Controller-->
         <scene sceneID="10k-Ef-lWt">
             <objects>
                 <viewController storyboardIdentifier="filemanagerviewcontroller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f6p-s9-Nix" customClass="FileManagerViewController" sceneMemberID="viewController">
@@ -416,11 +416,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="文件管理" id="acK-8u-nPf"/>
+                    <navigationItem key="navigationItem" id="acK-8u-nPf">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="ECR-z6-GTP">
+                            <rect key="frame" x="225" y="6" width="142" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-cZ-EFz">
+                                    <rect key="frame" x="0.0" y="0.0" width="71" height="33"/>
+                                    <state key="normal" title="正在下载">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqK-gB-qyr">
+                                    <rect key="frame" x="71" y="0.0" width="71" height="33"/>
+                                    <state key="normal" title="下载完成">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="eqK-gB-qyr" secondAttribute="trailing" id="341-hz-wQo"/>
+                                <constraint firstItem="wbb-cZ-EFz" firstAttribute="leading" secondItem="ECR-z6-GTP" secondAttribute="leading" id="Fxv-0c-6rR"/>
+                                <constraint firstItem="eqK-gB-qyr" firstAttribute="top" secondItem="ECR-z6-GTP" secondAttribute="top" id="Qcq-r4-Psh"/>
+                                <constraint firstAttribute="bottom" secondItem="eqK-gB-qyr" secondAttribute="bottom" id="Uks-t4-EzY"/>
+                                <constraint firstItem="eqK-gB-qyr" firstAttribute="leading" secondItem="wbb-cZ-EFz" secondAttribute="trailing" id="Xrd-Xk-MG7"/>
+                                <constraint firstItem="wbb-cZ-EFz" firstAttribute="top" secondItem="ECR-z6-GTP" secondAttribute="top" id="ef9-2h-AES"/>
+                                <constraint firstItem="wbb-cZ-EFz" firstAttribute="width" secondItem="eqK-gB-qyr" secondAttribute="width" id="rC8-d6-rCo"/>
+                                <constraint firstAttribute="bottom" secondItem="wbb-cZ-EFz" secondAttribute="bottom" id="vIC-Dg-vgQ"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftButton" destination="wbb-cZ-EFz" id="zbT-SE-LWG"/>
+                        <outlet property="navTitleView" destination="ECR-z6-GTP" id="s1b-ul-qRb"/>
+                        <outlet property="rightButton" destination="eqK-gB-qyr" id="b1R-cN-5fa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrD-8D-2sV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1869" y="605"/>
+            <point key="canvasLocation" x="-1869.5" y="605"/>
         </scene>
     </scenes>
     <resources>

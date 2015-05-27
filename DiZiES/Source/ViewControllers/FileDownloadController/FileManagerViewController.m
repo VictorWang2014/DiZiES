@@ -10,6 +10,10 @@
 
 @interface FileManagerViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView *navTitleView;
+@property (strong, nonatomic) IBOutlet UIButton *leftButton;
+@property (strong, nonatomic) IBOutlet UIButton *rightButton;
+
 @end
 
 @implementation FileManagerViewController
