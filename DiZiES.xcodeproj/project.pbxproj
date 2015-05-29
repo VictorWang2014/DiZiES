@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8427AFF11B1757D0002CA442 /* DataRequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFF01B1757D0002CA442 /* DataRequestPackage.m */; };
+		8427AFF81B18BCCD002CA442 /* DataResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFF71B18BCCD002CA442 /* DataResponseParser.m */; };
 		84B5D74E1B0B8608006F413D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D74D1B0B8608006F413D /* main.m */; };
 		84B5D76B1B0B8608006F413D /* DiZiESTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D76A1B0B8608006F413D /* DiZiESTests.m */; };
 		84B5D7831B0B88E6006F413D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7821B0B88E6006F413D /* AppDelegate.m */; };
@@ -54,6 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8427AFEF1B1757D0002CA442 /* DataRequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRequestPackage.h; path = Source/Modles/DataPackage/DataRequestPackage.h; sourceTree = "<group>"; };
+		8427AFF01B1757D0002CA442 /* DataRequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRequestPackage.m; path = Source/Modles/DataPackage/DataRequestPackage.m; sourceTree = "<group>"; };
+		8427AFF61B18BCCD002CA442 /* DataResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataResponseParser.h; path = Source/Modles/DataParser/DataResponseParser.h; sourceTree = "<group>"; };
+		8427AFF71B18BCCD002CA442 /* DataResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataResponseParser.m; path = Source/Modles/DataParser/DataResponseParser.m; sourceTree = "<group>"; };
 		84B5D7481B0B8608006F413D /* DiZiES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiZiES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B5D74C1B0B8608006F413D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B5D74D1B0B8608006F413D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -134,6 +140,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8427AFEE1B175797002CA442 /* DataPackage */ = {
+			isa = PBXGroup;
+			children = (
+				8427AFEF1B1757D0002CA442 /* DataRequestPackage.h */,
+				8427AFF01B1757D0002CA442 /* DataRequestPackage.m */,
+			);
+			name = DataPackage;
+			sourceTree = "<group>";
+		};
+		8427AFF51B18BCB2002CA442 /* DataParser */ = {
+			isa = PBXGroup;
+			children = (
+				8427AFF61B18BCCD002CA442 /* DataResponseParser.h */,
+				8427AFF71B18BCCD002CA442 /* DataResponseParser.m */,
+			);
+			name = DataParser;
+			sourceTree = "<group>";
+		};
 		84B5D73F1B0B8608006F413D = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +293,8 @@
 		84B5D7801B0B88A6006F413D /* Modles */ = {
 			isa = PBXGroup;
 			children = (
+				8427AFF51B18BCB2002CA442 /* DataParser */,
+				8427AFEE1B175797002CA442 /* DataPackage */,
 				84F053EB1B121B9900C441AC /* CoreDataModle */,
 				84F0538D1B0E293B00C441AC /* HomeDataModle.h */,
 				84F0538E1B0E293B00C441AC /* HomeDataModle.m */,
@@ -449,6 +475,8 @@
 				84F053CD1B10CA0A00C441AC /* MainTableViewCell.m in Sources */,
 				84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */,
 				84B5D74E1B0B8608006F413D /* main.m in Sources */,
+				8427AFF81B18BCCD002CA442 /* DataResponseParser.m in Sources */,
+				8427AFF11B1757D0002CA442 /* DataRequestPackage.m in Sources */,
 				84B5D78B1B0B891B006F413D /* FileManager.m in Sources */,
 				84F053D01B10CA7000C441AC /* MainDataModle.m in Sources */,
 				84F053E41B11BCBA00C441AC /* LoginViewController.m in Sources */,

@@ -10,7 +10,9 @@
 #ifndef DiZiES_CommonDefine_h
 #define DiZiES_CommonDefine_h
 
-#define UserInfoPath [FileManager getDocumentPathWithName:@"UserInfo.plist"]
+#define UserInfoPath [FileManager getDocumentPathWithName:@"UserInfo.plist"] // 用户信息保存的文件
+
+#define LoginUrl   @"http://ebsctgmgt.padccc.net/restapi/index.php/login"
 
 
 #endif
