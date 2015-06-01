@@ -11,10 +11,12 @@
 
 @interface DataResponseParser : NSObject
 
+- (void)parserFromData:(NSString *)jsonString;
+
 @end
 
 
-@interface LoginResponseParse : NSObject
+@interface LoginResponseParse : DataResponseParser
 
 @property (nonatomic) int success;
 

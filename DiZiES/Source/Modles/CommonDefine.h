@@ -16,3 +16,10 @@
 
 
 #endif
+
+
+/*
+ "http://ebsctgmgt.padccc.net/restapi/index.php/login"     登录URL  
+ @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/1/children"  请求文件目录下的文件夹及文件
+ 
+ */

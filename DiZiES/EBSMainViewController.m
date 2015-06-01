@@ -16,6 +16,8 @@
 #import "UserInfoModle.h"
 #import "Tools.h"
 
+#import "TestViewController.h"
+
 @interface EBSMainViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     int _selectRow;
@@ -69,6 +71,12 @@
     data4.imageNameStr              = @"lefttab_2.png";
     data4.selectImageNaemStr        = @"lefttab_select_2.png";
     [_tabListArray addObject:data4];
+    
+    MainDataModle *data5            = [[MainDataModle alloc] init];
+    data5.titleStr                  = @"测试";
+    data5.imageNameStr              = @"lefttab_3.png";
+    data5.selectImageNaemStr        = @"lefttab_select_3.png";
+    [_tabListArray addObject:data5];
 }
 
 
@@ -136,13 +144,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-    {
         return 80;
-    }
     else
-    {
         return 60;
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,6 +162,9 @@
         [_tabbarViewController setSelectedIndex:2];
     }else if (indexPath.row == 4) {
         [_tabbarViewController setSelectedIndex:3];
+    }else if (indexPath.row == 5) {
+        TestViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"testviewcontroller"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

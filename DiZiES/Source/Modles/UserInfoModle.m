@@ -98,6 +98,7 @@
 - (void)setIsLogin:(BOOL)isLogin
 {
     [_userInforDic setObject:[NSNumber numberWithBool:isLogin] forKey:KEY_IsLogin];
+    [_userInforDic writeToFile:UserInfoPath atomically:YES];
 }
 
 - (BOOL)isLogin

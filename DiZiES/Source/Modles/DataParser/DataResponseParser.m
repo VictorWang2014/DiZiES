@@ -10,6 +10,11 @@
 
 @implementation DataResponseParser
 
+- (void)parserFromData:(NSString *)jsonString
+{
+    NSAssert(nil, @"SubClass need realize parserFromData: jsonString method");
+}
+
 @end
 
 @implementation LoginResponseParse

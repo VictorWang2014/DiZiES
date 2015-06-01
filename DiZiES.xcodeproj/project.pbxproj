@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8427AFF11B1757D0002CA442 /* DataRequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFF01B1757D0002CA442 /* DataRequestPackage.m */; };
 		8427AFF81B18BCCD002CA442 /* DataResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFF71B18BCCD002CA442 /* DataResponseParser.m */; };
+		8427AFFB1B1A04F4002CA442 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFFA1B1A04F4002CA442 /* TestViewController.m */; };
+		8427AFFF1B1B51EE002CA442 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFFE1B1B51EE002CA442 /* DataRequest.m */; };
+		8427B0021B1B5AC6002CA442 /* JsonFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0011B1B5AC6002CA442 /* JsonFormator.m */; };
 		84B5D74E1B0B8608006F413D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D74D1B0B8608006F413D /* main.m */; };
 		84B5D76B1B0B8608006F413D /* DiZiESTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D76A1B0B8608006F413D /* DiZiESTests.m */; };
 		84B5D7831B0B88E6006F413D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7821B0B88E6006F413D /* AppDelegate.m */; };
@@ -60,6 +63,12 @@
 		8427AFF01B1757D0002CA442 /* DataRequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRequestPackage.m; path = Source/Modles/DataPackage/DataRequestPackage.m; sourceTree = "<group>"; };
 		8427AFF61B18BCCD002CA442 /* DataResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataResponseParser.h; path = Source/Modles/DataParser/DataResponseParser.h; sourceTree = "<group>"; };
 		8427AFF71B18BCCD002CA442 /* DataResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataResponseParser.m; path = Source/Modles/DataParser/DataResponseParser.m; sourceTree = "<group>"; };
+		8427AFF91B1A04F4002CA442 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		8427AFFA1B1A04F4002CA442 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		8427AFFD1B1B51EE002CA442 /* DataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRequest.h; path = Source/Modles/DataRequeest/DataRequest.h; sourceTree = "<group>"; };
+		8427AFFE1B1B51EE002CA442 /* DataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRequest.m; path = Source/Modles/DataRequeest/DataRequest.m; sourceTree = "<group>"; };
+		8427B0001B1B5AC6002CA442 /* JsonFormator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonFormator.h; path = Utiles/JsonFormator.h; sourceTree = "<group>"; };
+		8427B0011B1B5AC6002CA442 /* JsonFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonFormator.m; path = Utiles/JsonFormator.m; sourceTree = "<group>"; };
 		84B5D7481B0B8608006F413D /* DiZiES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiZiES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B5D74C1B0B8608006F413D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B5D74D1B0B8608006F413D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -158,6 +167,15 @@
 			name = DataParser;
 			sourceTree = "<group>";
 		};
+		8427AFFC1B1B496F002CA442 /* DataRequest */ = {
+			isa = PBXGroup;
+			children = (
+				8427AFFD1B1B51EE002CA442 /* DataRequest.h */,
+				8427AFFE1B1B51EE002CA442 /* DataRequest.m */,
+			);
+			name = DataRequest;
+			sourceTree = "<group>";
+		};
 		84B5D73F1B0B8608006F413D = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +249,8 @@
 				84B5D7881B0B891B006F413D /* Tools.h */,
 				84B5D7891B0B891B006F413D /* UIView+Tool.h */,
 				84B5D78A1B0B891B006F413D /* UIView+Tool.m */,
+				8427B0001B1B5AC6002CA442 /* JsonFormator.h */,
+				8427B0011B1B5AC6002CA442 /* JsonFormator.m */,
 			);
 			name = Utles;
 			sourceTree = "<group>";
@@ -275,6 +295,8 @@
 				84B5D79D1B0B89B3006F413D /* PersonalCenterViewController */,
 				84B5D79C1B0B899C006F413D /* FileDownloadViewController */,
 				84B5D79B1B0B8989006F413D /* HomeController */,
+				8427AFF91B1A04F4002CA442 /* TestViewController.h */,
+				8427AFFA1B1A04F4002CA442 /* TestViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -293,6 +315,7 @@
 		84B5D7801B0B88A6006F413D /* Modles */ = {
 			isa = PBXGroup;
 			children = (
+				8427AFFC1B1B496F002CA442 /* DataRequest */,
 				8427AFF51B18BCB2002CA442 /* DataParser */,
 				8427AFEE1B175797002CA442 /* DataPackage */,
 				84F053EB1B121B9900C441AC /* CoreDataModle */,
@@ -463,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F053C71B10B2AB00C441AC /* EBSMainViewController.m in Sources */,
+				8427AFFF1B1B51EE002CA442 /* DataRequest.m in Sources */,
 				84B5D7A21B0B8A08006F413D /* EBSBaseViewController.m in Sources */,
 				84F053891B0E1BE800C441AC /* UIImage+Tool.m in Sources */,
 				84F0538F1B0E293B00C441AC /* HomeDataModle.m in Sources */,
@@ -472,10 +496,12 @@
 				84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */,
 				84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */,
 				84B5D7931B0B8944006F413D /* DiZiES.xcdatamodeld in Sources */,
+				8427B0021B1B5AC6002CA442 /* JsonFormator.m in Sources */,
 				84F053CD1B10CA0A00C441AC /* MainTableViewCell.m in Sources */,
 				84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */,
 				84B5D74E1B0B8608006F413D /* main.m in Sources */,
 				8427AFF81B18BCCD002CA442 /* DataResponseParser.m in Sources */,
+				8427AFFB1B1A04F4002CA442 /* TestViewController.m in Sources */,
 				8427AFF11B1757D0002CA442 /* DataRequestPackage.m in Sources */,
 				84B5D78B1B0B891B006F413D /* FileManager.m in Sources */,
 				84F053D01B10CA7000C441AC /* MainDataModle.m in Sources */,

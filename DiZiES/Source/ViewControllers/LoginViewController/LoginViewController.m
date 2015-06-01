@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "UserInfoModle.h"
 #import "CommonDefine.h"
+#import "DataResponseParser.h"
+#import "DataRequest.h"
 
 @interface LoginViewController ()<NSURLConnectionDataDelegate>
 
@@ -34,15 +36,21 @@
 
 - (void)loginRequest
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:LoginUrl]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    NSString *string = @"&user=admin&pass=admin";
-    [request setHTTPBody:[string dataUsingEncoding:NSASCIIStringEncoding]];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"!-------%@", string);
+
+    [DataRequest requestSyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
+        
+    } failure:^(id data) {
+        
     }];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:LoginUrl]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    NSString *string = @"&user=admin&pass=admin";
+//    [request setHTTPBody:[string dataUsingEncoding:NSASCIIStringEncoding]];
+//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"!-------%@", string);
+//    }];
 }
 
 @end
