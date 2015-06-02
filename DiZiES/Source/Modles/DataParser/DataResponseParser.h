@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserInfoModle.h"
 
 @interface DataResponseParser : NSObject
 
@@ -20,6 +19,13 @@
 
 @property (nonatomic) int success;
 
-@property (nonatomic, retain) UserInfoModle *userInfo;
+@end
+
+
+@interface FlorderResponseParse : DataResponseParser
+
+@property (nonatomic) int success;
+
+@property (nonatomic, strong) NSMutableArray *flordListArray;
 
 @end

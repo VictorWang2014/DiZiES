@@ -18,15 +18,14 @@
 @end
 
 
-@interface HomeListDataModle1 : NSObject
+@interface FloderDataModel : NSObject
 
-@property (nonatomic, strong) NSString      *fatherNode;
+@property (nonatomic, strong) NSString * fatherNode;
+@property (nonatomic, strong) NSString * currentNode;
+@property (nonatomic, strong) NSNumber * canExpand;
+@property (nonatomic, strong) NSNumber * isExpand;
+@property (nonatomic, strong) NSString * fileNameStr;
 
-@property (nonatomic, strong) NSString      *currentNode;
-
-@property (nonatomic) BOOL                  canExpand;
-
-@property (nonatomic, strong) NSString      *fileNameStr;
-
+@property (nonatomic) NSInteger index;
 
 @end

@@ -13,7 +13,7 @@
 
 + (NSString *)getDocumentPath
 {
-    NSArray *paths  = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *path = [paths firstObject];
     return path;
 }

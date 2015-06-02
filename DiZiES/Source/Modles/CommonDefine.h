@@ -14,6 +14,7 @@
 
 #define LoginUrl   @"http://ebsctgmgt.padccc.net/restapi/index.php/login"
 
+#define FloderUrl  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/"
 
 #endif
 

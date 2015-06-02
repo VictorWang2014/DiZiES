@@ -12,7 +12,7 @@
 #import "DataResponseParser.h"
 #import "DataRequest.h"
 
-@interface LoginViewController ()<NSURLConnectionDataDelegate>
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *userNameTextFeild;
 
@@ -25,32 +25,56 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _userNameTextFeild.delegate             = self;
+    _passwordTextFeild.delegate             = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [_userNameTextFeild becomeFirstResponder];
 }
 
 - (IBAction)loginButtonClick:(UIButton *)sender
 {
+    if (_userNameTextFeild.text.length <= 0)
+    {
+        UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户名不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }else if (_passwordTextFeild.text.length <= 0)
+    {
+        UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     [self loginRequest];
-    AppUserInfo.isLogin = YES;
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)loginRequest
 {
-
     [DataRequest requestSyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
+        AppUserInfo.isLogin                 = YES;
+        UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [alertView show];
         
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alertView dismissWithClickedButtonIndex:0 animated:NO];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
     } failure:^(id data) {
         
     }];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:LoginUrl]];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    NSString *string = @"&user=admin&pass=admin";
-//    [request setHTTPBody:[string dataUsingEncoding:NSASCIIStringEncoding]];
-//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"!-------%@", string);
-//    }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == _userNameTextFeild) {
+        [_passwordTextFeild becomeFirstResponder];
+    }else if (textField == _passwordTextFeild)
+    {
+        [textField resignFirstResponder];
+    }
 }
 
 @end

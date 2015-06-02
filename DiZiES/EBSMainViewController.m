@@ -14,13 +14,18 @@
 
 #import "MainDataModle.h"
 #import "UserInfoModle.h"
+#import "DataRequest.h"
+#import "DataResponseParser.h"
+#import "DataRequestPackage.h"
+#import "CommonDefine.h"
 #import "Tools.h"
 
 #import "TestViewController.h"
 
 @interface EBSMainViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    int _selectRow;
+    int                 _selectRow;
+    BOOL                _needReLoad;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView      *tabTableView;
@@ -35,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _needReLoad                     = NO;
     [self _loadData];
 }
 
@@ -43,8 +49,9 @@
     _selectRow                      = 1;
     _tabListArray                   = [NSMutableArray array];
     
+    NSLog(@"!---%@", AppUserInfo.userName);
     PersonDataModle *personData     = [[PersonDataModle alloc] init];
-    personData.nameStr              = @"杨善利";
+    personData.nameStr              = AppUserInfo.userName;
     personData.imageNameStr         = @"default_userPortrait.png";
     [_tabListArray addObject:personData];
     
@@ -77,25 +84,38 @@
     data5.imageNameStr              = @"lefttab_3.png";
     data5.selectImageNaemStr        = @"lefttab_select_3.png";
     [_tabListArray addObject:data5];
+    [_tabTableView reloadData];
 }
 
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [DataRequest requestSyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
+    } failure:^(id data) {
+        
+    }];
+
+    
     [super viewWillAppear:animated];
-    // 判断是否需要弹出登录页面
-    if (AppUserInfo.isLogin == NO)
-    {
-        LoginViewController *vc     = [self.storyboard instantiateViewControllerWithIdentifier:@"loginviewcontroller"];
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
-    }
     
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
         _containViewConstraint.constant = 0;
     else
         _containViewConstraint.constant = -122;
+    if (_needReLoad) {
+        [self _loadData];
+        _needReLoad                 = NO;
+    }
+    // 判断是否需要弹出登录页面
+    if (AppUserInfo.isLogin == NO)
+    {
+        _needReLoad = YES;
+        LoginViewController *vc     = [self.storyboard instantiateViewControllerWithIdentifier:@"loginviewcontroller"];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+        return;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -13,6 +13,6 @@
 @end
 
 
-@implementation HomeListDataModle1
+@implementation FloderDataModel
 
 @end
