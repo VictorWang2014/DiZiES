@@ -48,6 +48,7 @@
 - (void)parserFromData:(NSString *)jsonString
 {
     NSDictionary *dic               = [NSJSONSerialization jsonDictionaryWithString:jsonString];
+    self.flordListArray             = [NSMutableArray array];
     if (dic)
     {
         self.success                = [[dic objectForKey:@"success"] intValue];
@@ -56,13 +57,24 @@
             NSArray *dataArray      = [dic objectForKey:@"data"];
             if ([dataArray isKindOfClass:[NSArray class]])
             {
-                if (dataArray.count > 1)
+                if (dataArray.count >= 1)
                 {
                     for (int i = 0; i < dataArray.count; i++)
                     {
                         NSDictionary *subDic            = [dataArray objectAtIndex:i];
-                        HomeDataModle *dataModel        = [[HomeDataModle alloc] init];
-                        dataModel.
+                        FloderDataModel *dataModel      = [[FloderDataModel alloc] init];
+                        dataModel.fileNameStr           = [subDic objectForKey:@"name"];
+                        dataModel.fileID                = [subDic objectForKey:@"id"];
+                        if ([[subDic objectForKey:@"type"] isEqualToString:@"folder"])
+                        {
+                            dataModel.canExpand         = [NSNumber numberWithBool:YES];
+                        }
+                        else
+                        {
+                            dataModel.canExpand         = [NSNumber numberWithBool:NO];
+                        }
+                        dataModel.isExpand              = [NSNumber numberWithBool:NO];
+                        [self.flordListArray addObject:dataModel];
                     }
                 }
             }
@@ -71,3 +83,11 @@
 }
 
 @end
+
+
+
+
+
+
+
+

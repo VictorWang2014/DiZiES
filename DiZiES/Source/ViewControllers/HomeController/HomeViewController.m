@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSMutableArray            *listArray;    // 左侧本地保存的文件列表
 @property (nonatomic, strong) NSMutableArray            *listDataSourceArray;// 左侧文件列表数据
 
+@property (nonatomic, strong) NSMutableArray            *tempArray;
+
 @end
 
 @implementation HomeViewController
@@ -165,12 +167,60 @@
     [_homeListTableView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.tempArray  = [NSMutableArray array];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self requestWithFloderId:@"1"];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"!----temp array%d", self.tempArray.count);
+    });
+}
 
 #pragma mark - DataRequest
 - (void)requestWithFloderId:(NSString *)floderId
 {
-    [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, floderId] responseClass:[DataRequest class] success:^(id data) {
-        
+    NSString *requestID                         = floderId;
+    if (floderId.length > 1)
+    {
+        requestID                               = [floderId substringFromIndex:floderId.length-1];
+    }
+    [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
+        if ([data isKindOfClass:[FlorderResponseParse class]])
+        {
+            FlorderResponseParse *florderData   = (FlorderResponseParse *)data;
+            if (florderData.flordListArray.count >= 1)
+            {
+                NSString *fatherNode            = @"";
+                if ([floderId isEqualToString:@"1"])
+                {
+                    fatherNode                  = @"node_0";
+                }
+                else
+                {
+                    fatherNode                  = floderId;
+                }
+                NSLog(@"!+++++++++++++++");
+                NSLog(@"fathernode %@", fatherNode);
+                for (int i = 0; i < florderData.flordListArray.count; i++)
+                {
+                    FloderDataModel *data   = [florderData.flordListArray objectAtIndex:i];
+                    data.fatherNode         = fatherNode;
+                    data.currentNode        = [NSString stringWithFormat:@"%@_%@", fatherNode, data.fileID];
+                    // 保存本地
+                    [self.tempArray addObject:data];
+                    NSLog(@"currentnode %@", data.currentNode);
+                    NSLog(@"filename %@", data.fileNameStr);
+                    if ([data.canExpand boolValue])
+                    {
+                        [self requestWithFloderId:data.currentNode];
+                    }
+                }
+                NSLog(@"!===============");
+            }
+        }
     } failure:^(id data) {
         
     }];
