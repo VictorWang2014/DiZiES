@@ -21,11 +21,16 @@
 @interface FloderDataModel : NSObject
 
 @property (nonatomic, strong) NSString *fileID;
+@property (nonatomic, strong) NSString *fileNameStr;
+@property (nonatomic, strong) NSString *fileSize;
+@property (nonatomic, strong) NSString *fileType;
+@property (nonatomic, strong) NSString *date;
+
 @property (nonatomic, strong) NSString *fatherNode;
 @property (nonatomic, strong) NSString *currentNode;
 @property (nonatomic, strong) NSNumber *canExpand;
 @property (nonatomic, strong) NSNumber *isExpand;
-@property (nonatomic, strong) NSString *fileNameStr;
+@property (nonatomic, strong) NSNumber *isDownloaded;
 
 @property (nonatomic) NSInteger index;
 

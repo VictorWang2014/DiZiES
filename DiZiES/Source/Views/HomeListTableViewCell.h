@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) IBOutlet UILabel      *titleLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *fileSizeLabel;
+
 @property (strong, nonatomic) IBOutlet UIImageView  *sepLineImg;
 
 @property (nonatomic, strong) IBOutlet UILabel      *dataLabel;

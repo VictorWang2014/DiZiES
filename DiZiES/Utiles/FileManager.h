@@ -20,4 +20,10 @@
 
 + (NSString *)getDocumentPathWithName:(NSString *)name;
 
++ (NSString *)getDownloadDirPath;
+
++ (NSString *)getDownloadDirPathWithName:(NSString *)name;
+
++ (BOOL)fileIsExistAtPath:(NSString *)filePath;
+
 @end

@@ -12,9 +12,11 @@
 
 #define UserInfoPath [FileManager getDocumentPathWithName:@"UserInfo.plist"] // 用户信息保存的文件
 
-#define LoginUrl   @"http://ebsctgmgt.padccc.net/restapi/index.php/login"
+#define LoginUrl   @"http://ebsctgmgt.padccc.net/restapi/index.php/login" // 登录url
 
-#define FloderUrl  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/"
+#define FloderUrl  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/" // 请求文件目录下的文件夹及文件
+
+#define DownloadDir [FileManager getDownloadDirPath] // 用户下载保存目录
 
 #endif
 

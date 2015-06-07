@@ -8,6 +8,8 @@
 
 #import "HomeDataHelper.h"
 #import "AppDelegate.h"
+#import "FileManager.h"
+#import "Tools.h"
 #import "HomeListDataModle.h"
 
 @interface HomeDataHelper ()
@@ -34,6 +36,22 @@
 {
     HomeListDataModle *model            = (HomeListDataModle *)[NSEntityDescription insertNewObjectForEntityForName:@"HomeListDataModle" inManagedObjectContext:_context];
     return model;
+}
+
+- (void)addHomeData:(FloderDataModel *)dataModel
+{
+    HomeListDataModle *model            = [self newObject];
+    model.fileID                        = dataModel.fileID;
+    model.fileNameStr                   = dataModel.fileNameStr;
+    model.fileSize                      = dataModel.fileSize;
+    model.fileType                      = dataModel.fileType;
+    model.date                          = dataModel.date;
+    model.currentNode                   = dataModel.currentNode;
+    model.fatherNode                    = dataModel.fatherNode;
+    model.isExpand                      = dataModel.isExpand;
+    model.canExpand                     = dataModel.canExpand;
+    model.isDownloaded                  = [NSNumber numberWithBool:[FileManager fileIsExistAtPath:[FileManager getDownloadDirPathWithName:model.fileNameStr]]];
+    
 }
 
 - (BOOL)save

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HomeDataModle.h"
 
 #define HomeDataHelperContext  [HomeDataHelper shareInstance]
 
@@ -15,6 +16,8 @@
 @interface HomeDataHelper : NSObject
 
 + (HomeDataHelper *)shareInstance;
+
+- (void)addHomeData:(FloderDataModel *)dataModel;
 
 - (HomeListDataModle *)newObject;
 

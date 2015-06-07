@@ -65,6 +65,9 @@
                         FloderDataModel *dataModel      = [[FloderDataModel alloc] init];
                         dataModel.fileNameStr           = [subDic objectForKey:@"name"];
                         dataModel.fileID                = [subDic objectForKey:@"id"];
+                        dataModel.fileSize              = [subDic objectForKey:@"size"];
+                        dataModel.date                  = [NSString stringWithDateFormateWithDateString:[subDic objectForKey:@"date"]];
+                        
                         if ([[subDic objectForKey:@"type"] isEqualToString:@"folder"])
                         {
                             dataModel.canExpand         = [NSNumber numberWithBool:YES];

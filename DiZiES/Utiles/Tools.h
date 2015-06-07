@@ -15,5 +15,6 @@
 #import "UIImage+Tool.h"
 #import "FileManager.h"
 #import "NSJSONSerialization+Tool.h"
+#import "NSString+Tool.h"
 
 #endif
