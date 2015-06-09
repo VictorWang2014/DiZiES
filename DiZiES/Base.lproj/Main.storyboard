@@ -545,9 +545,17 @@
                             <constraint firstItem="kyh-Gt-vv7" firstAttribute="top" secondItem="cfK-Rz-sqj" secondAttribute="bottom" id="hQn-e5-otw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="首页" id="RHM-0t-gsY"/>
+                    <navigationItem key="navigationItem" title="首页" id="RHM-0t-gsY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="DIH-I8-Ofw">
+                            <color key="tintColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="refreshButtonClick:" destination="hrD-MX-a6y" id="cTF-4D-wKN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="homeListTableView" destination="kyh-Gt-vv7" id="R22-ik-09y"/>
+                        <outlet property="refreshHomeListButton" destination="DIH-I8-Ofw" id="EoB-xt-ekL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRw-ea-JYt" userLabel="First Responder" sceneMemberID="firstResponder"/>

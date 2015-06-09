@@ -86,6 +86,7 @@
     for (NSManagedObject *obj in arra) {
         [_context deleteObject:obj];
     }
+    [_context save:nil];
 }
 
 @end

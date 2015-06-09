@@ -7,23 +7,30 @@
 //
 
 #import "HomeViewController.h"
-
 #import "HomeListTableViewCell.h"
+
+#import "MBProgressHUD.h"
+#import "CommonDefine.h"
+#import "Tools.h"
+
+#import "DataRequest.h"
+#import "DataResponseParser.h"
 #import "HomeDataModle.h"
 #import "HomeListDataModle.h"
 #import "HomeDataHelper.h"
-#import "DataRequest.h"
-#import "DataResponseParser.h"
-#import "CommonDefine.h"
-#import "Tools.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView      *homeListTableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshHomeListButton;
 @property (nonatomic, strong) NSMutableArray            *listArray;    // 左侧本地保存的文件列表
 @property (nonatomic, strong) NSMutableArray            *listDataSourceArray;// 左侧文件列表数据
 
 @property (nonatomic, strong) NSMutableArray            *tempArray;
+
+@property (nonatomic, strong) NSMutableArray            *nodeArray;
+
+@property (nonatomic, strong) MBProgressHUD             *hud;
 
 @end
 
@@ -42,11 +49,13 @@
 
 - (void)_initView
 {
-    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
 }
 
 - (void)_loadData
 {
+    self.nodeArray                      = [NSMutableArray array];
     _listArray                          = [NSMutableArray array];
     _listDataSourceArray                = [NSMutableArray array];
 
@@ -60,69 +69,11 @@
 {
     [super viewDidAppear:animated];
     self.tempArray  = [NSMutableArray array];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self refreshHomeListFloder];
-    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog(@"!----temp array%d", self.tempArray.count);
-    });
 }
 
-#pragma mark - DataRequest
-- (void)refreshHomeListFloder
+- (IBAction)refreshButtonClick:(UIBarButtonItem *)sender
 {
-    [self requestWithFloderId:@"1" callBack:^(id data) {
-        [HomeDataHelperContext deleteObjects];
-        for (FloderDataModel *data in self.tempArray) {
-            [HomeDataHelperContext addHomeData:data];
-        }
-        [HomeDataHelperContext save];
-        _listArray                          = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
-        _listDataSourceArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"]];
-        [_homeListTableView reloadData];
-    }];
-}
-
-- (void)requestWithFloderId:(NSString *)floderId callBack:(CallBack)callBack
-{
-    NSString *requestID                         = floderId;
-    if (floderId.length > 1)
-    {
-        requestID                               = [floderId substringFromIndex:floderId.length-1];
-    }
-    [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
-        if ([data isKindOfClass:[FlorderResponseParse class]])
-        {
-            FlorderResponseParse *florderData   = (FlorderResponseParse *)data;
-            if (florderData.flordListArray.count >= 1)
-            {
-                NSString *fatherNode            = @"";
-                if ([floderId isEqualToString:@"1"])
-                    fatherNode                  = @"node_0";
-                else
-                    fatherNode                  = floderId;
-//                NSLog(@"!+++++++++++++++");
-//                NSLog(@"fathernode %@", fatherNode);
-                for (int i = 0; i < florderData.flordListArray.count; i++)
-                {
-                    FloderDataModel *data   = [florderData.flordListArray objectAtIndex:i];
-                    data.fatherNode         = fatherNode;
-                    data.currentNode        = [NSString stringWithFormat:@"%@_%@", fatherNode, data.fileID];
-                    // 保存本地
-                    [self.tempArray addObject:data];
-//                    NSLog(@"currentnode %@", data.currentNode);
-//                    NSLog(@"filename %@", data.fileNameStr);
-                    if ([data.canExpand boolValue])
-                    {
-                        [self requestWithFloderId:data.currentNode callBack:callBack];
-                    }
-                }
-//                NSLog(@"!===============");
-                callBack(data);
-            }
-        }
-    } failure:^(id data) {
-    }];
+    [self refreshHomeListFloder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,12 +84,12 @@
 
 - (NSArray *)arrayWithCurrentNode:(NSString *)currentNode
 {
-    NSMutableArray *array           = [NSMutableArray array];
+    NSMutableArray *array               = [NSMutableArray array];
     for (HomeListDataModle *data in _listDataSourceArray)
     {
         if ([data.fatherNode rangeOfString:currentNode].location != NSNotFound)
         {
-            data.isExpand           = [NSNumber numberWithBool:NO];
+            data.isExpand               = [NSNumber numberWithBool:NO];
             [array addObject:data];
         }
     }
@@ -227,115 +178,83 @@
     
 }
 
+#pragma mark - DataRequest
+- (void)refreshHomeListFloder
+{
+    [self.nodeArray removeAllObjects];
+    [self.tempArray removeAllObjects];
+    [_hud show:NO];
+    
+    
+    [self requestWithFloderId:@"1" callBack:^(id data) {
+        
+        [_hud hide:YES];
+        [self.listArray removeAllObjects];
+        [self.listDataSourceArray removeAllObjects];
+        [HomeDataHelperContext deleteObjects];
+        for (FloderDataModel *data in self.tempArray) {
+            [HomeDataHelperContext addHomeData:data];
+        }
+        [HomeDataHelperContext save];
+        _listArray                          = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
+        _listDataSourceArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"]];
+        [_homeListTableView reloadData];
+    }];
+}
+
+- (void)requestWithFloderId:(NSString *)floderId callBack:(CallBack)callBack
+{
+    NSString *requestID                         = floderId;
+    
+    if (floderId.length > 1)
+    {
+        requestID                               = [floderId substringFromIndex:floderId.length-1];
+    }
+    [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
+        if ([data isKindOfClass:[FlorderResponseParse class]])
+        {
+            FlorderResponseParse *florderData   = (FlorderResponseParse *)data;
+            if (florderData.flordListArray.count >= 1)
+            {
+                NSString *fatherNode            = @"";
+                if ([floderId isEqualToString:@"1"])
+                    fatherNode                  = @"node_0";
+                else
+                    fatherNode                  = floderId;
+                //                NSLog(@"!+++++++++++++++");
+                //                NSLog(@"fathernode %@", fatherNode);
+                NSMutableArray *flordersArray   = [NSMutableArray array];
+                for (int i = 0; i < florderData.flordListArray.count; i++)
+                {
+                    FloderDataModel *data   = [florderData.flordListArray objectAtIndex:i];
+                    data.fatherNode         = fatherNode;
+                    data.currentNode        = [NSString stringWithFormat:@"%@_%@", fatherNode, data.fileID];
+                    // 保存本地
+                    //                    NSLog(@"currentnode %@", data.currentNode);
+                    //                    NSLog(@"filename %@", data.fileNameStr);
+                    [self.tempArray addObject:data];
+                    if ([data.canExpand boolValue])
+                    {
+                        [self.nodeArray addObject:data.currentNode];
+                        [flordersArray addObject:data.currentNode];
+                    }
+                }
+                [self.nodeArray removeObject:floderId];
+                for (int i = 0; i < flordersArray.count; i++)
+                {
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self requestWithFloderId:[flordersArray objectAtIndex:i] callBack:callBack];
+//                    });
+                }
+                if (self.nodeArray.count == 1) {
+                    callBack(data);
+                }
+                //                NSLog(@"!===============");
+            }
+        }
+    } failure:^(id data) {
+    }];
+}
+
 @end
-#if 0
-HomeListDataModle *data0            = [HomeDataHelperContext newObject];
-data0.fatherNode                    = @"node";
-data0.currentNode                   = @"node_0";
-data0.fileNameStr                   = @"迪姿有限公司";
-data0.canExpand                     = [NSNumber numberWithBool:YES];
-data0.index                         = -1;
-data0.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data0];
-
-HomeListDataModle *data1            = [HomeDataHelperContext newObject];
-data1.fatherNode                    = @"node_0";
-data1.currentNode                   = @"node_0_1";
-data1.fileNameStr                   = @"IT部门";
-data1.canExpand                     = [NSNumber numberWithBool:YES];
-data1.index                         = -1;
-data1.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data1];
-
-HomeListDataModle *data2            = [HomeDataHelperContext newObject];
-data2.fatherNode                    = @"node_0";
-data2.currentNode                   = @"node_0_2";
-data2.fileNameStr                   = @"运维";
-data2.canExpand                     = [NSNumber numberWithBool:YES];
-data2.index                         = -1;
-data2.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data2];
-
-HomeListDataModle *data3            = [HomeDataHelperContext newObject];
-data3.fatherNode                    = @"node_0";
-data3.currentNode                   = @"node_0_3";
-data3.fileNameStr                   = @"人事";
-data3.canExpand                     = [NSNumber numberWithBool:YES];
-data3.index                         = -1;
-data3.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data3];
-
-HomeListDataModle *data4            = [HomeDataHelperContext newObject];
-data4.fatherNode                    = @"node_0_1";
-data4.currentNode                   = @"node_0_1_1";
-data4.fileNameStr                   = @"peter组";
-data4.canExpand                     = [NSNumber numberWithBool:YES];
-data4.index                         = -1;
-data4.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data4];
-
-HomeListDataModle *data5            = [HomeDataHelperContext newObject];
-data5.fatherNode                    = @"node_0_1";
-data5.currentNode                   = @"node_0_1_2";
-data5.fileNameStr                   = @"mike组";
-data5.canExpand                     = [NSNumber numberWithBool:YES];
-data5.index                         = -1;
-data5.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data5];
-
-HomeListDataModle *data6            = [HomeDataHelperContext newObject];
-data6.fatherNode                    = @"node_0_1";
-data6.currentNode                   = @"node_0_1_3";
-data6.fileNameStr                   = @"tony组";
-data6.canExpand                     = [NSNumber numberWithBool:YES];
-data6.index                         = -1;
-data6.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data6];
-
-HomeListDataModle *data7            = [HomeDataHelperContext newObject];
-data7.fatherNode                    = @"node_0_2";
-data7.currentNode                   = @"node_0_2_1";
-data7.fileNameStr                   = @"jons组";
-data7.canExpand                     = [NSNumber numberWithBool:YES];
-data7.index                         = -1;
-data7.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data7];
-
-HomeListDataModle *data8            = [HomeDataHelperContext newObject];
-data8.fatherNode                    = @"node_0_2";
-data8.currentNode                   = @"node_0_2_2";
-data8.fileNameStr                   = @"jons组";
-data8.canExpand                     = [NSNumber numberWithBool:YES];
-data8.index                         = -1;
-data8.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data8];
-
-HomeListDataModle *data9            = [HomeDataHelperContext newObject];
-data9.fatherNode                    = @"node_0_2";
-data9.currentNode                   = @"node_0_2_3";
-data9.fileNameStr                   = @"allen组";
-data9.canExpand                     = [NSNumber numberWithBool:YES];
-data9.index                         = -1;
-data9.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data9];
-
-HomeListDataModle *data10           = [HomeDataHelperContext newObject];
-data10.fatherNode                   = @"node_0_1_2";
-data10.currentNode                  = @"node_0_1_2_1";
-data10.fileNameStr                  = @"allen组";
-data10.canExpand                    = [NSNumber numberWithBool:YES];
-data10.index                        = -1;
-data10.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data10];
-
-HomeListDataModle *data11           = [HomeDataHelperContext newObject];
-data11.fatherNode                   = @"node_0_1_2";
-data11.currentNode                  = @"node_0_1_2_2";
-data11.fileNameStr                  = @"allen组";
-data11.canExpand                    = [NSNumber numberWithBool:YES];
-data11.index                        = -1;
-data11.isExpand                      = [NSNumber numberWithBool:NO];
-[_listArray addObject:data11];
-[HomeDataHelperContext save];
-#endif
 

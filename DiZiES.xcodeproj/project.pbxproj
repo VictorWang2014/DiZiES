@@ -13,6 +13,7 @@
 		8427AFFF1B1B51EE002CA442 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFFE1B1B51EE002CA442 /* DataRequest.m */; };
 		8427B0051B1DE9A3002CA442 /* NSJSONSerialization+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */; };
 		8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0071B241A80002CA442 /* NSString+Tool.m */; };
+		84B15E211B273291004761F9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B15E201B273291004761F9 /* MBProgressHUD.m */; };
 		84B5D74E1B0B8608006F413D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D74D1B0B8608006F413D /* main.m */; };
 		84B5D76B1B0B8608006F413D /* DiZiESTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D76A1B0B8608006F413D /* DiZiESTests.m */; };
 		84B5D7831B0B88E6006F413D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7821B0B88E6006F413D /* AppDelegate.m */; };
@@ -72,6 +73,8 @@
 		8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSJSONSerialization+Tool.m"; path = "Utiles/NSJSONSerialization+Tool.m"; sourceTree = "<group>"; };
 		8427B0061B241A80002CA442 /* NSString+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Tool.h"; path = "Utiles/NSString+Tool.h"; sourceTree = "<group>"; };
 		8427B0071B241A80002CA442 /* NSString+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Tool.m"; path = "Utiles/NSString+Tool.m"; sourceTree = "<group>"; };
+		84B15E1F1B273291004761F9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ThirthParty/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		84B15E201B273291004761F9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ThirthParty/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		84B5D7481B0B8608006F413D /* DiZiES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiZiES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B5D74C1B0B8608006F413D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B5D74D1B0B8608006F413D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -179,6 +182,23 @@
 			name = DataRequest;
 			sourceTree = "<group>";
 		};
+		84B15E1D1B27324A004761F9 /* ThirthParty */ = {
+			isa = PBXGroup;
+			children = (
+				84B15E1E1B27325B004761F9 /* MBPorgressHUB */,
+			);
+			name = ThirthParty;
+			sourceTree = "<group>";
+		};
+		84B15E1E1B27325B004761F9 /* MBPorgressHUB */ = {
+			isa = PBXGroup;
+			children = (
+				84B15E1F1B273291004761F9 /* MBProgressHUD.h */,
+				84B15E201B273291004761F9 /* MBProgressHUD.m */,
+			);
+			name = MBPorgressHUB;
+			sourceTree = "<group>";
+		};
 		84B5D73F1B0B8608006F413D = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +220,7 @@
 		84B5D74A1B0B8608006F413D /* DiZiES */ = {
 			isa = PBXGroup;
 			children = (
+				84B15E1D1B27324A004761F9 /* ThirthParty */,
 				84B5D77D1B0B887F006F413D /* Source */,
 				84B5D77C1B0B8878006F413D /* Images */,
 				84B5D77A1B0B885C006F413D /* Utles */,
@@ -498,6 +519,7 @@
 				84B5D7A31B0B8A08006F413D /* EBSTabBarViewController.m in Sources */,
 				84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */,
 				8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */,
+				84B15E211B273291004761F9 /* MBProgressHUD.m in Sources */,
 				84B5D7831B0B88E6006F413D /* AppDelegate.m in Sources */,
 				84F053861B0E19FD00C441AC /* HomeListTableViewCell.m in Sources */,
 				84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */,
