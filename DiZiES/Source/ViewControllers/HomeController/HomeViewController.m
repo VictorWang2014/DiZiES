@@ -213,6 +213,7 @@
     [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
         if ([data isKindOfClass:[FlorderResponseParse class]])
         {
+            NSMutableArray *flordersArray   = [NSMutableArray array];
             FlorderResponseParse *florderData   = (FlorderResponseParse *)data;
             if (florderData.flordListArray.count >= 1)
             {
@@ -223,7 +224,6 @@
                     fatherNode                  = floderId;
                 //                NSLog(@"!+++++++++++++++");
                 //                NSLog(@"fathernode %@", fatherNode);
-                NSMutableArray *flordersArray   = [NSMutableArray array];
                 for (int i = 0; i < florderData.flordListArray.count; i++)
                 {
                     FloderDataModel *data   = [florderData.flordListArray objectAtIndex:i];
@@ -235,21 +235,24 @@
                     [self.tempArray addObject:data];
                     if ([data.canExpand boolValue])
                     {
+                        NSLog(@"!-----is florder %@", data.currentNode);
                         [self.nodeArray addObject:data.currentNode];
                         [flordersArray addObject:data.currentNode];
                     }
                 }
-                [self.nodeArray removeObject:floderId];
-                for (int i = 0; i < flordersArray.count; i++)
-                {
-//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self requestWithFloderId:[flordersArray objectAtIndex:i] callBack:callBack];
-//                    });
-                }
-                if (self.nodeArray.count == 1) {
-                    callBack(data);
-                }
                 //                NSLog(@"!===============");
+            }
+            [self.nodeArray removeObject:floderId];
+            NSLog(@"!-----remove florder %@", floderId);
+            for (int i = 0; i < flordersArray.count; i++)
+            {
+                //                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self requestWithFloderId:[flordersArray objectAtIndex:i] callBack:callBack];
+                //                    });
+            }
+            if (self.nodeArray.count == 0) {
+//                NSLog(@"!-----last florder %@", [self.nodeArray objectAtIndex:0]);
+                callBack(data);
             }
         }
     } failure:^(id data) {
