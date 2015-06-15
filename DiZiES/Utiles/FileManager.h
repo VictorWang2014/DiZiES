@@ -24,6 +24,8 @@
 
 + (NSString *)getDownloadDirPathWithName:(NSString *)name;
 
++ (NSString *)getDownloadCachesDirPathWithName:(NSString *)name;
+
 + (BOOL)fileIsExistAtPath:(NSString *)filePath;
 
 @end

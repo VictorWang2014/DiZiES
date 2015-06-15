@@ -18,6 +18,7 @@
 #import "HomeDataModle.h"
 #import "HomeListDataModle.h"
 #import "HomeDataHelper.h"
+#import "DownloadManager.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -63,6 +64,12 @@
     _listDataSourceArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"]];
    
     [_homeListTableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    [DownloadManager shareInstance] downloadWithUrl:<#(NSString *)#>
 }
 
 - (void)viewDidAppear:(BOOL)animated

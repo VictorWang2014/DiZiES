@@ -88,4 +88,9 @@
     return NO;
 }
 
++ (NSString *)getDownloadCachesDirPathWithName:(NSString *)name
+{
+    return nil;
+}
+
 @end
