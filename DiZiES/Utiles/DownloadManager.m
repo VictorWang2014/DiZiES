@@ -52,15 +52,57 @@
 
 - (void)downloadWithUrl:(NSString *)url
 {
-    NSURLRequest *request       = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSURLSessionDownloadTask *task = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:@"tep.data"]];
+    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:@"tep.mp4"]];
+        NSLog(@"!---------%@", [FileManager getDownloadCachesDirPathWithName:@"tep.mp4"]);
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        
+        if (error)
+        {
+            NSLog(@"%@", error.description);
+        }
+        else
+        {
+            NSLog(@"success");
+        }
     }];
     [task resume];
     [self.downloadTasksDic setObject:task forKey:@"key"];
 }
 
+- (void)downloadWithFile:(FileModel *)fileModel
+{
+    if (fileModel.url == nil || fileModel.url.length == 0)
+        return;
+    
+    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
+    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@", [fileModel.filename stringByDeletingPathExtension]]]];
+        return pathUrl;
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        if (error)
+        {
+            NSLog(@"%@", error.description);
+        }
+        else
+        {
+            NSLog(@"success");
+        }
+    }];
+    [task resume];
+    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    [self.downloadTasksDic setObject:task forKey:fileNameKey];
+}
+
+
 @end
+
+
+@implementation FileModel
+
+
+
+@end
+
+

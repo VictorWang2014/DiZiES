@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+
+@class FileModel;
+
 @interface DownloadManager : NSObject
 
 + (DownloadManager *)shareInstance;
@@ -16,5 +19,18 @@
 @property (nonatomic, retain) NSMutableDictionary *downloadTasksDic;
 
 - (void)downloadWithUrl:(NSString *)url;
+
+- (void)downloadWithFile:(FileModel *)fileModel;
+
+@end
+
+
+@interface FileModel : NSObject
+
+@property (nonatomic, strong) NSString *filename;
+
+@property (nonatomic, strong) NSString *fileSize;
+
+@property (nonatomic, strong) NSString *url;
 
 @end

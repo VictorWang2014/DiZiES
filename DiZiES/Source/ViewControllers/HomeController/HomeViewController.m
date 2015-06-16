@@ -70,8 +70,13 @@
 - (void)viewWillAppear:(BOOL)animated//http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4 http://x1.zhuti.com/down/2012/11/29-win7/3D-1.jpg
 {
     [super viewWillAppear:animated];
-    [[DownloadManager shareInstance] downloadWithUrl:@"http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4"];
-    NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:@"key"];
+    FileModel *file = [[FileModel alloc] init];
+    file.filename = @"ceshi.mp4";
+    file.url = @"http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4";
+    [[DownloadManager shareInstance] downloadWithFile:file];
+    
+//    [[DownloadManager shareInstance] downloadWithUrl:@"http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4"];
+    NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[file.filename stringByDeletingPathExtension]];
     self.task = task;
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeAction:) userInfo:nil repeats:YES];
     
@@ -79,9 +84,8 @@
 
 - (void)timeAction:(id)sender
 {
-    NSLog(@"!_------%lld", self.task.countOfBytesReceived);
+    NSLog(@"!------%lld", self.task.countOfBytesReceived);
 }
-
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -92,7 +96,11 @@
 
 - (IBAction)refreshButtonClick:(UIBarButtonItem *)sender
 {
-    [self refreshHomeListFloder];
+//    [self refreshHomeListFloder];
+    if (self.task.state == NSURLSessionTaskStateSuspended) {
+        [self.task resume];
+    }else
+        [self.task suspend];
 }
 
 - (void)didReceiveMemoryWarning {
