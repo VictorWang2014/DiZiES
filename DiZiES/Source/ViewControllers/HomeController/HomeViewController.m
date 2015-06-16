@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) MBProgressHUD             *hud;
 
+@property (nonatomic, strong) NSURLSessionDownloadTask *task;
 @end
 
 @implementation HomeViewController
@@ -66,11 +67,22 @@
     [_homeListTableView reloadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated//http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4 http://x1.zhuti.com/down/2012/11/29-win7/3D-1.jpg
 {
     [super viewWillAppear:animated];
-//    [DownloadManager shareInstance] downloadWithUrl:<#(NSString *)#>
+    [[DownloadManager shareInstance] downloadWithUrl:@"http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4"];
+    NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:@"key"];
+    self.task = task;
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeAction:) userInfo:nil repeats:YES];
+    
 }
+
+- (void)timeAction:(id)sender
+{
+    NSLog(@"!_------%lld", self.task.countOfBytesReceived);
+}
+
+
 
 - (void)viewDidAppear:(BOOL)animated
 {

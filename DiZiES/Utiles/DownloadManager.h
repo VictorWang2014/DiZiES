@@ -13,6 +13,8 @@
 
 + (DownloadManager *)shareInstance;
 
+@property (nonatomic, retain) NSMutableDictionary *downloadTasksDic;
+
 - (void)downloadWithUrl:(NSString *)url;
 
 @end

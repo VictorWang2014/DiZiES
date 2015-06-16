@@ -52,6 +52,23 @@
 
 + (NSString *)getDownloadDirPath
 {
+    NSString *docPath               = [self getLibraryPath];
+    NSString *filePath              = [NSString stringWithFormat:@"%@/DownLoadFile", docPath];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    BOOL isDir;
+    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDir] && !isDir)
+    {
+        NSError *error;
+        [fileManager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:&error];
+        if (error) {
+            NSAssert(@"Download Directory create failure %@", error.localizedDescription);
+        }
+    }
+    return filePath;
+}
+
++ (NSString *)getDownloadCachesDirPath
+{
     NSString *docPath               = [self getCacheDirPath];
     NSString *filePath              = [NSString stringWithFormat:@"%@/DownLoadFile", docPath];
     NSFileManager *fileManager      = [NSFileManager defaultManager];
@@ -90,7 +107,14 @@
 
 + (NSString *)getDownloadCachesDirPathWithName:(NSString *)name
 {
-    return nil;
+    NSString *docPath               = [self getDownloadDirPath];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, name];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:path])
+    {
+        [fileManager createFileAtPath:path contents:nil attributes:nil];
+    }
+    return path;
 }
 
 @end

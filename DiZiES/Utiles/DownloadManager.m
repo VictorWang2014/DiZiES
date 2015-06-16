@@ -7,6 +7,7 @@
 //
 
 #import "DownloadManager.h"
+#import "Tools.h"
 
 @interface DownloadManager ()
 {
@@ -15,7 +16,6 @@
 }
 
 @property (nonatomic, retain) AFURLSessionManager *sessionManager;
-@property (nonatomic, retain) NSMutableDictionary *downloadTasksDic;
 
 @end
 
@@ -31,7 +31,7 @@
     return downloadManager;
 }
 
-- (id)init
+- (id)init//http://x1.zhuti.com/down/2012/11/29-win7/3D-1.jpg
 {
     self = [super init];
     if (self)
@@ -53,13 +53,14 @@
 - (void)downloadWithUrl:(NSString *)url
 {
     NSURLRequest *request       = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSProgress *progress        = [[NSProgress alloc] init];
-    NSURLSessionDownloadTask *task = [self.sessionManager downloadTaskWithRequest:request progress:&progress destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl ;
+    NSURLSessionDownloadTask *task = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *pathUrl = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:@"tep.data"]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         
     }];
+    [task resume];
+    [self.downloadTasksDic setObject:task forKey:@"key"];
 }
 
 @end
