@@ -10,17 +10,23 @@
 #import "AFNetworking.h"
 
 
+typedef void(^DownloadManagerSuccess)(id data);
+
 @class FileModel;
 
 @interface DownloadManager : NSObject
 
-+ (DownloadManager *)shareInstance;
-
 @property (nonatomic, retain) NSMutableDictionary *downloadTasksDic;
 
-- (void)downloadWithUrl:(NSString *)url;
++ (DownloadManager *)shareInstance;
 
-- (void)downloadWithFile:(FileModel *)fileModel;
+- (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success;
+// 开始下载文件
+- (void)downloadWithFile:(FileModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success;
+// 暂停下载文件
+- (void)suspendWithFile:(FileModel *)fileModel;
+// 唤醒文件下载
+- (void)resumeWithFile:(FileModel *)fileModel;
 
 @end
 

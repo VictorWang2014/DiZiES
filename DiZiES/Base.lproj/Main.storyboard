@@ -573,6 +573,79 @@
                     <view key="view" contentMode="scaleToFill" id="YyJ-pM-nMw">
                         <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-hm-Fkk">
+                                <rect key="frame" x="0.0" y="44" width="591" height="1024"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="downloadingcell" rowHeight="70" id="txL-a8-9sf" customClass="DownloadingCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="591" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="txL-a8-9sf" id="ATw-jy-OcP">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F3S-J1-wAU">
+                                                    <rect key="frame" x="24" y="8" width="54" height="54"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXL-nW-4ND">
+                                                    <rect key="frame" x="346" y="18" width="122" height="34"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tb-9z-c9A">
+                                                    <rect key="frame" x="10" y="68" width="573" height="1"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-go-QxO">
+                                                    <rect key="frame" x="86" y="18" width="189" height="34"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fileImageView" destination="F3S-J1-wAU" id="F8l-MG-3QJ"/>
+                                            <outlet property="progressLabel" destination="QXL-nW-4ND" id="qDf-Wa-sL0"/>
+                                            <outlet property="sepLineImageView" destination="3Tb-9z-c9A" id="wg5-Pl-rai"/>
+                                            <outlet property="titleLabel" destination="Yzr-go-QxO" id="hNZ-ff-NUy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="downloadedcell" id="hco-GU-43q" customClass="DownloadedCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="591" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hco-GU-43q" id="fsa-GX-Kbu">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kzE-ip-m5p">
+                                                    <rect key="frame" x="24" y="8" width="54" height="54"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-gx-65N">
+                                                    <rect key="frame" x="86" y="17" width="239" height="35"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QUV-2S-UGe">
+                                                    <rect key="frame" x="10" y="67" width="573" height="1"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fileImageView" destination="kzE-ip-m5p" id="jZW-oM-NCb"/>
+                                            <outlet property="sepLineImageView" destination="QUV-2S-UGe" id="Kag-yW-yZL"/>
+                                            <outlet property="titleLable" destination="BgG-gx-65N" id="txB-9R-yjS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="f6p-s9-Nix" id="BvQ-S0-7Lq"/>
+                                    <outlet property="delegate" destination="f6p-s9-Nix" id="ZQO-QX-gwg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="acK-8u-nPf">
@@ -586,12 +659,18 @@
                                     <state key="normal" title="正在下载">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="downloadingBtnClick:" destination="f6p-s9-Nix" eventType="touchUpInside" id="LHE-wd-vey"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqK-gB-qyr">
                                     <rect key="frame" x="71" y="0.0" width="71" height="33"/>
                                     <state key="normal" title="下载完成">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="downloadedBtnClick:" destination="f6p-s9-Nix" eventType="touchUpInside" id="J2M-Jv-uHN"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -611,6 +690,7 @@
                         <outlet property="leftButton" destination="wbb-cZ-EFz" id="zbT-SE-LWG"/>
                         <outlet property="navTitleView" destination="ECR-z6-GTP" id="s1b-ul-qRb"/>
                         <outlet property="rightButton" destination="eqK-gB-qyr" id="b1R-cN-5fa"/>
+                        <outlet property="tableView" destination="Epu-hm-Fkk" id="izh-GR-T0a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrD-8D-2sV" userLabel="First Responder" sceneMemberID="firstResponder"/>

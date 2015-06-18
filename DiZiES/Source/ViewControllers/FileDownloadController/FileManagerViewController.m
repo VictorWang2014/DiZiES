@@ -7,35 +7,116 @@
 //
 
 #import "FileManagerViewController.h"
+#import "DownloadedCell.h"
+#import "DownloadingCell.h"
 
-@interface FileManagerViewController ()
+#import "HomeDataHelper.h"
+#import "Tools.h"
+#import "HomeListDataModle.h"
+#import "CommonDefine.h"
 
-@property (strong, nonatomic) IBOutlet UIView *navTitleView;
-@property (strong, nonatomic) IBOutlet UIButton *leftButton;
-@property (strong, nonatomic) IBOutlet UIButton *rightButton;
+typedef NS_ENUM(NSInteger, FileManagerType)
+{
+    FileManagerTypeDownloading,
+    FileManagerTypeDownloaded
+};
+
+@interface FileManagerViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    FileManagerType                 _managerType;
+}
+
+@property (strong, nonatomic) IBOutlet UIView           *navTitleView;
+@property (strong, nonatomic) IBOutlet UIButton         *leftButton;
+@property (strong, nonatomic) IBOutlet UIButton         *rightButton;
+
+@property (strong, nonatomic) IBOutlet UITableView      *tableView;
+
+@property (nonatomic, strong) NSMutableArray            *listArray;
 
 @end
 
 @implementation FileManagerViewController
 
-- (void)viewDidLoad {
+- (IBAction)downloadingBtnClick:(UIButton *)sender
+{
+    if (_managerType == FileManagerTypeDownloading)
+        return;
+    _managerType                = FileManagerTypeDownloading;
+    [self _initialDownloadingData];
+}
+- (IBAction)downloadedBtnClick:(UIButton *)sender
+{
+    if (_managerType == FileManagerTypeDownloaded)
+        return;
+    _managerType                = FileManagerTypeDownloaded;
+    [self _initialDownloadedData];
+}
+
+- (void)_initialDownloadingData
+{
+    NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
+    for (HomeListDataModle *model in array)
+    {
+        FileModel *fileModel    = [[FileModel alloc] init];
+        fileModel.filename      = model.fileNameStr;
+        fileModel.fileSize      = model.fileSize;
+        fileModel.url           = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+        [_listArray addObject:fileModel];
+    }
+}
+
+- (void)_initialDownloadedData
+{
+    
+}
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.listArray              = [NSMutableArray array];
+    _managerType                = FileManagerTypeDownloading;
+    [self _initialDownloadingData];
 }
 
-- (void)didReceiveMemoryWarning {
+
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDataSource and UITableViewDelegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_managerType == FileManagerTypeDownloading)
+    {
+        DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
+        FileModel *model                            = [_listArray objectAtIndex:indexPath.row];
+        cell.titleLabel.text                        = model.filename;
+        return cell;
+    }
+    else
+    {
+        DownloadedCell *cell                        = [tableView dequeueReusableCellWithIdentifier:@"downloadedcell"];
+        return cell;
+    }
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _listArray.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_managerType == FileManagerTypeDownloaded)
+    {
+        
+    }
+}
 
 @end

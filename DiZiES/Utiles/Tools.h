@@ -16,5 +16,6 @@
 #import "FileManager.h"
 #import "NSJSONSerialization+Tool.h"
 #import "NSString+Tool.h"
+#import "DownloadManager.h"
 
 #endif

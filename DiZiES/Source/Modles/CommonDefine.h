@@ -16,6 +16,8 @@
 
 #define FloderUrl  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/" // 请求文件目录下的文件夹及文件
 
+#define ContentUrl @"http://ebsctgmgt.padccc.net/restapi/index.php/document/"// 文件内容，共下载
+
 #define DownloadDir [FileManager getDownloadDirPath] // 用户下载保存目录
 
 #endif
@@ -24,5 +26,5 @@
 /*
  "http://ebsctgmgt.padccc.net/restapi/index.php/login"     登录URL  
  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/1/children"  请求文件目录下的文件夹及文件
- 
+ @"http://ebsctgmgt.padccc.net/restapi/index.php/document/2/content"  文件内容
  */

@@ -50,49 +50,63 @@
 
 
 
-- (void)downloadWithUrl:(NSString *)url
+- (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success
 {
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:@"tep.mp4"]];
-        NSLog(@"!---------%@", [FileManager getDownloadCachesDirPathWithName:@"tep.mp4"]);
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@", url]]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)
         {
-            NSLog(@"%@", error.description);
+            success(@"failure");
         }
         else
         {
-            NSLog(@"success");
+            success(@"success");
         }
     }];
     [task resume];
     [self.downloadTasksDic setObject:task forKey:@"key"];
 }
 
-- (void)downloadWithFile:(FileModel *)fileModel
+- (void)downloadWithFile:(FileModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success
 {
     if (fileModel.url == nil || fileModel.url.length == 0)
         return;
     
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@", [fileModel.filename stringByDeletingPathExtension]]]];
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@_%@", fileModel.url, fileModel.filename]]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)
         {
-            NSLog(@"%@", error.description);
+            success(@"failure");
         }
         else
         {
-            NSLog(@"success");
+            success(@"success");
         }
     }];
+
     [task resume];
     NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
     [self.downloadTasksDic setObject:task forKey:fileNameKey];
+}
+
+- (void)suspendWithFile:(FileModel *)fileModel
+{
+    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
+    [task suspend];
+}
+
+- (void)resumeWithFile:(FileModel *)fileModel
+{
+    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
+    [task resume];
 }
 
 
