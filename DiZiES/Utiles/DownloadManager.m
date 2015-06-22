@@ -77,7 +77,7 @@
     
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@_%@", fileModel.url, fileModel.filename]]];
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [fileModel.url hash], fileModel.filename]]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)

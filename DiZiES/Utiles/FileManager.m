@@ -117,4 +117,11 @@
     return path;
 }
 
++ (NSArray *)getAllFilesInDirPath:(NSString *)dirPath
+{
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    NSArray *array                  = [fileManager subpathsAtPath:dirPath];
+    return array;
+}
+
 @end

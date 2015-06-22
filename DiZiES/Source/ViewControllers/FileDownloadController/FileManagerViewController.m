@@ -53,22 +53,40 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     [self _initialDownloadedData];
 }
 
-- (void)_initialDownloadingData
+- (void)_initialDownloadingData// 获取本地保存的服务端所有的数据，然后剔除已经下载下来的数据
 {
-    NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
-    for (HomeListDataModle *model in array)
-    {
-        FileModel *fileModel    = [[FileModel alloc] init];
-        fileModel.filename      = model.fileNameStr;
-        fileModel.fileSize      = model.fileSize;
-        fileModel.url           = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
-        [_listArray addObject:fileModel];
-    }
+    [self _initialDataWithDownloaded:NO];
 }
 
 - (void)_initialDownloadedData
 {
-    
+    [self _initialDataWithDownloaded:YES];
+//    _listArray                  = [NSMutableArray arrayWithArray:[FileManager getAllFilesInDirPath:[FileManager getDownloadDirPath]]];
+}
+
+- (void)_initialDataWithDownloaded:(BOOL)downloaded
+{
+    BOOL hasDownload            = NO;
+    [_listArray removeAllObjects];
+    _listArray                  = [NSMutableArray array];
+    NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
+    for (HomeListDataModle *model in array)
+    {
+        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+        if ([FileManager fileIsExistAtPath:filePath])
+        {
+            hasDownload         = YES;
+        }
+        if (downloaded == hasDownload)
+        {
+            FileModel *fileModel    = [[FileModel alloc] init];
+            fileModel.filename      = model.fileNameStr;
+            fileModel.fatherNode    = model.fatherNode;
+            fileModel.fileSize      = model.fileSize;
+            fileModel.url           = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+            [_listArray addObject:fileModel];
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -97,6 +115,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
         FileModel *model                            = [_listArray objectAtIndex:indexPath.row];
         cell.titleLabel.text                        = model.filename;
+        cell.fileModel                              = model;
         return cell;
     }
     else
@@ -118,5 +137,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         
     }
 }
+
 
 @end

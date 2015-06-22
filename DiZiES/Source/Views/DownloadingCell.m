@@ -20,4 +20,15 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)downloadButtonClick:(UIButton *)sender
+{
+    if (self.fileModel.downloadState  == DownloadStateDownloading)// 正在下载 则点击后暂停
+    {
+        
+    }else if (self.fileModel.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
+    {
+        
+    }
+}
+
 @end

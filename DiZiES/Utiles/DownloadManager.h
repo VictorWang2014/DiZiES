@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+typedef NS_ENUM(NSInteger, DownloadState)
+{
+    DownloadStateSuspend,
+    DownloadStateDownloading,
+};
 
 typedef void(^DownloadManagerSuccess)(id data);
 
@@ -38,5 +43,9 @@ typedef void(^DownloadManagerSuccess)(id data);
 @property (nonatomic, strong) NSString *fileSize;
 
 @property (nonatomic, strong) NSString *url;
+
+@property (nonatomic, strong) NSString *fatherNode;
+
+@property (nonatomic) DownloadState downloadState;
 
 @end
