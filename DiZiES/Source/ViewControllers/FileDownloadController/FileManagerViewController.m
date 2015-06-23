@@ -55,18 +55,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 
 - (void)_initialDownloadingData// 获取本地保存的服务端所有的数据，然后剔除已经下载下来的数据
 {
-    [self _initialDataWithDownloaded:NO];
-}
-
-- (void)_initialDownloadedData
-{
-    [self _initialDataWithDownloaded:YES];
-//    _listArray                  = [NSMutableArray arrayWithArray:[FileManager getAllFilesInDirPath:[FileManager getDownloadDirPath]]];
-}
-
-- (void)_initialDataWithDownloaded:(BOOL)downloaded
-{
-    BOOL hasDownload            = NO;
     [_listArray removeAllObjects];
     _listArray                  = [NSMutableArray array];
     NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
@@ -75,18 +63,44 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
         if ([FileManager fileIsExistAtPath:filePath])
         {
-            hasDownload         = YES;
+            FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
+            fileModel.fileNameStr           = model.fileNameStr;
+            fileModel.fatherNode            = model.fatherNode;
+            fileModel.fileSize              = model.fileSize;
+            fileModel.currentNode           = model.currentNode;
+            fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+            [_listArray addObject:fileModel];
         }
-        if (downloaded == hasDownload)
+    }
+    [self _rankDownloadingData];
+}
+
+- (void)_rankDownloadingData
+{
+    NSMutableArray *tmpArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"]];
+    
+}
+
+- (void)_initialDownloadedData
+{
+    [_listArray removeAllObjects];
+    _listArray                  = [NSMutableArray array];
+    NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
+    for (HomeListDataModle *model in array)
+    {
+        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+        if ([FileManager fileIsExistAtPath:filePath])
         {
             FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
             fileModel.fileNameStr           = model.fileNameStr;
             fileModel.fatherNode            = model.fatherNode;
             fileModel.fileSize              = model.fileSize;
+            fileModel.currentNode           = model.currentNode;
             fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
             [_listArray addObject:fileModel];
         }
     }
+//    _listArray                  = [NSMutableArray arrayWithArray:[FileManager getAllFilesInDirPath:[FileManager getDownloadDirPath]]];
 }
 
 - (void)viewDidLoad
@@ -97,8 +111,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     _managerType                = FileManagerTypeDownloading;
     [self _initialDownloadingData];
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -114,13 +126,24 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
+        if ([model.fileType isEqualToString:@"floder"])
+            cell.downloadButton.hidden              = YES;
+        else
+            cell.downloadButton.hidden              = NO;
+        
         cell.titleLabel.text                        = model.fileNameStr;
         cell.fileModel                              = model;
+        NSArray *sepNum                             = [model.currentNode componentsSeparatedByString:@"_"];
+        cell.imgLineLayoutConstrains.constant       = 20 + (sepNum.count-2)*40;
+//        cell.dataLabel.text                         = data.date;
         return cell;
     }
     else
     {
         DownloadedCell *cell                        = [tableView dequeueReusableCellWithIdentifier:@"downloadedcell"];
+        FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
+        cell.titleLable.text                        = model.fileNameStr;
+//        cell.dataLabel.text                         = data.date;
         return cell;
     }
 }

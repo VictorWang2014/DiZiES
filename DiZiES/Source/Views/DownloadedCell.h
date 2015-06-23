@@ -16,4 +16,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLable;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgLineLayoutConstrains;
 @end

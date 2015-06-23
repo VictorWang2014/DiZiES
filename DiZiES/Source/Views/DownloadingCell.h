@@ -32,4 +32,6 @@
 
 @property (nonatomic, assign) id<DownloadingCellDelegate> adelegate;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgLineLayoutConstrains;
+
 @end

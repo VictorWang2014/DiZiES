@@ -574,49 +574,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-hm-Fkk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-hm-Fkk">
                                 <rect key="frame" x="0.0" y="44" width="591" height="1024"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="downloadingcell" rowHeight="70" id="txL-a8-9sf" customClass="DownloadingCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="downloadingcell" id="txL-a8-9sf" customClass="DownloadingCell">
                                         <rect key="frame" x="0.0" y="0.0" width="591" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="txL-a8-9sf" id="ATw-jy-OcP">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F3S-J1-wAU">
-                                                    <rect key="frame" x="24" y="8" width="54" height="54"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.png" translatesAutoresizingMaskIntoConstraints="NO" id="F3S-J1-wAU">
+                                                    <rect key="frame" x="16" y="4" width="44" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="8vN-1S-lDf"/>
+                                                        <constraint firstAttribute="height" constant="43" id="ipR-zW-tdb"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXL-nW-4ND">
-                                                    <rect key="frame" x="346" y="18" width="122" height="34"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="文件1正在下载" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-go-QxO">
+                                                    <rect key="frame" x="68" y="11" width="189" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="ZYs-zB-tyS"/>
+                                                        <constraint firstAttribute="width" constant="189" id="c2c-d0-9Vc"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tb-9z-c9A">
-                                                    <rect key="frame" x="10" y="68" width="573" height="1"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Tb-9z-c9A">
+                                                    <rect key="frame" x="10" y="49" width="573" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="kQW-aL-TL5"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBP-3N-ilu">
-                                                    <rect key="frame" x="205" y="20" width="60" height="30"/>
-                                                    <state key="normal" title="正在下载">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBP-3N-ilu">
+                                                    <rect key="frame" x="399" y="12" width="60" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Dht-iL-DF5"/>
+                                                        <constraint firstAttribute="width" constant="60" id="dB3-NI-4hf"/>
+                                                    </constraints>
+                                                    <state key="normal" title="点击下载">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="downloadButtonClick:" destination="txL-a8-9sf" eventType="touchUpInside" id="tUV-q8-HLM"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzr-go-QxO">
-                                                    <rect key="frame" x="86" y="18" width="189" height="34"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-12-11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXL-nW-4ND">
+                                                    <rect key="frame" x="472" y="8" width="105" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="9k6-pm-zBe"/>
+                                                        <constraint firstAttribute="width" constant="105" id="DhX-1f-WQC"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="0.423828125" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="VBP-3N-ilu" secondAttribute="centerY" id="0Xx-vz-cmx"/>
+                                                <constraint firstItem="3Tb-9z-c9A" firstAttribute="leading" secondItem="ATw-jy-OcP" secondAttribute="leadingMargin" constant="2" id="37h-xl-Ezl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QXL-nW-4ND" secondAttribute="trailing" constant="6" id="8Sg-V7-X90"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="3Tb-9z-c9A" secondAttribute="bottom" constant="-8" id="DRC-7d-6NO"/>
+                                                <constraint firstItem="3Tb-9z-c9A" firstAttribute="trailing" secondItem="ATw-jy-OcP" secondAttribute="trailingMargin" id="IB3-Ox-Y08"/>
+                                                <constraint firstAttribute="centerY" secondItem="Yzr-go-QxO" secondAttribute="centerY" id="c45-XV-Vsk"/>
+                                                <constraint firstItem="QXL-nW-4ND" firstAttribute="leading" secondItem="VBP-3N-ilu" secondAttribute="trailing" constant="13" id="cDf-yw-jQt"/>
+                                                <constraint firstItem="3Tb-9z-c9A" firstAttribute="leading" secondItem="F3S-J1-wAU" secondAttribute="trailing" constant="-50" id="cuf-TW-YrO"/>
+                                                <constraint firstAttribute="centerY" secondItem="QXL-nW-4ND" secondAttribute="centerY" id="jEa-RT-Xnd"/>
+                                                <constraint firstItem="Yzr-go-QxO" firstAttribute="leading" secondItem="F3S-J1-wAU" secondAttribute="trailing" constant="8" id="mff-dl-bER"/>
+                                                <constraint firstAttribute="centerY" secondItem="F3S-J1-wAU" secondAttribute="centerY" id="pLj-yl-WRN"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="downloadButton" destination="VBP-3N-ilu" id="MaI-8O-3dU"/>
                                             <outlet property="fileImageView" destination="F3S-J1-wAU" id="F8l-MG-3QJ"/>
+                                            <outlet property="imgLineLayoutConstrains" destination="37h-xl-Ezl" id="W0T-z6-uet"/>
                                             <outlet property="progressLabel" destination="QXL-nW-4ND" id="qDf-Wa-sL0"/>
                                             <outlet property="sepLineImageView" destination="3Tb-9z-c9A" id="wg5-Pl-rai"/>
                                             <outlet property="titleLabel" destination="Yzr-go-QxO" id="hNZ-ff-NUy"/>
@@ -628,23 +661,56 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hco-GU-43q" id="fsa-GX-Kbu">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kzE-ip-m5p">
-                                                    <rect key="frame" x="24" y="8" width="54" height="54"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.png" translatesAutoresizingMaskIntoConstraints="NO" id="kzE-ip-m5p">
+                                                    <rect key="frame" x="16" y="4" width="44" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="2ug-VB-5Zq"/>
+                                                        <constraint firstAttribute="width" constant="44" id="EPO-EX-EqO"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-gx-65N">
-                                                    <rect key="frame" x="86" y="17" width="239" height="35"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文件夹已经下载" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-gx-65N">
+                                                    <rect key="frame" x="68" y="8" width="239" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="auY-Lj-bUs"/>
+                                                        <constraint firstAttribute="width" constant="239" id="iiq-Pd-9Bm"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QUV-2S-UGe">
-                                                    <rect key="frame" x="10" y="67" width="573" height="1"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QUV-2S-UGe">
+                                                    <rect key="frame" x="10" y="49" width="573" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="U6i-DV-b3X"/>
+                                                    </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-12-01" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEY-tm-Y7y">
+                                                    <rect key="frame" x="479" y="15" width="99" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="99" id="ENY-MV-gRu"/>
+                                                        <constraint firstAttribute="height" constant="21" id="Yxx-Jh-YKp"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.423828125" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QUV-2S-UGe" firstAttribute="trailing" secondItem="fsa-GX-Kbu" secondAttribute="trailingMargin" id="2YW-gm-YSl"/>
+                                                <constraint firstAttribute="centerY" secondItem="BgG-gx-65N" secondAttribute="centerY" id="JLU-Cp-p1I"/>
+                                                <constraint firstItem="BgG-gx-65N" firstAttribute="leading" secondItem="kzE-ip-m5p" secondAttribute="trailing" constant="8" id="Jf4-7U-jw0"/>
+                                                <constraint firstAttribute="centerY" secondItem="kzE-ip-m5p" secondAttribute="centerY" id="JyB-hI-TZY"/>
+                                                <constraint firstItem="QUV-2S-UGe" firstAttribute="leading" secondItem="kzE-ip-m5p" secondAttribute="trailing" constant="-50" id="SDy-nS-zpq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QUV-2S-UGe" secondAttribute="bottom" constant="-8" id="Tzu-oN-vQ6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HEY-tm-Y7y" secondAttribute="trailing" constant="5" id="YIZ-fo-nX0"/>
+                                                <constraint firstItem="QUV-2S-UGe" firstAttribute="leading" secondItem="fsa-GX-Kbu" secondAttribute="leadingMargin" constant="2" id="jo8-uW-cYx"/>
+                                                <constraint firstAttribute="centerY" secondItem="HEY-tm-Y7y" secondAttribute="centerY" id="lzP-ky-Xae"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="fileImageView" destination="kzE-ip-m5p" id="jZW-oM-NCb"/>
+                                            <outlet property="imgLineLayoutConstrains" destination="jo8-uW-cYx" id="vMM-QL-1wa"/>
                                             <outlet property="sepLineImageView" destination="QUV-2S-UGe" id="Kag-yW-yZL"/>
                                             <outlet property="titleLable" destination="BgG-gx-65N" id="txB-9R-yjS"/>
                                         </connections>
