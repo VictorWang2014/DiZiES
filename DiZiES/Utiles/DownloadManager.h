@@ -8,16 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-
-typedef NS_ENUM(NSInteger, DownloadState)
-{
-    DownloadStateSuspend,
-    DownloadStateDownloading,
-};
+#import "HomeDataModle.h"
 
 typedef void(^DownloadManagerSuccess)(id data);
-
-@class FileModel;
 
 @interface DownloadManager : NSObject
 
@@ -27,25 +20,11 @@ typedef void(^DownloadManagerSuccess)(id data);
 
 - (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success;
 // 开始下载文件
-- (void)downloadWithFile:(FileModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success;
+- (void)downloadWithFile:(FloderDataModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success;
 // 暂停下载文件
-- (void)suspendWithFile:(FileModel *)fileModel;
+- (void)suspendWithFile:(FloderDataModel *)fileModel;
 // 唤醒文件下载
-- (void)resumeWithFile:(FileModel *)fileModel;
+- (void)resumeWithFile:(FloderDataModel *)fileModel;
 
 @end
 
-
-@interface FileModel : NSObject
-
-@property (nonatomic, strong) NSString *filename;
-
-@property (nonatomic, strong) NSString *fileSize;
-
-@property (nonatomic, strong) NSString *url;
-
-@property (nonatomic, strong) NSString *fatherNode;
-
-@property (nonatomic) DownloadState downloadState;
-
-@end

@@ -27,4 +27,8 @@
 
 - (void)deleteObjects;
 
+- (void)storeHomeData:(FloderDataModel *)dataModel;
+
+- (void)restoreHomeData:(FloderDataModel *)dataModel;
+
 @end

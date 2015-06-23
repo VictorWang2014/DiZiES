@@ -8,10 +8,20 @@
 
 #import "DownloadingCell.h"
 
+@interface DownloadingCell ()
+
+@property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
+
+@property (nonatomic, strong) NSTimer   *timer;
+
+@end
+
 @implementation DownloadingCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1. target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+    [self.timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,11 +34,43 @@
 {
     if (self.fileModel.downloadState  == DownloadStateDownloading)// 正在下载 则点击后暂停
     {
-        
+        NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
+        if (task == nil)
+        {
+            [[DownloadManager shareInstance] downloadWithFile:self.fileModel downloadSuccess:^(id data) {
+                if (_adelegate && [_adelegate respondsToSelector:@selector(downloadingSuccess:)]) {
+                    [_adelegate downloadingSuccess:self];
+                }
+            }];
+            task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
+        }
+        [task suspend];
+        self.downloadTask = task;
+        [self.timer setFireDate:[NSDate distantPast]];
+
     }else if (self.fileModel.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
     {
-        
+        NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
+        if (task == nil)
+        {
+            [[DownloadManager shareInstance] downloadWithFile:self.fileModel downloadSuccess:^(id data) {
+                if (_adelegate && [_adelegate respondsToSelector:@selector(downloadingSuccess:)]) {
+                    [_adelegate downloadingSuccess:self];
+                }
+            }];
+        }else
+        {
+            [task resume];
+        }
+        self.downloadTask = task;
+        [self.timer setFireDate:[NSDate distantFuture]];
     }
+}
+
+- (void)updateProgress
+{
+    float percentage = self.downloadTask.countOfBytesReceived*100.0/[self.fileModel.fileSize floatValue];
+    self.progressLabel.text = [NSString stringWithFormat:@"%.2f", percentage];
 }
 
 @end

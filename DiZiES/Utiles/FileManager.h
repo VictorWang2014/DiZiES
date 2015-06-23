@@ -30,4 +30,6 @@
 
 + (NSArray *)getAllFilesInDirPath:(NSString *)dirPath;
 
+//+ (NSString *)getStoreFilePath;
+
 @end

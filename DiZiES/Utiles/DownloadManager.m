@@ -70,14 +70,14 @@
     [self.downloadTasksDic setObject:task forKey:@"key"];
 }
 
-- (void)downloadWithFile:(FileModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success
+- (void)downloadWithFile:(FloderDataModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success
 {
     if (fileModel.url == nil || fileModel.url.length == 0)
         return;
     
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [fileModel.url hash], fileModel.filename]]];
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [fileModel.url hash], fileModel.fileNameStr]]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)
@@ -91,32 +91,24 @@
     }];
 
     [task resume];
-    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
     [self.downloadTasksDic setObject:task forKey:fileNameKey];
 }
 
-- (void)suspendWithFile:(FileModel *)fileModel
+- (void)suspendWithFile:(FloderDataModel *)fileModel
 {
-    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
     NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
     [task suspend];
 }
 
-- (void)resumeWithFile:(FileModel *)fileModel
+- (void)resumeWithFile:(FloderDataModel *)fileModel
 {
-    NSString *fileNameKey               = [fileModel.filename stringByDeletingPathExtension];
+    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
     NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
     [task resume];
 }
 
 
 @end
-
-
-@implementation FileModel
-
-
-
-@end
-
 

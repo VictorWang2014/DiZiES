@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "DownloadManager.h"
 
+@class DownloadingCell;
+@protocol DownloadingCellDelegate <NSObject>
+
+- (void)downloadingSuccess:(DownloadingCell *)cell;
+
+@end
+
 @interface DownloadingCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *fileImageView;
@@ -21,6 +28,8 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *downloadButton;
 
-@property (nonatomic, strong) FileModel *fileModel;
+@property (nonatomic, strong) FloderDataModel *fileModel;
+
+@property (nonatomic, assign) id<DownloadingCellDelegate> adelegate;
 
 @end

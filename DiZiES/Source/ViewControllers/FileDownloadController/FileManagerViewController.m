@@ -79,11 +79,11 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         }
         if (downloaded == hasDownload)
         {
-            FileModel *fileModel    = [[FileModel alloc] init];
-            fileModel.filename      = model.fileNameStr;
-            fileModel.fatherNode    = model.fatherNode;
-            fileModel.fileSize      = model.fileSize;
-            fileModel.url           = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+            FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
+            fileModel.fileNameStr           = model.fileNameStr;
+            fileModel.fatherNode            = model.fatherNode;
+            fileModel.fileSize              = model.fileSize;
+            fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
             [_listArray addObject:fileModel];
         }
     }
@@ -113,8 +113,8 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     if (_managerType == FileManagerTypeDownloading)
     {
         DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
-        FileModel *model                            = [_listArray objectAtIndex:indexPath.row];
-        cell.titleLabel.text                        = model.filename;
+        FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
+        cell.titleLabel.text                        = model.fileNameStr;
         cell.fileModel                              = model;
         return cell;
     }

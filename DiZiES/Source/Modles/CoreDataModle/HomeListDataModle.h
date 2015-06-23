@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSNumber *canExpand;
 @property (nonatomic, retain) NSNumber *isExpand;
 @property (nonatomic, strong) NSNumber *isDownloaded;
+@property (nonatomic, strong) NSNumber *isBookmarked;
 
 @property (nonatomic) NSInteger index;
 

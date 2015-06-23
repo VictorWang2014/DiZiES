@@ -51,7 +51,6 @@
     model.isExpand                      = dataModel.isExpand;
     model.canExpand                     = dataModel.canExpand;
     model.isDownloaded                  = [NSNumber numberWithBool:[FileManager fileIsExistAtPath:[FileManager getDownloadDirPathWithName:model.fileNameStr]]];
-    
 }
 
 - (BOOL)save

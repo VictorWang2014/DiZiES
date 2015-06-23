@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, DownloadState)
+{
+    DownloadStateSuspend,
+    DownloadStateDownloading,
+};
 
 @interface HomeDataModle : NSObject
 
@@ -31,6 +36,9 @@
 @property (nonatomic, strong) NSNumber *canExpand;
 @property (nonatomic, strong) NSNumber *isExpand;
 @property (nonatomic, strong) NSNumber *isDownloaded;
+
+@property (nonatomic, strong) NSString *url;
+@property (nonatomic) DownloadState downloadState;
 
 @property (nonatomic) NSInteger index;
 
