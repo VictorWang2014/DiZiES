@@ -55,6 +55,7 @@
         if (_success)
         {
             NSArray *dataArray      = [dic objectForKey:@"data"];
+            NSLog(@"%@", dataArray);
             if ([dataArray isKindOfClass:[NSArray class]])
             {
                 if (dataArray.count >= 1)
@@ -67,6 +68,7 @@
                         dataModel.fileID                = [subDic objectForKey:@"id"];
                         dataModel.fileSize              = [subDic objectForKey:@"size"];
                         dataModel.date                  = [NSString stringWithDateFormateWithDateString:[subDic objectForKey:@"date"]];
+                        dataModel.fileType              = [subDic objectForKey:@"type"];
                         
                         if ([[subDic objectForKey:@"type"] isEqualToString:@"folder"])
                         {

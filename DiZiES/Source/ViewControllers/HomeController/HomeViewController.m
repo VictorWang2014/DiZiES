@@ -206,6 +206,11 @@
         [self.listArray removeAllObjects];
         [self.listDataSourceArray removeAllObjects];
         [HomeDataHelperContext deleteObjects];
+        for (int i = 0; i < _tempArray.count; i++)
+        {
+            FloderDataModel *model = [_tempArray objectAtIndex:i];
+            NSLog(@"filetype %@", model.fileType);
+        }
         for (FloderDataModel *data in self.tempArray) {
             [HomeDataHelperContext addHomeData:data];
         }

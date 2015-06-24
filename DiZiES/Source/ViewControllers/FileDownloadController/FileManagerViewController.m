@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 @property (strong, nonatomic) IBOutlet UITableView      *tableView;
 
 @property (nonatomic, strong) NSMutableArray            *listArray;
+@property (nonatomic, strong) NSMutableArray            *sourceArray;
+
 
 @end
 
@@ -57,28 +59,37 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 {
     [_listArray removeAllObjects];
     _listArray                  = [NSMutableArray array];
-    NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
-    for (HomeListDataModle *model in array)
-    {
-        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
-        if ([FileManager fileIsExistAtPath:filePath])
-        {
-            FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
-            fileModel.fileNameStr           = model.fileNameStr;
-            fileModel.fatherNode            = model.fatherNode;
-            fileModel.fileSize              = model.fileSize;
-            fileModel.currentNode           = model.currentNode;
-            fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
-            [_listArray addObject:fileModel];
-        }
-    }
     [self _rankDownloadingData];
 }
 
 - (void)_rankDownloadingData
 {
-    NSMutableArray *tmpArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:@"node_0"]];
-    
+    [self _rankDownloadDataWithNode:@"node_0"];
+}
+
+- (void)_rankDownloadDataWithNode:(NSString *)node
+{
+    NSMutableArray *tmpArray                = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:@"fatherNode" forAttribute:node]];
+    for (int i = 0; i < tmpArray.count; i++)
+    {
+        HomeListDataModle *model            = [tmpArray objectAtIndex:i];
+        FloderDataModel *fileModel          = [[FloderDataModel alloc] init];
+        fileModel.fileNameStr               = model.fileNameStr;
+        fileModel.fatherNode                = model.fatherNode;
+        fileModel.fileSize                  = model.fileSize;
+        fileModel.fileType                  = model.fileType;
+        fileModel.currentNode               = model.currentNode;
+        fileModel.url                       = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+        if (![FileManager fileIsExistAtPath:filePath])// 树状结构只显示没有下载的文件
+        {
+            [_listArray insertObject:fileModel atIndex:(_listArray.count )];
+        }
+        if ([fileModel.fileType isEqualToString:@"folder"])
+        {
+            [self _rankDownloadDataWithNode:model.currentNode];
+        }
+    }
 }
 
 - (void)_initialDownloadedData
@@ -100,7 +111,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
             [_listArray addObject:fileModel];
         }
     }
-//    _listArray                  = [NSMutableArray arrayWithArray:[FileManager getAllFilesInDirPath:[FileManager getDownloadDirPath]]];
 }
 
 - (void)viewDidLoad
@@ -108,6 +118,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.listArray              = [NSMutableArray array];
+    self.sourceArray            = [NSMutableArray array];
     _managerType                = FileManagerTypeDownloading;
     [self _initialDownloadingData];
 }
@@ -126,7 +137,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
-        if ([model.fileType isEqualToString:@"floder"])
+        if ([model.fileType isEqualToString:@"folder"])
             cell.downloadButton.hidden              = YES;
         else
             cell.downloadButton.hidden              = NO;
