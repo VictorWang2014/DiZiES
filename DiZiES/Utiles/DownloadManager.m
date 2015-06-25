@@ -54,7 +54,7 @@
 {
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%@", url]]];
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDocumentPathWithName:[NSString stringWithFormat:@"%@", url]]];
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)
@@ -77,7 +77,8 @@
     
     NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
     NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [fileModel.url hash], fileModel.fileNameStr]]];
+        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithFloderModel:fileModel]];
+        NSLog(@"download filepath %@", pathUrl);
         return pathUrl;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)

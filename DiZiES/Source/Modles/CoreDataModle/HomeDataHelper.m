@@ -11,6 +11,7 @@
 #import "FileManager.h"
 #import "Tools.h"
 #import "HomeListDataModle.h"
+#import "CommonDefine.h"
 
 @interface HomeDataHelper ()
 
@@ -50,7 +51,7 @@
     model.fatherNode                    = dataModel.fatherNode;
     model.isExpand                      = dataModel.isExpand;
     model.canExpand                     = dataModel.canExpand;
-    model.isDownloaded                  = [NSNumber numberWithBool:[FileManager fileIsExistAtPath:[FileManager getDownloadDirPathWithName:model.fileNameStr]]];
+    model.isDownloaded                  = [NSNumber numberWithBool:[FileManager fileIsExistAtPath:[FileManager getDownloadDirPathWithFloderModel:dataModel]]];
 }
 
 - (BOOL)save

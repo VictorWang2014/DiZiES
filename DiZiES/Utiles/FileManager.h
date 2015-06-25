@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HomeDataModle.h"
 
 @interface FileManager : NSObject
 
@@ -29,6 +30,8 @@
 + (BOOL)fileIsExistAtPath:(NSString *)filePath;
 
 + (NSArray *)getAllFilesInDirPath:(NSString *)dirPath;
+
++ (NSString *)getDownloadDirPathWithFloderModel:(FloderDataModel *)model;
 
 //+ (NSString *)getStoreFilePath;
 

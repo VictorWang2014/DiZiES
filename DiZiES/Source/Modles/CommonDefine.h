@@ -28,3 +28,9 @@
  @"http://ebsctgmgt.padccc.net/restapi/index.php/folder/1/children"  请求文件目录下的文件夹及文件
  @"http://ebsctgmgt.padccc.net/restapi/index.php/document/2/content"  文件内容
  */
+ /*
+  * 本地文件保存的格式
+ 文件下载保存的目录＋文件内容的hash＋文件名称
+ NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+
+ */

@@ -58,6 +58,7 @@
                     [_adelegate downloadingSuccess:self];
                 }
             }];
+            task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
         }else
         {
             [task resume];
@@ -70,7 +71,7 @@
 - (void)updateProgress
 {
     float percentage = self.downloadTask.countOfBytesReceived*100.0/[self.fileModel.fileSize floatValue];
-    self.progressLabel.text = [NSString stringWithFormat:@"%.2f", percentage];
+    self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%", percentage];
 }
 
 @end

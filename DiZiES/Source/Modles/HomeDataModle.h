@@ -31,13 +31,13 @@ typedef NS_ENUM(NSInteger, DownloadState)
 @property (nonatomic, strong) NSString *fileType;
 @property (nonatomic, strong) NSString *date;
 
+@property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *fatherNode;
 @property (nonatomic, strong) NSString *currentNode;
 @property (nonatomic, strong) NSNumber *canExpand;
 @property (nonatomic, strong) NSNumber *isExpand;
 @property (nonatomic, strong) NSNumber *isDownloaded;
 
-@property (nonatomic, strong) NSString *url;
 @property (nonatomic) DownloadState downloadState;
 
 @property (nonatomic) NSInteger index;

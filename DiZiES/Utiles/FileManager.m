@@ -8,6 +8,7 @@
 //
 
 #import "FileManager.h"
+#import "CommonDefine.h"
 
 @implementation FileManager
 
@@ -122,6 +123,13 @@
     NSFileManager *fileManager      = [NSFileManager defaultManager];
     NSArray *array                  = [fileManager subpathsAtPath:dirPath];
     return array;
+}
+
++ (NSString *)getDownloadDirPathWithFloderModel:(FloderDataModel *)model
+{
+    NSString *docPath               = [self getDownloadDirPath];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+    return path;
 }
 
 @end

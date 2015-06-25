@@ -13,6 +13,7 @@
 #import "HomeDataHelper.h"
 #import "Tools.h"
 #import "HomeListDataModle.h"
+#import "HomeDataModle.h"
 #import "CommonDefine.h"
 
 typedef NS_ENUM(NSInteger, FileManagerType)
@@ -60,10 +61,12 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     [_listArray removeAllObjects];
     _listArray                  = [NSMutableArray array];
     [self _rankDownloadingData];
+    
 }
 
 - (void)_rankDownloadingData
 {
+    [_listArray removeAllObjects];
     [self _rankDownloadDataWithNode:@"node_0"];
 }
 
@@ -74,17 +77,18 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         HomeListDataModle *model            = [tmpArray objectAtIndex:i];
         FloderDataModel *fileModel          = [[FloderDataModel alloc] init];
+        fileModel.url                       = [NSString stringWithFormat:@"%@%@/content", ContentUrl, model.fileID];
         fileModel.fileNameStr               = model.fileNameStr;
         fileModel.fatherNode                = model.fatherNode;
         fileModel.fileSize                  = model.fileSize;
         fileModel.fileType                  = model.fileType;
         fileModel.currentNode               = model.currentNode;
-        fileModel.url                       = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
-        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+
+        NSLog(@"%@", filePath);
         if (![FileManager fileIsExistAtPath:filePath])// 树状结构只显示没有下载的文件
-        {
             [_listArray insertObject:fileModel atIndex:(_listArray.count )];
-        }
+
         if ([fileModel.fileType isEqualToString:@"folder"])
         {
             [self _rankDownloadDataWithNode:model.currentNode];
@@ -121,6 +125,18 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     self.sourceArray            = [NSMutableArray array];
     _managerType                = FileManagerTypeDownloading;
     [self _initialDownloadingData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //http://ebsctgmgt.padccc.net/restapi/index.php/document/8/content
+    [[DownloadManager shareInstance] downloadWithUrl:@"http://ebsctgmgt.padccc.net/restapi/index.php/document/8/content" downloadSuccess:^(id data) {
+        
+    }];
+    [[DownloadManager shareInstance] downloadWithUrl:@"http://ebsctgmgt.padccc.net/restapi/index.php/document/11/content" downloadSuccess:^(id data) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning

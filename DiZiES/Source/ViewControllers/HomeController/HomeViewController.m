@@ -119,19 +119,16 @@
     cell.titleLabel.text            = data.fileNameStr;
     cell.dataLabel.text             = data.date;
     
-    int fileSize                    = [data.fileSize floatValue];
+    float fileSize                  = [data.fileSize floatValue];
     if (fileSize > 0)
     {
-        fileSize++;
-        NSString *fileS             = [NSString stringWithFormat:@"%dB", fileSize];
-        if (fileSize/1024 >= 1) {
-            fileSize                = fileSize/1024;
-            fileSize++;
-            fileS                   = [NSString stringWithFormat:@"%dKB", fileSize];
+        NSString *fileS             = [NSString stringWithFormat:@"%.2fB", fileSize];
+        if (fileSize/1024.0 >= 1) {
+            fileSize                = fileSize/1024.0;
+            fileS                   = [NSString stringWithFormat:@"%.2fKB", fileSize];
             if (fileSize/1024 >= 1) {
-                fileSize            = fileSize/1024;
-                fileSize++;
-                fileS               = [NSString stringWithFormat:@"%dMB", fileSize];
+                fileSize            = fileSize/1024.0;
+                fileS               = [NSString stringWithFormat:@"%.2fMB", fileSize];
             }
         }
         cell.fileSizeLabel.text     = fileS;
@@ -139,7 +136,7 @@
         cell.fileSizeLabel.text     = @"";
     
     NSArray *sepNum                 = [data.currentNode componentsSeparatedByString:@"_"];
-    cell.imgViewLeadingConstraint.constant  = 20 + (sepNum.count-2)*40;
+    cell.imgViewLeadingConstraint.constant  = 20 + (sepNum.count-3)*40;
     return cell;
 }
 
