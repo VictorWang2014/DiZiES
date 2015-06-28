@@ -11,11 +11,13 @@
 
 @interface DownloadManager ()
 {
-    AFURLSessionManager *_sessionManager;
+//    AFURLSessionManager *_sessionManager;
 //    AFHTTPSessionManager *_httpSessionManager;// http请求的时候用
 }
 
-@property (nonatomic, retain) AFURLSessionManager *sessionManager;
+//@property (nonatomic, strong) AFURLSessionManager *sessionManager;
+
+//@property (nonatomic, strong) NSMutableDictionary *sessionManagerDic;
 
 @end
 
@@ -37,7 +39,8 @@
     if (self)
     {
         self.downloadTasksDic = [NSMutableDictionary dictionary];
-        self.sessionManager = [[AFURLSessionManager alloc] init];
+//        self.sessionManager = [[AFURLSessionManager alloc] init];
+//        self.sessionManager.operationQueue.maxConcurrentOperationCount = 10;
         [self _resumeLastDownloading];
     }
     return self;
@@ -52,22 +55,22 @@
 
 - (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success
 {
-    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDocumentPathWithName:[NSString stringWithFormat:@"%@", url]]];
-        return pathUrl;
-    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        if (error)
-        {
-            success(@"failure");
-        }
-        else
-        {
-            success(@"success");
-        }
-    }];
-    [task resume];
-    [self.downloadTasksDic setObject:task forKey:@"key"];
+//    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+//        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithName:[NSString stringWithFormat:@"%@", [url lastPathComponent]]]];
+//        return pathUrl;
+//    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//        if (error)
+//        {
+//            success(@"failure");
+//        }
+//        else
+//        {
+//            success(@"success");
+//        }
+//    }];
+//    [task resume];
+//    [self.downloadTasksDic setObject:task forKey:@"key"];
 }
 
 - (void)downloadWithFile:(FloderDataModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success
@@ -75,25 +78,25 @@
     if (fileModel.url == nil || fileModel.url.length == 0)
         return;
     
-    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
-    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithFloderModel:fileModel]];
-        NSLog(@"download filepath %@", pathUrl);
-        return pathUrl;
-    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        if (error)
-        {
-            success(@"failure");
-        }
-        else
-        {
-            success(@"success");
-        }
-    }];
-
-    [task resume];
-    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
-    [self.downloadTasksDic setObject:task forKey:fileNameKey];
+//    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
+//    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+//        NSLog(@"download filepath %@", [FileManager getDownloadDirPathWithFloderModel:fileModel]);
+//        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithFloderModel:fileModel]];
+//        return pathUrl;
+//    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//        if (error)
+//        {
+//            success(@"failure");
+//        }
+//        else
+//        {
+//            success(@"success");
+//        }
+//    }];
+//
+//    [task resume];
+//    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
+//    [self.downloadTasksDic setObject:task forKey:fileNameKey];
 }
 
 - (void)suspendWithFile:(FloderDataModel *)fileModel

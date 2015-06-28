@@ -33,6 +33,6 @@
 
 + (NSString *)getDownloadDirPathWithFloderModel:(FloderDataModel *)model;
 
-//+ (NSString *)getStoreFilePath;
++ (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model;
 
 @end

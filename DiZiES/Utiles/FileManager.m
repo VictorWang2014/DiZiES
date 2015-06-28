@@ -132,4 +132,15 @@
     return path;
 }
 
++ (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model
+{
+    NSString *docPath               = [self getDownloadCachesDirPath];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:path]) {
+        [fileManager createFileAtPath:path contents:nil attributes:nil];
+    }
+    return path;
+}
+
 @end

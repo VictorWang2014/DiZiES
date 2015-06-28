@@ -21,6 +21,7 @@
 #import "Tools.h"
 
 #import "TestViewController.h"
+#import "DownloadTestViewController.h"
 
 @interface EBSMainViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -183,7 +184,7 @@
     }else if (indexPath.row == 4) {
         [_tabbarViewController setSelectedIndex:3];
     }else if (indexPath.row == 5) {
-        TestViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"testviewcontroller"];
+        DownloadTestViewController *vc = [[DownloadTestViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

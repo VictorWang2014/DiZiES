@@ -47,7 +47,7 @@
         [task suspend];
         self.downloadTask = task;
         [self.timer setFireDate:[NSDate distantPast]];
-
+        [self.downloadButton setTitle:@"暂停" forState:UIControlStateNormal];
     }else if (self.fileModel.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
     {
         NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
@@ -56,6 +56,7 @@
             [[DownloadManager shareInstance] downloadWithFile:self.fileModel downloadSuccess:^(id data) {
                 if (_adelegate && [_adelegate respondsToSelector:@selector(downloadingSuccess:)]) {
                     [_adelegate downloadingSuccess:self];
+                    [self.downloadButton setTitle:@"下载完成" forState:UIControlStateNormal];
                 }
             }];
             task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
@@ -65,6 +66,7 @@
         }
         self.downloadTask = task;
         [self.timer setFireDate:[NSDate distantFuture]];
+        [self.downloadButton setTitle:@"正在下载" forState:UIControlStateNormal];
     }
 }
 
