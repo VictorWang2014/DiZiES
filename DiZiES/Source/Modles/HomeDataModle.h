@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, DownloadState)
 @end
 
 
-@interface FloderDataModel : NSObject
+@interface FloderDataModel : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSString *fileID;
 @property (nonatomic, strong) NSString *fileNameStr;

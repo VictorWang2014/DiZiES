@@ -71,7 +71,7 @@
 + (NSString *)getDownloadCachesDirPath
 {
     NSString *docPath               = [self getCacheDirPath];
-    NSString *filePath              = [NSString stringWithFormat:@"%@/DownLoadFile", docPath];
+    NSString *filePath              = [NSString stringWithFormat:@"%@/TempDownLoadFile", docPath];
     NSFileManager *fileManager      = [NSFileManager defaultManager];
     BOOL isDir;
     if (![fileManager fileExistsAtPath:filePath isDirectory:&isDir] && !isDir)
@@ -135,7 +135,17 @@
 + (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model
 {
     NSString *docPath               = [self getDownloadCachesDirPath];
-    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:path]) {
+        [fileManager createFileAtPath:path contents:nil attributes:nil];
+    }
+    return path;
+}
+
++ (NSString *)getResumeDownloadInfoPlistFile
+{
+    NSString *path               = [self getDocumentPathWithName:@"FileModel.archive"];
     NSFileManager *fileManager      = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:path]) {
         [fileManager createFileAtPath:path contents:nil attributes:nil];

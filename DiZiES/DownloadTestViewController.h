@@ -20,4 +20,8 @@
 
 - (void)downloadFileWithFileModel:(FloderDataModel *)model;
 
+- (void)suspendRequestWithFileModel:(FloderDataModel *)model;
+
+- (void)resumeRequestWithFileMode:(FloderDataModel *)model;
+
 @end

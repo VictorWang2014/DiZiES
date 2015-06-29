@@ -92,12 +92,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [DataRequest requestSyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
     } failure:^(id data) {
         
     }];
 
-    
     [super viewWillAppear:animated];
     
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];

@@ -77,6 +77,7 @@
 //    
 //    NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[file.filename stringByDeletingPathExtension]];
 //    self.task = task;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated

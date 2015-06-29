@@ -35,4 +35,6 @@
 
 + (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model;
 
++ (NSString *)getResumeDownloadInfoPlistFile;
+
 @end

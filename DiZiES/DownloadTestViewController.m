@@ -78,16 +78,6 @@
     button4.tag         = 4;
     [self.view addSubview:button4];
     
-//    dataModel = [_listArray objectAtIndex:4];
-//    UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(0, 160, 200, 30)];
-//    label5.text = dataModel.fileNameStr;
-//    [self.view addSubview:label5];
-//    UIButton *button5   = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button5 setTitle:@"点击下载 " forState:UIControlStateNormal];
-//    button5.frame       = CGRectMake(200, 160, 150, 30);
-//    [button5 addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    button5.tag         = 5;
-//    [self.view addSubview:button5];
 }
 
 - (void)_initialDownloadingData// 获取本地保存的服务端所有的数据，然后剔除已经下载下来的数据
@@ -138,6 +128,8 @@
 - (void)downloadBtnClick:(UIButton *)button
 {
     [button setTitle:@"正在下载" forState:UIControlStateNormal];
+    FloderDataModel *data                   = [_listArray objectAtIndex:button.tag-1];
+    [[Downloader shareInstance] downloadFileWithFileModel:data];
     if (button.tag == 1)
     {
 
@@ -174,9 +166,11 @@
 
 
 
-@interface Downloader ()<NSURLSessionDownloadDelegate>
+@interface Downloader ()<ASIHTTPRequestDelegate, ASIProgressDelegate>
 
 @property (nonatomic, strong) ASINetworkQueue *queue;
+// 当前正在下载的队列
+@property (nonatomic, strong) NSMutableArray *listArray;
 
 @end
 
@@ -198,27 +192,120 @@
     if (self)
     {
         self.queue                  = [[ASINetworkQueue alloc] init];
+        self.queue.maxConcurrentOperationCount      = 2;
         [self.queue setShowAccurateProgress:YES];
         [self.queue go];
-        [self _resumeDownloadTmpFile];
+//        [self _resumeDownloadTmpFile];
     }
     return self;
 }
 
 - (void)_resumeDownloadTmpFile
-{
+{//  NSData *archiveCarPriceData = [NSKeyedArchiver archivedDataWithRootObject:self.DataArray];
+    NSArray *array                  = [NSKeyedUnarchiver unarchiveObjectWithFile:[FileManager getResumeDownloadInfoPlistFile]];
+    for (int i = 0; i < array.count; i++)
+    {
+        id item                     = [array objectAtIndex:i];
+        if ([item isKindOfClass:[FloderDataModel class]])
+        {
+            FloderDataModel *model  = (FloderDataModel *)item;
+            [self downloadFileWithFileModel:model];
+        }
+    }
     
 }
 
+#pragma mark - Public Methods
 - (void)downloadFileWithFileModel:(FloderDataModel *)model
 {
     NSAssert(model.url.length > 0, @"download url is not valid");
+    [self.listArray addObject:model];
+    NSLog(@"url %@ star download", model.url);
     NSURL *nUrl             = [NSURL URLWithString:model.url];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:nUrl];
+    request.userInfo        = @{@"key":model.url};
     request.delegate        = self;
+    [request setAllowResumeForFileDownloads:YES];
+    request.downloadProgressDelegate = self;
     [request setDownloadDestinationPath:[FileManager getDownloadDirPathWithFloderModel:model]];
-    request setTemporaryFileDownloadPath:<#(NSString *)#>
+    [request setTemporaryFileDownloadPath:[FileManager getTempDownloadFileWithFloderModel:model]];
+    [self.queue addOperation:request];
 }
+
+- (void)suspendRequestWithFileModel:(FloderDataModel *)model
+{
+    NSArray *array          = [self.queue operations];
+    ASIHTTPRequest *request;
+    for (int i = 0; i < array.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [array objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:model.url])
+        {
+            request         = tRequest;
+        }
+    }
+    if (request) {
+        [request clearDelegatesAndCancel];
+    }
+}
+
+
+- (void)resumeRequestWithFileMode:(FloderDataModel *)model
+{
+    NSArray *array          = [self.queue operations];
+    ASIHTTPRequest *request;
+    for (int i = 0; i < array.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [array objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:model.url])
+        {
+            request         = tRequest;
+        }
+    }
+    if (request) {
+        [request start];
+    }
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+- (void)requestStarted:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request start", [request.userInfo objectForKey:@"key"]);
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request finished", [request.userInfo objectForKey:@"key"]);
+    for (int i = 0; i < _listArray.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [_listArray objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:[request.userInfo objectForKey:@"key"]])
+        {
+            NSLog(@"url %@", [tRequest.userInfo objectForKey:@"key"]);
+            [_listArray removeObjectAtIndex:i];
+        }
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request failed", [request.userInfo objectForKey:@"key"]);
+}
+
+//- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
+//{
+//    
+//}
+
+#pragma mark - ASIProgressDelegate
+//- (void)setProgress:(float)newProgress
+//{
+//    NSLog(@"%f", newProgress);
+//}
+//- (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes
+//{
+//    
+//}
 
 @end
 
