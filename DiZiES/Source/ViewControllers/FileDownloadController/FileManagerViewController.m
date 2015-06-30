@@ -83,9 +83,8 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         fileModel.fileSize                  = model.fileSize;
         fileModel.fileType                  = model.fileType;
         fileModel.currentNode               = model.currentNode;
-        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
-
-        NSLog(@"%@", filePath);
+        
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
         if (![FileManager fileIsExistAtPath:filePath])// 树状结构只显示没有下载的文件
             [_listArray insertObject:fileModel atIndex:(_listArray.count )];
 
@@ -130,13 +129,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //http://ebsctgmgt.padccc.net/restapi/index.php/document/8/content
-    [[DownloadManager shareInstance] downloadWithUrl:@"http://ebsctgmgt.padccc.net/restapi/index.php/document/8/content" downloadSuccess:^(id data) {
-        
-    }];
-    [[DownloadManager shareInstance] downloadWithUrl:@"http://ebsctgmgt.padccc.net/restapi/index.php/document/11/content" downloadSuccess:^(id data) {
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -183,6 +175,10 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_managerType == FileManagerTypeDownloaded)
+    {
+        
+    }
+    else if (_managerType == FileManagerTypeDownloading)
     {
         
     }

@@ -105,11 +105,11 @@
         fileModel.fileNameStr               = model.fileNameStr;
         fileModel.fatherNode                = model.fatherNode;
         fileModel.fileSize                  = model.fileSize;
+        fileModel.date                      = model.date;
         fileModel.fileType                  = model.fileType;
         fileModel.currentNode               = model.currentNode;
-        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%lu_%@", (unsigned long)[[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
-        
-        NSLog(@"%@", filePath);
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+
         if (![FileManager fileIsExistAtPath:filePath] && [fileModel.fileType isEqualToString:@"document"])// 树状结构只显示没有下载的文件
             [_listArray insertObject:fileModel atIndex:_listArray.count];
         
@@ -192,7 +192,7 @@
     if (self)
     {
         self.queue                  = [[ASINetworkQueue alloc] init];
-        self.queue.maxConcurrentOperationCount      = 2;
+        self.queue.maxConcurrentOperationCount      = 1;
         [self.queue setShowAccurateProgress:YES];
         [self.queue go];
 //        [self _resumeDownloadTmpFile];
@@ -298,14 +298,10 @@
 //}
 
 #pragma mark - ASIProgressDelegate
-//- (void)setProgress:(float)newProgress
-//{
-//    NSLog(@"%f", newProgress);
-//}
-//- (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes
-//{
-//    
-//}
+- (void)setProgress:(float)newProgress
+{
+    NSLog(@"%f", newProgress);
+}
 
 @end
 

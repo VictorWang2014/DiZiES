@@ -20,11 +20,13 @@ typedef void(^DownloadManagerSuccess)(id data);
 
 - (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success;
 // 开始下载文件
-- (void)downloadWithFile:(FloderDataModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success;
+- (void)downloadFileWithFileModel:(FloderDataModel *)model;
 // 暂停下载文件
-- (void)suspendWithFile:(FloderDataModel *)fileModel;
+- (void)suspendRequestWithFileModel:(FloderDataModel *)model;
 // 唤醒文件下载
-- (void)resumeWithFile:(FloderDataModel *)fileModel;
+- (void)resumeRequestWithFileMode:(FloderDataModel *)model;
+
+
 
 @end
 

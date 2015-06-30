@@ -37,11 +37,7 @@
         NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
         if (task == nil)
         {
-            [[DownloadManager shareInstance] downloadWithFile:self.fileModel downloadSuccess:^(id data) {
-                if (_adelegate && [_adelegate respondsToSelector:@selector(downloadingSuccess:)]) {
-                    [_adelegate downloadingSuccess:self];
-                }
-            }];
+            [[DownloadManager shareInstance] downloadFileWithFileModel:self.fileModel];
             task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
         }
         [task suspend];
@@ -53,12 +49,7 @@
         NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
         if (task == nil)
         {
-            [[DownloadManager shareInstance] downloadWithFile:self.fileModel downloadSuccess:^(id data) {
-                if (_adelegate && [_adelegate respondsToSelector:@selector(downloadingSuccess:)]) {
-                    [_adelegate downloadingSuccess:self];
-                    [self.downloadButton setTitle:@"下载完成" forState:UIControlStateNormal];
-                }
-            }];
+            [[DownloadManager shareInstance] downloadFileWithFileModel:self.fileModel];
             task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[self.fileModel.fileNameStr stringByDeletingPathExtension]];
         }else
         {

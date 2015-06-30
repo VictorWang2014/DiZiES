@@ -8,16 +8,14 @@
 
 #import "DownloadManager.h"
 #import "Tools.h"
+#import "ASIHTTPRequest.h"
+#import "ASINetworkQueue.h"
 
-@interface DownloadManager ()
-{
-//    AFURLSessionManager *_sessionManager;
-//    AFHTTPSessionManager *_httpSessionManager;// http请求的时候用
-}
+@interface DownloadManager ()<ASIHTTPRequestDelegate, ASIProgressDelegate>
 
-//@property (nonatomic, strong) AFURLSessionManager *sessionManager;
-
-//@property (nonatomic, strong) NSMutableDictionary *sessionManagerDic;
+@property (nonatomic, strong) ASINetworkQueue *queue;
+// 当前正在下载的队列
+@property (nonatomic, strong) NSMutableArray *listArray;
 
 @end
 
@@ -25,94 +23,129 @@
 
 + (DownloadManager *)shareInstance
 {
-    static DownloadManager *downloadManager       = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        downloadManager = [[DownloadManager alloc] init];
+    static DownloadManager *downloader   = nil;
+    static dispatch_once_t dispatch;
+    dispatch_once(&dispatch , ^{
+        downloader                  = [[DownloadManager alloc] init];
     });
-    return downloadManager;
+    return downloader;
 }
 
-- (id)init//http://x1.zhuti.com/down/2012/11/29-win7/3D-1.jpg
+- (id)init
 {
     self = [super init];
     if (self)
     {
-        self.downloadTasksDic = [NSMutableDictionary dictionary];
-//        self.sessionManager = [[AFURLSessionManager alloc] init];
-//        self.sessionManager.operationQueue.maxConcurrentOperationCount = 10;
-        [self _resumeLastDownloading];
+        self.queue                  = [[ASINetworkQueue alloc] init];
+        self.queue.maxConcurrentOperationCount      = 1;
+        [self.queue setShowAccurateProgress:YES];
+        [self.queue go];
+        //        [self _resumeDownloadTmpFile];
     }
     return self;
 }
-// 恢复之前暂停的下载
-- (void)_resumeLastDownloading
-{
+
+- (void)_resumeDownloadTmpFile
+{//  NSData *archiveCarPriceData = [NSKeyedArchiver archivedDataWithRootObject:self.DataArray];
+    NSArray *array                  = [NSKeyedUnarchiver unarchiveObjectWithFile:[FileManager getResumeDownloadInfoPlistFile]];
+    for (int i = 0; i < array.count; i++)
+    {
+        id item                     = [array objectAtIndex:i];
+        if ([item isKindOfClass:[FloderDataModel class]])
+        {
+            FloderDataModel *model  = (FloderDataModel *)item;
+            [self downloadFileWithFileModel:model];
+        }
+    }
     
 }
 
-
-
-- (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success
+#pragma mark - Public Methods
+- (void)downloadFileWithFileModel:(FloderDataModel *)model
 {
-//    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-//    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-//        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithName:[NSString stringWithFormat:@"%@", [url lastPathComponent]]]];
-//        return pathUrl;
-//    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-//        if (error)
-//        {
-//            success(@"failure");
-//        }
-//        else
-//        {
-//            success(@"success");
-//        }
-//    }];
-//    [task resume];
-//    [self.downloadTasksDic setObject:task forKey:@"key"];
+    NSAssert(model.url.length > 0, @"download url is not valid");
+    [self.listArray addObject:model];
+    NSLog(@"url %@ star download", model.url);
+    NSURL *nUrl             = [NSURL URLWithString:model.url];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:nUrl];
+    request.userInfo        = @{@"key":model.url};
+    request.delegate        = self;
+    [request setAllowResumeForFileDownloads:YES];
+    request.downloadProgressDelegate = self;
+    [request setDownloadDestinationPath:[FileManager getDownloadDirPathWithFloderModel:model]];
+    [request setTemporaryFileDownloadPath:[FileManager getTempDownloadFileWithFloderModel:model]];
+    [self.queue addOperation:request];
 }
 
-- (void)downloadWithFile:(FloderDataModel *)fileModel downloadSuccess:(DownloadManagerSuccess)success
+- (void)suspendRequestWithFileModel:(FloderDataModel *)model
 {
-    if (fileModel.url == nil || fileModel.url.length == 0)
-        return;
-    
-//    NSURLRequest *request               = [NSURLRequest requestWithURL:[NSURL URLWithString:fileModel.url]];
-//    NSURLSessionDownloadTask *task      = [self.sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-//        NSLog(@"download filepath %@", [FileManager getDownloadDirPathWithFloderModel:fileModel]);
-//        NSURL *pathUrl                  = [NSURL fileURLWithPath:[FileManager getDownloadDirPathWithFloderModel:fileModel]];
-//        return pathUrl;
-//    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-//        if (error)
-//        {
-//            success(@"failure");
-//        }
-//        else
-//        {
-//            success(@"success");
-//        }
-//    }];
+    NSArray *array          = [self.queue operations];
+    ASIHTTPRequest *request;
+    for (int i = 0; i < array.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [array objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:model.url])
+        {
+            request         = tRequest;
+        }
+    }
+    if (request) {
+        [request clearDelegatesAndCancel];
+    }
+}
+
+
+- (void)resumeRequestWithFileMode:(FloderDataModel *)model
+{
+    NSArray *array          = [self.queue operations];
+    ASIHTTPRequest *request;
+    for (int i = 0; i < array.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [array objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:model.url])
+        {
+            request         = tRequest;
+        }
+    }
+    if (request) {
+        [request start];
+    }
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+- (void)requestStarted:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request start", [request.userInfo objectForKey:@"key"]);
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request finished", [request.userInfo objectForKey:@"key"]);
+    for (int i = 0; i < _listArray.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [_listArray objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:[request.userInfo objectForKey:@"key"]])
+        {
+            NSLog(@"url %@", [tRequest.userInfo objectForKey:@"key"]);
+            [_listArray removeObjectAtIndex:i];
+        }
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSLog(@"url %@ request failed", [request.userInfo objectForKey:@"key"]);
+}
+
+//- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
+//{
 //
-//    [task resume];
-//    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
-//    [self.downloadTasksDic setObject:task forKey:fileNameKey];
-}
+//}
 
-- (void)suspendWithFile:(FloderDataModel *)fileModel
+#pragma mark - ASIProgressDelegate
+- (void)setProgress:(float)newProgress
 {
-    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
-    NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
-    [task suspend];
+    NSLog(@"%f", newProgress);
 }
-
-- (void)resumeWithFile:(FloderDataModel *)fileModel
-{
-    NSString *fileNameKey               = [fileModel.fileNameStr stringByDeletingPathExtension];
-    NSURLSessionDownloadTask *task      = [self.downloadTasksDic objectForKey:fileNameKey];
-    [task resume];
-}
-
 
 @end
-
