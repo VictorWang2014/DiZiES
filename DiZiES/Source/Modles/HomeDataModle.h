@@ -10,8 +10,12 @@
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSInteger, DownloadState)
 {
+    DownloadStateNone,
     DownloadStateSuspend,
     DownloadStateDownloading,
+    DownloadStateDownloadWait,
+    DownloadStateDownloaded,
+    DownloadStateDownloadError
 };
 
 @interface HomeDataModle : NSObject

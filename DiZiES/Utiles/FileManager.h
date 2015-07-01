@@ -33,8 +33,12 @@
 
 + (NSString *)getDownloadDirPathWithFloderModel:(FloderDataModel *)model;
 
++ (NSString *)getTempDownloadFilePathWithFloderModel:(FloderDataModel *)model;
+
 + (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model;
 
 + (NSString *)getResumeDownloadInfoPlistFile;
+
++ (BOOL)deleteDownloadFileWithFloderModel:(FloderDataModel *)model;
 
 @end

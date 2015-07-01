@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         return;
     _managerType                = FileManagerTypeDownloading;
     [self _initialDownloadingData];
+    [_tableView reloadData];
 }
 - (IBAction)downloadedBtnClick:(UIButton *)sender
 {
@@ -54,6 +55,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         return;
     _managerType                = FileManagerTypeDownloaded;
     [self _initialDownloadedData];
+    [_tableView reloadData];
 }
 
 - (void)_initialDownloadingData// 获取本地保存的服务端所有的数据，然后剔除已经下载下来的数据
@@ -82,6 +84,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         fileModel.fatherNode                = model.fatherNode;
         fileModel.fileSize                  = model.fileSize;
         fileModel.fileType                  = model.fileType;
+        fileModel.date                      = model.date;
         fileModel.currentNode               = model.currentNode;
         
         NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
@@ -102,7 +105,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
     for (HomeListDataModle *model in array)
     {
-        NSString *filePath      = [FileManager getDownloadCachesDirPathWithName:[NSString stringWithFormat:@"%d_%@", [[NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID] hash], model.fileNameStr]];
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
         if ([FileManager fileIsExistAtPath:filePath])
         {
             FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
@@ -110,6 +113,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
             fileModel.fatherNode            = model.fatherNode;
             fileModel.fileSize              = model.fileSize;
             fileModel.currentNode           = model.currentNode;
+            fileModel.date                      = model.date;
             fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
             [_listArray addObject:fileModel];
         }
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         DownloadedCell *cell                        = [tableView dequeueReusableCellWithIdentifier:@"downloadedcell"];
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
         cell.titleLable.text                        = model.fileNameStr;
-//        cell.dataLabel.text                         = data.date;
+        cell.fileModel                              = model;
         return cell;
     }
 }
@@ -176,7 +180,10 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 {
     if (_managerType == FileManagerTypeDownloaded)
     {
-        
+        FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
+        [FileManager deleteDownloadFileWithFloderModel:model];
+        [_listArray removeObjectAtIndex:indexPath.row];
+        [_tableView reloadData];
     }
     else if (_managerType == FileManagerTypeDownloading)
     {

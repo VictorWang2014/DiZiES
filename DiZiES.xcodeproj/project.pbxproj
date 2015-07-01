@@ -13,7 +13,6 @@
 		8427AFFF1B1B51EE002CA442 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFFE1B1B51EE002CA442 /* DataRequest.m */; };
 		8427B0051B1DE9A3002CA442 /* NSJSONSerialization+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */; };
 		8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0071B241A80002CA442 /* NSString+Tool.m */; };
-		844395B61B3E8FBA00C92AD5 /* DownloadTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395B51B3E8FBA00C92AD5 /* DownloadTestViewController.m */; };
 		844395D11B402E6500C92AD5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395B91B402E6500C92AD5 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		844395D21B402E6500C92AD5 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395BC1B402E6500C92AD5 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		844395D31B402E6500C92AD5 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395BE1B402E6500C92AD5 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -105,8 +104,6 @@
 		8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSJSONSerialization+Tool.m"; path = "Utiles/NSJSONSerialization+Tool.m"; sourceTree = "<group>"; };
 		8427B0061B241A80002CA442 /* NSString+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Tool.h"; path = "Utiles/NSString+Tool.h"; sourceTree = "<group>"; };
 		8427B0071B241A80002CA442 /* NSString+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Tool.m"; path = "Utiles/NSString+Tool.m"; sourceTree = "<group>"; };
-		844395B41B3E8FBA00C92AD5 /* DownloadTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTestViewController.h; sourceTree = "<group>"; };
-		844395B51B3E8FBA00C92AD5 /* DownloadTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTestViewController.m; sourceTree = "<group>"; };
 		844395B81B402E6500C92AD5 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = ThirthParty/ASIHttpRequest/ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		844395B91B402E6500C92AD5 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = ThirthParty/ASIHttpRequest/ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		844395BA1B402E6500C92AD5 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = ThirthParty/ASIHttpRequest/ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -436,8 +433,6 @@
 				84B5D77C1B0B8878006F413D /* Images */,
 				84B5D77A1B0B885C006F413D /* Utles */,
 				84B5D74B1B0B8608006F413D /* Supporting Files */,
-				844395B41B3E8FBA00C92AD5 /* DownloadTestViewController.h */,
-				844395B51B3E8FBA00C92AD5 /* DownloadTestViewController.m */,
 			);
 			path = DiZiES;
 			sourceTree = "<group>";
@@ -779,7 +774,6 @@
 				844395D21B402E6500C92AD5 /* ASIDataCompressor.m in Sources */,
 				84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */,
 				844395D71B402E6500C92AD5 /* ASIInputStream.m in Sources */,
-				844395B61B3E8FBA00C92AD5 /* DownloadTestViewController.m in Sources */,
 				84F053E71B11BD5F00C441AC /* UserInfoModle.m in Sources */,
 				8443960C1B402FC300C92AD5 /* ASIS3BucketObject.m in Sources */,
 				844395F81B402FA800C92AD5 /* ASICloudFilesContainer.m in Sources */,

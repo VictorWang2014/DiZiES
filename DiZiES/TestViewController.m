@@ -20,7 +20,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getRootDirect];
+//    [self getRootDirect];
+    
 }
 
 - (void)getRootDirect

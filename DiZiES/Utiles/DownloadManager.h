@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 //#import "AFNetworking.h"
 #import "HomeDataModle.h"
+#import "ASIHTTPRequest.h"
+#import "ASINetworkQueue.h"
 
 typedef void(^DownloadManagerSuccess)(id data);
 
@@ -26,7 +28,7 @@ typedef void(^DownloadManagerSuccess)(id data);
 // 唤醒文件下载
 - (void)resumeRequestWithFileMode:(FloderDataModel *)model;
 
-
+- (ASIHTTPRequest *)getDownloadRequestWithFileModel:(FloderDataModel *)model;
 
 @end
 

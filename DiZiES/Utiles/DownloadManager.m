@@ -8,10 +8,8 @@
 
 #import "DownloadManager.h"
 #import "Tools.h"
-#import "ASIHTTPRequest.h"
-#import "ASINetworkQueue.h"
 
-@interface DownloadManager ()<ASIHTTPRequestDelegate, ASIProgressDelegate>
+@interface DownloadManager ()<ASIHTTPRequestDelegate>
 
 @property (nonatomic, strong) ASINetworkQueue *queue;
 // 当前正在下载的队列
@@ -40,7 +38,7 @@
         self.queue.maxConcurrentOperationCount      = 1;
         [self.queue setShowAccurateProgress:YES];
         [self.queue go];
-        //        [self _resumeDownloadTmpFile];
+//        [self _resumeDownloadTmpFile];
     }
     return self;
 }
@@ -61,6 +59,20 @@
 }
 
 #pragma mark - Public Methods
+- (ASIHTTPRequest *)getDownloadRequestWithFileModel:(FloderDataModel *)model
+{
+    NSArray *array          = [self.queue operations];
+    for (int i = 0; i < array.count; i++)
+    {
+        ASIHTTPRequest *tRequest        = [array objectAtIndex:i];
+        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:model.url])
+        {
+            return tRequest;
+        }
+    }
+    return nil;
+}
+
 - (void)downloadFileWithFileModel:(FloderDataModel *)model
 {
     NSAssert(model.url.length > 0, @"download url is not valid");
@@ -71,7 +83,6 @@
     request.userInfo        = @{@"key":model.url};
     request.delegate        = self;
     [request setAllowResumeForFileDownloads:YES];
-    request.downloadProgressDelegate = self;
     [request setDownloadDestinationPath:[FileManager getDownloadDirPathWithFloderModel:model]];
     [request setTemporaryFileDownloadPath:[FileManager getTempDownloadFileWithFloderModel:model]];
     [self.queue addOperation:request];
@@ -146,6 +157,7 @@
 - (void)setProgress:(float)newProgress
 {
     NSLog(@"%f", newProgress);
+  
 }
 
 @end

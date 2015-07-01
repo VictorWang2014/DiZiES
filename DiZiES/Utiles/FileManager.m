@@ -133,6 +133,13 @@
     return path;
 }
 
++ (NSString *)getTempDownloadFilePathWithFloderModel:(FloderDataModel *)model
+{
+    NSString *docPath               = [self getDownloadCachesDirPath];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+    return path;
+}
+
 + (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model
 {
     NSString *docPath               = [self getDownloadCachesDirPath];
@@ -152,6 +159,18 @@
         [fileManager createFileAtPath:path contents:nil attributes:nil];
     }
     return path;
+}
+
++ (BOOL)deleteDownloadFileWithFloderModel:(FloderDataModel *)model
+{
+    NSString *path                  = [self getDownloadDirPathWithFloderModel:model];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path])
+    {
+        [fileManager removeItemAtPath:path error:nil];
+        return YES;
+    }
+    return NO;
 }
 
 @end

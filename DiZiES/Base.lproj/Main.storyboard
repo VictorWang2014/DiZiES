@@ -696,6 +696,15 @@
                                                     <color key="textColor" white="0.423828125" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mio-PG-HJ9">
+                                                    <rect key="frame" x="402" y="8" width="46" height="30"/>
+                                                    <state key="normal" title="delete">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonClick:" destination="hco-GU-43q" eventType="touchUpInside" id="U0x-LY-Kfp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="QUV-2S-UGe" firstAttribute="trailing" secondItem="fsa-GX-Kbu" secondAttribute="trailingMargin" id="2YW-gm-YSl"/>

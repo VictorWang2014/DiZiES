@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DownloadManager.h"
 
+
 @class DownloadingCell;
 @protocol DownloadingCellDelegate <NSObject>
 
@@ -33,5 +34,7 @@
 @property (nonatomic, assign) id<DownloadingCellDelegate> adelegate;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgLineLayoutConstrains;
+
+@property (nonatomic) DownloadState downloadState;
 
 @end

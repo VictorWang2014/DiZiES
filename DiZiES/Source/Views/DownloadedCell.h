@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeDataModle.h"
 
 @interface DownloadedCell : UITableViewCell
 
@@ -17,4 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLable;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgLineLayoutConstrains;
+
+@property (nonatomic, strong) FloderDataModel *fileModel;
+
 @end
