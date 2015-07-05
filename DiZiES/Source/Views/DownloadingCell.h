@@ -9,19 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "DownloadManager.h"
 
-
 @class DownloadingCell;
 @protocol DownloadingCellDelegate <NSObject>
 
-- (void)downloadingSuccess:(DownloadingCell *)cell;
+- (void)downloadingCell:(DownloadingCell *)cell data:(FloderDataModel *)model;
 
 @end
 
 @interface DownloadingCell : UITableViewCell
 
+@property (nonatomic, assign) id<DownloadingCellDelegate>delegate;
+
 @property (strong, nonatomic) IBOutlet UIImageView *fileImageView;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *progressLabel;
 

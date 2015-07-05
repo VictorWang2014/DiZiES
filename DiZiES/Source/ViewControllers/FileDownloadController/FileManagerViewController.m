@@ -22,9 +22,10 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     FileManagerTypeDownloaded
 };
 
-@interface FileManagerViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FileManagerViewController ()<UITableViewDataSource, UITableViewDelegate, DownloadingCellDelegate, ASIProgressDelegate, ASIHTTPRequestDelegate>
 {
     FileManagerType                 _managerType;
+    NSTimer                         *_timer;
 }
 
 @property (strong, nonatomic) IBOutlet UIView           *navTitleView;
@@ -126,13 +127,42 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     // Do any additional setup after loading the view.
     self.listArray              = [NSMutableArray array];
     self.sourceArray            = [NSMutableArray array];
+    
     _managerType                = FileManagerTypeDownloading;
+    
     [self _initialDownloadingData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (_timer == nil) {
+        _timer                  = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(timeAction:) userInfo:nil repeats:YES];
+    }
+    [_timer setFireDate:[NSDate distantPast]];
+}
+
+- (void)timeAction:(id)userInfo
+{
+    for (int i = 0; i < [[[[DownloadManager shareInstance] queue] operations] count]; i++)
+    {
+        ASIHTTPRequest *rq          = [[[[DownloadManager shareInstance]queue] operations] objectAtIndex:i];
+        for (int j = 0; j < _listArray.count; j++)
+        {
+            DownloadingCell *cell   = (DownloadingCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:j inSection:0]];
+            if ([[rq.userInfo objectForKey:@"key"] isEqualToString:cell.fileModel.url])
+            {
+                NSLog(@"total receive %lld", rq.totalBytesRead);
+                float progress              = (rq.totalBytesRead*100.0)/[cell.fileModel.fileSize floatValue];
+                cell.progressLabel.text     = [NSString stringWithFormat:@"%.2f%%", progress];
+            }
+        }
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,15 +180,21 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         DownloadingCell *cell                       = [tableView dequeueReusableCellWithIdentifier:@"downloadingcell"];
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
         if ([model.fileType isEqualToString:@"folder"])
+        {
+            cell.progressLabel.hidden               = YES;
             cell.downloadButton.hidden              = YES;
+        }
         else
+        {
+            cell.progressLabel.hidden               = NO;
             cell.downloadButton.hidden              = NO;
+            cell.delegate                           = self;
+        }
         
         cell.titleLabel.text                        = model.fileNameStr;
         cell.fileModel                              = model;
         NSArray *sepNum                             = [model.currentNode componentsSeparatedByString:@"_"];
         cell.imgLineLayoutConstrains.constant       = 20 + (sepNum.count-2)*40;
-//        cell.dataLabel.text                         = data.date;
         return cell;
     }
     else
@@ -191,5 +227,59 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     }
 }
 
+#pragma mark - ASIHTTPRequestDelegate
+- (void)requestStarted:(ASIHTTPRequest *)request
+{
+    for (int i = 0; i < _listArray.count; i++)
+    {
+        DownloadingCell *cell           = (DownloadingCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if ([cell.fileModel.url isEqualToString:[request.userInfo objectForKey:@"key"]])
+        {
+            cell.fileModel.downloadState = DownloadStateDownloading;
+            cell.downloadState = DownloadStateDownloading;
+            [_tableView reloadData];
+        }
+    }
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    for (int i = 0; i < _listArray.count; i++)
+    {
+        DownloadingCell *cell           = (DownloadingCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if ([cell.fileModel.url isEqualToString:[request.userInfo objectForKey:@"key"]])
+        {
+            cell.fileModel.downloadState = DownloadStateDownloaded;
+            cell.downloadState = DownloadStateDownloaded;
+            cell.progressLabel.text     = @"100.00%";
+            [self _initialDownloadingData];
+            [_tableView reloadData];
+        }
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    
+}
+
+#pragma mark - DownloadingCellDelegate
+- (void)downloadingCell:(DownloadingCell *)cell data:(FloderDataModel *)model
+{
+    if (model.downloadState == DownloadStateNone)
+    {
+        cell.downloadState = DownloadStateDownloadWait;
+        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
+    }else if (model.downloadState == DownloadStateDownloading)
+    {
+        cell.downloadState = DownloadStateSuspend;
+        cell.fileModel.downloadState = DownloadStateSuspend;
+        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
+    }else if (model.downloadState == DownloadStateSuspend)
+    {
+        cell.downloadState = DownloadStateDownloading;
+        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
+    }
+}
 
 @end

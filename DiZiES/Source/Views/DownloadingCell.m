@@ -9,11 +9,7 @@
 #import "DownloadingCell.h"
 #import "Tools.h"
 
-@interface DownloadingCell ()<ASIProgressDelegate>
-
-@property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
-
-@property (nonatomic, strong) NSTimer   *timer;
+@interface DownloadingCell ()
 
 @end
 
@@ -21,8 +17,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.timer                  = [NSTimer scheduledTimerWithTimeInterval:1. target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-    [self.timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)setFileModel:(FloderDataModel *)fileModel
@@ -30,11 +24,18 @@
     if (_fileModel != fileModel)
     {
         _fileModel = fileModel;
-        if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]])
+        if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]] && _fileModel.downloadState == DownloadStateDownloading)
         {
+            _fileModel.downloadState = DownloadStateDownloading;
             self.downloadState  = DownloadStateDownloading;
+        }
+        else if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]])
+        {
+            _fileModel.downloadState = DownloadStateSuspend;
+            self.downloadState  = DownloadStateSuspend;
         }else
         {
+            _fileModel.downloadState = DownloadStateNone;
             self.downloadState  = DownloadStateNone;
         }
     }
@@ -48,37 +49,53 @@
 
 - (IBAction)downloadButtonClick:(UIButton *)sender
 {
-    if (self.downloadState == DownloadStateNone) {
-        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel];
-        [self.timer setFireDate:[NSDate distantFuture]];
+    if (_delegate && [_delegate respondsToSelector:@selector(downloadingCell:data:)]) {
+        [_delegate downloadingCell:self data:_fileModel];
     }
-    if (self.fileModel.downloadState  == DownloadStateDownloading)// 正在下载 则点击后暂停
-    {
-        [self.timer setFireDate:[NSDate distantPast]];
-        self.downloadState          = DownloadStateSuspend;
-    }else if (self.fileModel.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
-    {
-        self.downloadState          = DownloadStateDownloading;
-        [self.timer setFireDate:[NSDate distantFuture]];
-    }
+//    if (self.downloadState == DownloadStateNone)
+//    {
+//        self.downloadState              = DownloadStateDownloading;
+//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
+//    }else if (self.downloadState == DownloadStateDownloading)// 正在下载 则点击后暂停
+//    {
+//        self.downloadState              = DownloadStateSuspend;
+//        [[DownloadManager shareInstance] suspendRequestWithFileModel:_fileModel];
+//    }else if (self.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
+//    {
+//        self.downloadState              = DownloadStateDownloading;
+//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
+//    }
+//    else if (self.downloadState == DownloadStateDownloadError)
+//    {
+//        self.downloadState              = DownloadStateDownloading;
+//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
+//    }
 }
 
 - (void)setDownloadState:(DownloadState)downloadState
 {
-    _downloadState = downloadState;
+//    _fileModel.downloadState    = downloadState;
+    _downloadState                      = downloadState;
     if (downloadState == DownloadStateNone)
     {
         [self.downloadButton setTitle:@"点击下载" forState:UIControlStateNormal];
     }else if (downloadState == DownloadStateSuspend)
     {
         [self.downloadButton setTitle:@"暂停下载" forState:UIControlStateNormal];
-    }else if (downloadState == DownloadStateDownloading)
-    {
-        [self.downloadButton setTitle:@"正在下载" forState:UIControlStateNormal];
     }
     else if (downloadState == DownloadStateDownloadWait)
     {
         [self.downloadButton setTitle:@"等待下载" forState:UIControlStateNormal];
+    }
+    else if (downloadState == DownloadStateDownloading)
+    {
+        if (self.fileModel.downloadState == DownloadStateDownloading)
+        {
+            [self.downloadButton setTitle:@"正在下载" forState:UIControlStateNormal];
+        }else
+        {
+            [self.downloadButton setTitle:@"等待下载" forState:UIControlStateNormal];
+        }
     }else if (downloadState == DownloadStateDownloadError)
     {
         [self.downloadButton setTitle:@"下载失败，点击重新下载" forState:UIControlStateNormal];
@@ -88,16 +105,5 @@
     }
 }
 
-- (void)updateProgress
-{
-    ASIHTTPRequest *h               = [[DownloadManager shareInstance] getDownloadRequestWithFileModel:_fileModel];
-    h.downloadProgressDelegate      = self;
-    [h updateDownloadProgress];
-    NSLog(@"url %@", _fileModel.fileNameStr);
-}
 
-- (void)setProgress:(float)newProgress
-{
-    NSLog(@"%f", newProgress);
-}
 @end

@@ -9,9 +9,8 @@
 #import "DownloadManager.h"
 #import "Tools.h"
 
-@interface DownloadManager ()<ASIHTTPRequestDelegate>
+@interface DownloadManager ()
 
-@property (nonatomic, strong) ASINetworkQueue *queue;
 // 当前正在下载的队列
 @property (nonatomic, strong) NSMutableArray *listArray;
 
@@ -43,6 +42,11 @@
     return self;
 }
 
+- (int)queueCount
+{
+    return [[self.queue operations] count];
+}
+
 - (void)_resumeDownloadTmpFile
 {//  NSData *archiveCarPriceData = [NSKeyedArchiver archivedDataWithRootObject:self.DataArray];
     NSArray *array                  = [NSKeyedUnarchiver unarchiveObjectWithFile:[FileManager getResumeDownloadInfoPlistFile]];
@@ -55,7 +59,6 @@
             [self downloadFileWithFileModel:model];
         }
     }
-    
 }
 
 #pragma mark - Public Methods
@@ -75,16 +78,24 @@
 
 - (void)downloadFileWithFileModel:(FloderDataModel *)model
 {
+    [self downloadFileWithFileModel:model delegate:nil];
+}
+
+- (void)downloadFileWithFileModel:(FloderDataModel *)model delegate:(id)delegate
+{
     NSAssert(model.url.length > 0, @"download url is not valid");
     [self.listArray addObject:model];
-    NSLog(@"url %@ star download", model.url);
     NSURL *nUrl             = [NSURL URLWithString:model.url];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:nUrl];
     request.userInfo        = @{@"key":model.url};
-    request.delegate        = self;
+    request.delegate        = delegate;
+    request.downloadProgressDelegate = delegate;
+    request.downloadDestinationPath = [FileManager getDownloadDirPathWithFloderModel:model];
+    request.temporaryFileDownloadPath =[FileManager getTempDownloadFileWithFloderModel:model];
+//    [request setDownloadDestinationPath:[FileManager getDownloadDirPathWithFloderModel:model]];
+//    NSLog(@"temp path %@", [FileManager getTempDownloadFileWithFloderModel:model]);
+//    [request setTemporaryFileDownloadPath:[FileManager getTempDownloadFileWithFloderModel:model]];
     [request setAllowResumeForFileDownloads:YES];
-    [request setDownloadDestinationPath:[FileManager getDownloadDirPathWithFloderModel:model]];
-    [request setTemporaryFileDownloadPath:[FileManager getTempDownloadFileWithFloderModel:model]];
     [self.queue addOperation:request];
 }
 
@@ -121,43 +132,6 @@
     if (request) {
         [request start];
     }
-}
-
-#pragma mark - ASIHTTPRequestDelegate
-- (void)requestStarted:(ASIHTTPRequest *)request
-{
-    NSLog(@"url %@ request start", [request.userInfo objectForKey:@"key"]);
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    NSLog(@"url %@ request finished", [request.userInfo objectForKey:@"key"]);
-    for (int i = 0; i < _listArray.count; i++)
-    {
-        ASIHTTPRequest *tRequest        = [_listArray objectAtIndex:i];
-        if ([[tRequest.userInfo objectForKey:@"key"] isEqualToString:[request.userInfo objectForKey:@"key"]])
-        {
-            NSLog(@"url %@", [tRequest.userInfo objectForKey:@"key"]);
-            [_listArray removeObjectAtIndex:i];
-        }
-    }
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    NSLog(@"url %@ request failed", [request.userInfo objectForKey:@"key"]);
-}
-
-//- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
-//{
-//
-//}
-
-#pragma mark - ASIProgressDelegate
-- (void)setProgress:(float)newProgress
-{
-    NSLog(@"%f", newProgress);
-  
 }
 
 @end

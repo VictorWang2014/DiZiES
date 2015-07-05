@@ -631,14 +631,26 @@
                                                     <color key="textColor" white="0.423828125" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.00%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBU-Of-enB">
+                                                    <rect key="frame" x="335" y="16" width="56" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="iNz-sV-seS"/>
+                                                        <constraint firstAttribute="width" constant="56" id="wT7-Xg-w3U"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.423828125" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="VBP-3N-ilu" secondAttribute="centerY" id="0Xx-vz-cmx"/>
                                                 <constraint firstItem="3Tb-9z-c9A" firstAttribute="leading" secondItem="ATw-jy-OcP" secondAttribute="leadingMargin" constant="2" id="37h-xl-Ezl"/>
+                                                <constraint firstAttribute="centerY" secondItem="DBU-Of-enB" secondAttribute="centerY" id="4UD-Dl-qpa"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QXL-nW-4ND" secondAttribute="trailing" constant="6" id="8Sg-V7-X90"/>
                                                 <constraint firstItem="3Tb-9z-c9A" firstAttribute="leading" secondItem="F3S-J1-wAU" secondAttribute="trailing" constant="8" id="CfM-8v-FbX"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="3Tb-9z-c9A" secondAttribute="bottom" constant="-8" id="DRC-7d-6NO"/>
                                                 <constraint firstItem="3Tb-9z-c9A" firstAttribute="trailing" secondItem="ATw-jy-OcP" secondAttribute="trailingMargin" id="IB3-Ox-Y08"/>
+                                                <constraint firstItem="VBP-3N-ilu" firstAttribute="leading" secondItem="DBU-Of-enB" secondAttribute="trailing" constant="8" id="UnO-1P-5Ls"/>
                                                 <constraint firstAttribute="centerY" secondItem="Yzr-go-QxO" secondAttribute="centerY" id="c45-XV-Vsk"/>
                                                 <constraint firstItem="QXL-nW-4ND" firstAttribute="leading" secondItem="VBP-3N-ilu" secondAttribute="trailing" constant="13" id="cDf-yw-jQt"/>
                                                 <constraint firstAttribute="centerY" secondItem="QXL-nW-4ND" secondAttribute="centerY" id="jEa-RT-Xnd"/>
@@ -648,10 +660,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dateLabel" destination="QXL-nW-4ND" id="3g2-tQ-Xcy"/>
                                             <outlet property="downloadButton" destination="VBP-3N-ilu" id="MaI-8O-3dU"/>
                                             <outlet property="fileImageView" destination="F3S-J1-wAU" id="F8l-MG-3QJ"/>
                                             <outlet property="imgLineLayoutConstrains" destination="37h-xl-Ezl" id="W0T-z6-uet"/>
-                                            <outlet property="progressLabel" destination="QXL-nW-4ND" id="qDf-Wa-sL0"/>
+                                            <outlet property="progressLabel" destination="DBU-Of-enB" id="TMK-Cm-74G"/>
                                             <outlet property="sepLineImageView" destination="3Tb-9z-c9A" id="wg5-Pl-rai"/>
                                             <outlet property="titleLabel" destination="Yzr-go-QxO" id="hNZ-ff-NUy"/>
                                         </connections>
@@ -788,7 +801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrD-8D-2sV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1869.5" y="604.5"/>
+            <point key="canvasLocation" x="-1869.5" y="604"/>
         </scene>
     </scenes>
     <resources>

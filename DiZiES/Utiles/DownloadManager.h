@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "AFNetworking.h"
 #import "HomeDataModle.h"
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
@@ -18,11 +17,17 @@ typedef void(^DownloadManagerSuccess)(id data);
 
 @property (nonatomic, retain) NSMutableDictionary *downloadTasksDic;
 
+@property (nonatomic) int queueCount;
+
+@property (nonatomic, strong) ASINetworkQueue *queue;
+
 + (DownloadManager *)shareInstance;
 
 - (void)downloadWithUrl:(NSString *)url downloadSuccess:(DownloadManagerSuccess)success;
 // 开始下载文件
 - (void)downloadFileWithFileModel:(FloderDataModel *)model;
+// 开始下载文件 代理通知进度
+- (void)downloadFileWithFileModel:(FloderDataModel *)model delegate:(id)delegate;
 // 暂停下载文件
 - (void)suspendRequestWithFileModel:(FloderDataModel *)model;
 // 唤醒文件下载
