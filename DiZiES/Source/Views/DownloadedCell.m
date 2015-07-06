@@ -22,7 +22,10 @@
 
 - (IBAction)deleteButtonClick:(UIButton *)sender
 {
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(downloadedCellDelete:)])
+    {
+        [_delegate downloadedCellDelete:self];
+    }
 }
 
 @end

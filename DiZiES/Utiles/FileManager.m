@@ -128,7 +128,7 @@
 + (NSString *)getDownloadDirPathWithFloderModel:(FloderDataModel *)model
 {
     NSString *docPath               = [self getDownloadDirPath];
-    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@", docPath, [NSString stringWithFormat:@"%@", model.fileNameStr]];
     NSLog(@"%@", path);
     return path;
 }
@@ -136,14 +136,14 @@
 + (NSString *)getTempDownloadFilePathWithFloderModel:(FloderDataModel *)model
 {
     NSString *docPath               = [self getDownloadCachesDirPath];
-    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%@", model.fileNameStr]];
     return path;
 }
 
 + (NSString *)getTempDownloadFileWithFloderModel:(FloderDataModel *)model
 {
     NSString *docPath               = [self getDownloadCachesDirPath];
-    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+    NSString *path                  = [NSString stringWithFormat:@"%@/%@.temp", docPath, [NSString stringWithFormat:@"%@", model.fileNameStr]];
     NSFileManager *fileManager      = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:path]) {
         [fileManager createFileAtPath:path contents:nil attributes:nil];

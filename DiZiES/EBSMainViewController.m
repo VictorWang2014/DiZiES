@@ -91,8 +91,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    [DataRequest requestSyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
+    [DataRequest requestAsyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
     } failure:^(id data) {
         
     }];

@@ -9,6 +9,7 @@
 #import "FileManagerViewController.h"
 #import "DownloadedCell.h"
 #import "DownloadingCell.h"
+#import "ReaderViewController.h"
 
 #import "HomeDataHelper.h"
 #import "Tools.h"
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     FileManagerTypeDownloaded
 };
 
-@interface FileManagerViewController ()<UITableViewDataSource, UITableViewDelegate, DownloadingCellDelegate, ASIProgressDelegate, ASIHTTPRequestDelegate>
+@interface FileManagerViewController ()<ReaderViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, DownloadingCellDelegate, ASIProgressDelegate, ASIHTTPRequestDelegate, DownloadedCellDelegate>
 {
     FileManagerType                 _managerType;
     NSTimer                         *_timer;
@@ -88,7 +89,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         fileModel.date                      = model.date;
         fileModel.currentNode               = model.currentNode;
         
-        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@", model.fileNameStr]];
         if (![FileManager fileIsExistAtPath:filePath])// 树状结构只显示没有下载的文件
             [_listArray insertObject:fileModel atIndex:(_listArray.count )];
 
@@ -106,7 +107,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
     for (HomeListDataModle *model in array)
     {
-        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@_%@", model.date, model.fileNameStr]];
+        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@", model.fileNameStr]];
         if ([FileManager fileIsExistAtPath:filePath])
         {
             FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
@@ -201,7 +202,10 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         DownloadedCell *cell                        = [tableView dequeueReusableCellWithIdentifier:@"downloadedcell"];
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
+        cell.delegate                               = self;
         cell.titleLable.text                        = model.fileNameStr;
+        cell.indexPath                              = indexPath;
+        cell.imgLineLayoutConstrains.constant       = 20+40;
         cell.fileModel                              = model;
         return cell;
     }
@@ -217,14 +221,25 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     if (_managerType == FileManagerTypeDownloaded)
     {
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
-        [FileManager deleteDownloadFileWithFloderModel:model];
-        [_listArray removeObjectAtIndex:indexPath.row];
-        [_tableView reloadData];
+        if ([model.fileNameStr rangeOfString:@".pdf"].location != NSNotFound)
+        {
+            NSString *filePath = [FileManager getDownloadDirPathWithFloderModel:model];
+            ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
+            ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+            readerViewController.delegate = self;
+            readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:readerViewController animated:YES completion:nil];
+        }
     }
     else if (_managerType == FileManagerTypeDownloading)
     {
         
     }
+}
+- (void)dismissReaderViewController:(ReaderViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - ASIHTTPRequestDelegate
@@ -251,16 +266,33 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         {
             cell.fileModel.downloadState = DownloadStateDownloaded;
             cell.downloadState = DownloadStateDownloaded;
-            cell.progressLabel.text     = @"100.00%";
-            [self _initialDownloadingData];
-            [_tableView reloadData];
+//            cell.progressLabel.text     = @"100.00%";
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                if (_managerType == FileManagerTypeDownloaded)
+//                {
+//                    [self _initialDownloadedData];
+//                }
+//                else if (_managerType == FileManagerTypeDownloading)
+                {
+                    [self _initialDownloadingData];
+                }
+                [_tableView reloadData];
+            });
         }
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    
+    NSLog(@"request failed");
+}
+
+#pragma mark - DownloadedCellDelegate
+- (void)downloadedCellDelete:(DownloadedCell *)cell
+{
+    [_listArray removeObjectAtIndex:cell.indexPath.row];
+    [FileManager deleteDownloadFileWithFloderModel:cell.fileModel];
+    [_tableView reloadData];
 }
 
 #pragma mark - DownloadingCellDelegate
