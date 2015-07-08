@@ -223,12 +223,13 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
         if ([model.fileNameStr rangeOfString:@".pdf"].location != NSNotFound)
         {
-            NSString *filePath = [FileManager getDownloadDirPathWithFloderModel:model];
-            ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
-            ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
-            readerViewController.delegate = self;
-            readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            NSString *filePath                      = [FileManager getDownloadDirPathWithFloderModel:model];
+            ReaderDocument *document                = [ReaderDocument withDocumentFilePath:filePath password:nil];
+            ReaderViewController *readerViewController              = [[ReaderViewController alloc] initWithReaderDocument:document];
+            readerViewController.delegate           = self;
+            readerViewController.model              = model;
+            readerViewController.modalTransitionStyle               = UIModalTransitionStyleCrossDissolve;
+            readerViewController.modalPresentationStyle             = UIModalPresentationFullScreen;
             [self presentViewController:readerViewController animated:YES completion:nil];
         }
     }
@@ -240,6 +241,30 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)bookMarkReadViewController:(ReaderViewController *)viewontroller
+{
+    FloderDataModel *model                          = viewontroller.model;
+    NSString *markPath                              = [FileManager getBookMarkFile];
+    NSMutableArray *fileArray                       = [NSKeyedUnarchiver unarchiveObjectWithFile:markPath];
+    NSMutableArray *array;
+    if (fileArray.count > 0) {
+        array                                       = [NSMutableArray arrayWithArray:fileArray];
+    }
+    for (int i = 0; i < fileArray.count; i++) {
+        FloderDataModel *tmpModel                   = [fileArray objectAtIndex:i];
+        if ([tmpModel.fileNameStr isEqualToString:model.fileNameStr]) {
+            // 已经存在
+            UIAlertView *alertView                  = [[UIAlertView alloc] initWithTitle:@"已经收藏" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            return;
+        }
+    }
+    [array addObject:model];
+    [NSKeyedArchiver archiveRootObject:array toFile:markPath];
+    UIAlertView *alertView                  = [[UIAlertView alloc] initWithTitle:@"收藏成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
 }
 
 #pragma mark - ASIHTTPRequestDelegate

@@ -918,44 +918,48 @@
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+    if (delegate && [delegate respondsToSelector:@selector(bookMarkReadViewController:)])
+    {
+        [delegate bookMarkReadViewController:self];
+    }
+//#ifdef DEBUGX
+//	NSLog(@"%s", __FUNCTION__);
+//#endif
 
-#if (READER_ENABLE_MAIL == TRUE) // Option
+//#if (READER_ENABLE_MAIL == TRUE) // Option
+//
+//	if ([MFMailComposeViewController canSendMail] == NO) return;
+//
+//	if (printInteraction != nil) [printInteraction dismissAnimated:YES];
+//
+//	unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
+//
+//	if (fileSize < (unsigned long long)15728640) // Check attachment size limit (15MB)
+//	{
+//		NSURL *fileURL = document.fileURL; NSString *fileName = document.fileName; // Document
+//
+//		NSData *attachment = [NSData dataWithContentsOfURL:fileURL options:(NSDataReadingMapped|NSDataReadingUncached) error:nil];
+//
+//		if (attachment != nil) // Ensure that we have valid document file attachment data
+//		{
+//			MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
+//
+//			[mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
+//
+//			[mailComposer setSubject:fileName]; // Use the document file name for the subject
+//
+//			mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//			mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
+//
+//			mailComposer.mailComposeDelegate = self; // Set the delegate
+//
+//			[self presentModalViewController:mailComposer animated:YES];
+//
+//			[mailComposer release]; // Cleanup
+//		}
+//	}
 
-	if ([MFMailComposeViewController canSendMail] == NO) return;
-
-	if (printInteraction != nil) [printInteraction dismissAnimated:YES];
-
-	unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
-
-	if (fileSize < (unsigned long long)15728640) // Check attachment size limit (15MB)
-	{
-		NSURL *fileURL = document.fileURL; NSString *fileName = document.fileName; // Document
-
-		NSData *attachment = [NSData dataWithContentsOfURL:fileURL options:(NSDataReadingMapped|NSDataReadingUncached) error:nil];
-
-		if (attachment != nil) // Ensure that we have valid document file attachment data
-		{
-			MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
-
-			[mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
-
-			[mailComposer setSubject:fileName]; // Use the document file name for the subject
-
-			mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-			mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
-
-			mailComposer.mailComposeDelegate = self; // Set the delegate
-
-			[self presentModalViewController:mailComposer animated:YES];
-
-			[mailComposer release]; // Cleanup
-		}
-	}
-
-#endif // end of READER_ENABLE_MAIL Option
+//#endif // end of READER_ENABLE_MAIL Option
 }
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button

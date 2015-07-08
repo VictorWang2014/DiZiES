@@ -41,4 +41,6 @@
 
 + (BOOL)deleteDownloadFileWithFloderModel:(FloderDataModel *)model;
 
++ (NSString *)getBookMarkFile;
+
 @end

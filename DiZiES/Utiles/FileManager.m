@@ -153,7 +153,7 @@
 
 + (NSString *)getResumeDownloadInfoPlistFile
 {
-    NSString *path               = [self getDocumentPathWithName:@"FileModel.archive"];
+    NSString *path                  = [self getDocumentPathWithName:@"FileModel.archive"];
     NSFileManager *fileManager      = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:path]) {
         [fileManager createFileAtPath:path contents:nil attributes:nil];
@@ -172,5 +172,17 @@
     }
     return NO;
 }
+
++ (NSString *)getBookMarkFile
+{
+    NSString *path                  = [self getDownloadDirPathWithName:@"bookMark.archive"];
+    NSFileManager *fileManager      = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:path])
+    {
+        [fileManager createFileAtPath:path contents:nil attributes:nil];
+    }
+    return path;
+}
+
 
 @end

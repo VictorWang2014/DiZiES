@@ -31,6 +31,7 @@
 #import "ReaderMainToolbar.h"
 #import "ReaderMainPagebar.h"
 #import "ThumbsViewController.h"
+#import "HomeDataModle.h"
 
 @class ReaderViewController;
 @class ReaderMainToolbar;
@@ -40,6 +41,8 @@
 @optional // Delegate protocols
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController;
+
+- (void)bookMarkReadViewController:(ReaderViewController *)viewontroller;
 
 @end
 
@@ -69,6 +72,8 @@
 
 	BOOL isVisible;
 }
+
+@property (nonatomic, retain) FloderDataModel *model;
 
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;
 
