@@ -248,7 +248,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     FloderDataModel *model                          = viewontroller.model;
     NSString *markPath                              = [FileManager getBookMarkFile];
     NSMutableArray *fileArray                       = [NSKeyedUnarchiver unarchiveObjectWithFile:markPath];
-    NSMutableArray *array;
+    NSMutableArray *array                           = [NSMutableArray array];
     if (fileArray.count > 0) {
         array                                       = [NSMutableArray arrayWithArray:fileArray];
     }
@@ -263,7 +263,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     }
     [array addObject:model];
     [NSKeyedArchiver archiveRootObject:array toFile:markPath];
-    UIAlertView *alertView                  = [[UIAlertView alloc] initWithTitle:@"收藏成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    UIAlertView *alertView                          = [[UIAlertView alloc] initWithTitle:@"收藏成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alertView show];
 }
 
