@@ -65,6 +65,16 @@
     return [_userInforDic objectForKey:KEY_UserName];
 }
 
+- (void)setPassword:(NSString *)password
+{
+    [_userInforDic setObject:password forKey:@"password"];
+}
+
+- (NSString *)password
+{
+    return [_userInforDic objectForKey:@"password"];
+}
+
 - (void)setDepartment:(NSString *)department
 {
     [_userInforDic setObject:department forKey:KEY_Department];

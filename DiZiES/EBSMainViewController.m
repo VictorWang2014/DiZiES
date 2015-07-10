@@ -78,12 +78,7 @@
     data4.imageNameStr              = @"lefttab_2.png";
     data4.selectImageNaemStr        = @"lefttab_select_2.png";
     [_tabListArray addObject:data4];
-    
-    MainDataModle *data5            = [[MainDataModle alloc] init];
-    data5.titleStr                  = @"测试";
-    data5.imageNameStr              = @"lefttab_3.png";
-    data5.selectImageNaemStr        = @"lefttab_select_3.png";
-    [_tabListArray addObject:data5];
+
     [_tabTableView reloadData];
 }
 
@@ -91,10 +86,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [DataRequest requestAsyncUrl:LoginUrl queryString:@"&user=admin&pass=admin" responseClass:[LoginResponseParse class] success:^(id data) {
-    } failure:^(id data) {
-        
-    }];
+    if (AppUserInfo.isLogin == YES)
+    {
+        NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", AppUserInfo.userName, AppUserInfo.password];
+        [DataRequest requestAsyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
+        } failure:^(id data) {
+            
+        }];
+    }
 
     [super viewWillAppear:animated];
     

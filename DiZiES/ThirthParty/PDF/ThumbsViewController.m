@@ -100,7 +100,7 @@
 
 	CGRect toolbarRect = viewRect; toolbarRect.size.height = TOOLBAR_HEIGHT;
 
-	mainToolbar = [[ThumbsMainToolbar alloc] initWithFrame:toolbarRect title:toolbarTitle]; // At top
+	mainToolbar = [[ThumbsMainToolbar alloc] initWithFrame:CGRectMake(0, 20, toolbarRect.size.width, TOOLBAR_HEIGHT) title:toolbarTitle]; // At top
 
 	mainToolbar.delegate = self;
 

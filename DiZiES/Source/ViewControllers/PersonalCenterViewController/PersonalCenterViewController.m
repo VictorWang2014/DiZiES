@@ -29,6 +29,10 @@
     [self.editBtn sizeToFit];
     [self.editBtn addTarget:self action:@selector(editBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem          = [[UIBarButtonItem alloc] initWithCustomView:self.editBtn];
+    
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [_tableView setTableFooterView:view];
 }
 
 - (void)viewWillAppear:(BOOL)animated

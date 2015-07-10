@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 @property (strong, nonatomic) IBOutlet UIView           *navTitleView;
 @property (strong, nonatomic) IBOutlet UIButton         *leftButton;
 @property (strong, nonatomic) IBOutlet UIButton         *rightButton;
+@property (strong, nonatomic) UIButton                  *fullDownloadButton;
 
 @property (strong, nonatomic) IBOutlet UITableView      *tableView;
 
@@ -43,8 +44,15 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 
 @implementation FileManagerViewController
 
+#pragma mark - UIButtonClick
+- (void)fullDownloadButtonClick:(UIButton *)button
+{
+    
+}
+
 - (IBAction)downloadingBtnClick:(UIButton *)sender
 {
+    self.fullDownloadButton.hidden = NO;
     if (_managerType == FileManagerTypeDownloading)
         return;
     _managerType                = FileManagerTypeDownloading;
@@ -53,6 +61,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 }
 - (IBAction)downloadedBtnClick:(UIButton *)sender
 {
+    self.fullDownloadButton.hidden = YES;
     if (_managerType == FileManagerTypeDownloaded)
         return;
     _managerType                = FileManagerTypeDownloaded;
@@ -65,7 +74,6 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     [_listArray removeAllObjects];
     _listArray                  = [NSMutableArray array];
     [self _rankDownloadingData];
-    
 }
 
 - (void)_rankDownloadingData
@@ -122,9 +130,17 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     }
 }
 
+#pragma mark - view life cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.fullDownloadButton     = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.fullDownloadButton setTitle:@"一键下载" forState:UIControlStateNormal];
+    [self.fullDownloadButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.fullDownloadButton sizeToFit];
+    [self.fullDownloadButton addTarget:self action:@selector(fullDownloadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.fullDownloadButton];
+    
     // Do any additional setup after loading the view.
     self.listArray              = [NSMutableArray array];
     self.sourceArray            = [NSMutableArray array];
@@ -237,7 +253,10 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark - ReaderViewControllerDelegate
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -291,16 +310,9 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         {
             cell.fileModel.downloadState = DownloadStateDownloaded;
             cell.downloadState = DownloadStateDownloaded;
-//            cell.progressLabel.text     = @"100.00%";
+            cell.progressLabel.text     = @"100.00%";
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                if (_managerType == FileManagerTypeDownloaded)
-//                {
-//                    [self _initialDownloadedData];
-//                }
-//                else if (_managerType == FileManagerTypeDownloading)
-                {
-                    [self _initialDownloadingData];
-                }
+                [self _initialDownloadingData];
                 [_tableView reloadData];
             });
         }
@@ -327,11 +339,11 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     {
         cell.downloadState = DownloadStateDownloadWait;
         [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
-    }else if (model.downloadState == DownloadStateDownloading)
-    {
-        cell.downloadState = DownloadStateSuspend;
-        cell.fileModel.downloadState = DownloadStateSuspend;
-        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
+//    }else if (model.downloadState == DownloadStateDownloading)
+//    {
+//        cell.downloadState = DownloadStateSuspend;
+//        cell.fileModel.downloadState = DownloadStateSuspend;
+//        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
     }else if (model.downloadState == DownloadStateSuspend)
     {
         cell.downloadState = DownloadStateDownloading;

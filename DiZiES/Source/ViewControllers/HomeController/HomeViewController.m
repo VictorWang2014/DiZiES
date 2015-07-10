@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "HomeListTableViewCell.h"
+#import "ReaderViewController.h"
 
 #import "MBProgressHUD.h"
 #import "CommonDefine.h"
@@ -20,7 +21,7 @@
 #import "HomeDataHelper.h"
 #import "DownloadManager.h"
 
-@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, ReaderViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView      *homeListTableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshHomeListButton;
@@ -159,6 +160,25 @@
     HomeListDataModle *data         = [_listDataSourceArray objectAtIndex:indexPath.row];
     if (![data.canExpand boolValue]) {
         // 是文件  需要提示下载或者显示
+        FloderDataModel *model                      = [_listDataSourceArray objectAtIndex:indexPath.row];
+        if ([model.fileNameStr rangeOfString:@".pdf"].location != NSNotFound)
+        {
+            NSString *filePath                      = [FileManager getDownloadDirPathWithFloderModel:model];
+            if (![FileManager fileIsExistAtPath:filePath])
+            {
+                UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请到下载页面下载" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+            }else
+            {
+                ReaderDocument *document                = [ReaderDocument withDocumentFilePath:filePath password:nil];
+                ReaderViewController *readerViewController              = [[ReaderViewController alloc] initWithReaderDocument:document];
+                readerViewController.delegate           = self;
+                readerViewController.model              = model;
+                readerViewController.modalTransitionStyle               = UIModalTransitionStyleCrossDissolve;
+                readerViewController.modalPresentationStyle             = UIModalPresentationFullScreen;
+                [self presentViewController:readerViewController animated:YES completion:nil];
+            }
+        }
         return;
     }
     BOOL isExpand                   = [data.isExpand boolValue];
@@ -188,6 +208,12 @@
         [tableView insertRowsAtIndexPaths:insertArrays withRowAnimation:UITableViewRowAnimationFade];
     }
     
+}
+
+#pragma mark - ReaderViewControllerDelegate
+- (void)dismissReaderViewController:(ReaderViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - DataRequest

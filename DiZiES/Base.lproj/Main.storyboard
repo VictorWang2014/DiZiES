@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="a53-B5-85b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="a53-B5-85b">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -341,7 +341,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XuA-MT-m7G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="f6p-s9-Nix" kind="relationship" relationship="rootViewController" id="eRJ-yn-JKi"/>
@@ -381,9 +381,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3H8-on-jsy">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="3H8-on-jsy">
                                 <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="53" id="zI9-ze-3A0">
                                         <rect key="frame" x="0.0" y="0.0" width="591" height="44"/>
@@ -404,7 +404,7 @@
                             <constraint firstItem="3H8-on-jsy" firstAttribute="top" secondItem="2wG-9z-Xqu" secondAttribute="topMargin" id="HsQ-dj-VWD"/>
                             <constraint firstItem="3H8-on-jsy" firstAttribute="leading" secondItem="2wG-9z-Xqu" secondAttribute="leadingMargin" id="QEx-YX-M7w"/>
                             <constraint firstItem="3H8-on-jsy" firstAttribute="bottom" secondItem="2wG-9z-Xqu" secondAttribute="bottomMargin" id="WRH-vi-VAg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3H8-on-jsy" secondAttribute="trailing" id="Xxv-H6-oPD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3H8-on-jsy" secondAttribute="trailing" constant="-16" id="Xxv-H6-oPD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="收藏" id="1qE-l1-hay"/>
@@ -427,7 +427,7 @@
                         <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="MJU-d1-QGN" kind="relationship" relationship="rootViewController" id="yFL-hU-80X"/>
+                        <segue destination="9VJ-68-F6t" kind="relationship" relationship="rootViewController" id="r2g-KT-IPi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wlC-qn-Ol6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -435,21 +435,29 @@
             <point key="canvasLocation" x="-2732" y="3079"/>
         </scene>
         <!--设置-->
-        <scene sceneID="sDk-dT-ZXd">
+        <scene sceneID="ugY-1a-yp8">
             <objects>
-                <viewController id="MJU-d1-QGN" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vNc-5i-iCB"/>
-                        <viewControllerLayoutGuide type="bottom" id="gCr-GT-fGZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fee-HP-x6Z">
+                <tableViewController id="9VJ-68-F6t" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2LX-Tl-Bi2">
                         <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="设置" id="d7D-m4-b0s"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0FY-pY-kxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AlP-GC-mcO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AlP-GC-mcO" id="zp4-JZ-Bw5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9VJ-68-F6t" id="I50-NP-QMX"/>
+                            <outlet property="delegate" destination="9VJ-68-F6t" id="GWE-JQ-3th"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="设置" id="p6F-su-hlz"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uij-fa-2s1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1805.5" y="3079"/>
         </scene>
@@ -739,7 +747,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mio-PG-HJ9">
                                                     <rect key="frame" x="402" y="8" width="46" height="30"/>
-                                                    <state key="normal" title="delete">
+                                                    <state key="normal" title="删除">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -785,7 +793,7 @@
                     <navigationItem key="navigationItem" id="acK-8u-nPf">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="ECR-z6-GTP">
-                            <rect key="frame" x="225" y="6" width="142" height="33"/>
+                            <rect key="frame" x="224.5" y="5.5" width="142" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-cZ-EFz">
@@ -807,7 +815,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="eqK-gB-qyr" secondAttribute="trailing" id="341-hz-wQo"/>
                                 <constraint firstItem="wbb-cZ-EFz" firstAttribute="leading" secondItem="ECR-z6-GTP" secondAttribute="leading" id="Fxv-0c-6rR"/>

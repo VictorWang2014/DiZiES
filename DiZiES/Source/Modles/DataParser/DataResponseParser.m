@@ -27,15 +27,18 @@
     NSDictionary *dic               = [NSJSONSerialization jsonDictionaryWithString:jsonString];
     if (dic)
     {
-        _success                    = [[dic objectForKey:@"success"] intValue];
-        self.success                = _success;
-        if (_success)
+        int success           = [[dic objectForKey:@"success"] boolValue];
+        if (success == 1)
         {
+            self.success                = 0;
             NSDictionary *dataDic   = [dic objectForKey:@"data"];
             if ([dataDic isKindOfClass:[NSDictionary class]])
             {
                 AppUserInfo.userName= [dataDic objectForKey:@"fullname"];
             }
+        }else
+        {
+            self.success                = 1;
         }
     }
 }

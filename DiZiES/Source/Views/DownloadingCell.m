@@ -29,7 +29,12 @@
             _fileModel.downloadState = DownloadStateDownloading;
             self.downloadState  = DownloadStateDownloading;
         }
-        else if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]])
+        else if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]] && _fileModel.downloadState == DownloadStateDownloadWait)
+        {
+            _fileModel.downloadState = DownloadStateDownloadWait;
+            self.downloadState  = DownloadStateDownloadWait;
+        }
+        else if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:fileModel]] && _fileModel.downloadState == DownloadStateSuspend)
         {
             _fileModel.downloadState = DownloadStateSuspend;
             self.downloadState  = DownloadStateSuspend;
