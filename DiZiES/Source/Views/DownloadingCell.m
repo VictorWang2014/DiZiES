@@ -57,29 +57,10 @@
     if (_delegate && [_delegate respondsToSelector:@selector(downloadingCell:data:)]) {
         [_delegate downloadingCell:self data:_fileModel];
     }
-//    if (self.downloadState == DownloadStateNone)
-//    {
-//        self.downloadState              = DownloadStateDownloading;
-//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
-//    }else if (self.downloadState == DownloadStateDownloading)// 正在下载 则点击后暂停
-//    {
-//        self.downloadState              = DownloadStateSuspend;
-//        [[DownloadManager shareInstance] suspendRequestWithFileModel:_fileModel];
-//    }else if (self.downloadState == DownloadStateSuspend)// 如果暂停，则点击后开始下载
-//    {
-//        self.downloadState              = DownloadStateDownloading;
-//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
-//    }
-//    else if (self.downloadState == DownloadStateDownloadError)
-//    {
-//        self.downloadState              = DownloadStateDownloading;
-//        [[DownloadManager shareInstance] downloadFileWithFileModel:_fileModel delegate:self];
-//    }
 }
 
 - (void)setDownloadState:(DownloadState)downloadState
 {
-//    _fileModel.downloadState    = downloadState;
     _downloadState                      = downloadState;
     if (downloadState == DownloadStateNone)
     {

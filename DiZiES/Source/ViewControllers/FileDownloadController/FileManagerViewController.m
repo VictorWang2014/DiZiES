@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 @property (nonatomic, strong) NSMutableArray            *listArray;
 @property (nonatomic, strong) NSMutableArray            *sourceArray;
 
+@property (nonatomic) BOOL  isFullDownload;
+
 
 @end
 
@@ -47,7 +49,14 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 #pragma mark - UIButtonClick
 - (void)fullDownloadButtonClick:(UIButton *)button
 {
-    
+    _isFullDownload = YES;
+    [_tableView reloadData];
+    for (FloderDataModel *model in _listArray)
+    {
+        if (![model.fileType isEqualToString:@"folder"]) {
+            [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
+        }
+    }
 }
 
 - (IBAction)downloadingBtnClick:(UIButton *)sender
@@ -148,6 +157,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     _managerType                = FileManagerTypeDownloading;
     
     [self _initialDownloadingData];
+    _isFullDownload             = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -172,6 +182,11 @@ typedef NS_ENUM(NSInteger, FileManagerType)
                 NSLog(@"total receive %lld", rq.totalBytesRead);
                 float progress              = (rq.totalBytesRead*100.0)/[cell.fileModel.fileSize floatValue];
                 cell.progressLabel.text     = [NSString stringWithFormat:@"%.2f%%", progress];
+                if (progress > 0) {
+                    [cell.downloadButton setTitle:@"正在下载" forState:UIControlStateNormal];
+                }else{
+                    [cell.downloadButton setTitle:@"等待下载" forState:UIControlStateNormal];
+                }
             }
         }
     }
@@ -210,8 +225,19 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         
         cell.titleLabel.text                        = model.fileNameStr;
         cell.fileModel                              = model;
+        
+        if ([FileManager fileIsExistAtPath:[FileManager getTempDownloadFilePathWithFloderModel:model]])
+        {
+            
+        }
+        else
+            cell.progressLabel.text                     = @"0.00%";
+
         NSArray *sepNum                             = [model.currentNode componentsSeparatedByString:@"_"];
         cell.imgLineLayoutConstrains.constant       = 20 + (sepNum.count-2)*40;
+        if (_isFullDownload == YES) {
+            cell.downloadState                      = DownloadStateDownloadWait;
+        }
         return cell;
     }
     else
@@ -311,8 +337,9 @@ typedef NS_ENUM(NSInteger, FileManagerType)
             cell.fileModel.downloadState = DownloadStateDownloaded;
             cell.downloadState = DownloadStateDownloaded;
             cell.progressLabel.text     = @"100.00%";
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self _initialDownloadingData];
+                [self timeAction:nil];
                 [_tableView reloadData];
             });
         }
@@ -337,7 +364,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 {
     if (model.downloadState == DownloadStateNone)
     {
-        cell.downloadState = DownloadStateDownloadWait;
+//        cell.downloadState = DownloadStateDownloadWait;
         [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
 //    }else if (model.downloadState == DownloadStateDownloading)
 //    {
@@ -346,7 +373,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 //        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
     }else if (model.downloadState == DownloadStateSuspend)
     {
-        cell.downloadState = DownloadStateDownloading;
+//        cell.downloadState = DownloadStateDownloading;
         [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
     }
 }
