@@ -132,6 +132,7 @@
         MainPersonTableViewCell *cell       = [tableView dequeueReusableCellWithIdentifier:@"mainpersontableviewcell"];        
         PersonDataModle *data               = [_tabListArray objectAtIndex:0];
         cell.titleLabel.text                = data.nameStr;
+        cell.detailLabel.text               = [self getFreeSpace];
         cell.imgeView.ECornerRadius         = 5;
         cell.imgeView.image                 = [UIImage imageNamed:data.imageNameStr];
         cell.backgroundColor                = UIColorWith(39, 39, 39);
@@ -154,6 +155,13 @@
     }
 }
 
+- (NSString *)getFreeSpace
+{
+    NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
+    float filesize = [[fattributes objectForKey:NSFileSystemFreeSize] floatValue] /1024.0f/1024.0f/1024.0f;
+    NSString *file = [NSString stringWithFormat:@"%.2fGB", filesize];
+    return file;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _tabListArray.count;
