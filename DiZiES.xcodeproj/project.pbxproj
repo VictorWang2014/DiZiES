@@ -112,6 +112,7 @@
 		84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053ED1B121BC000C441AC /* HomeListDataModle.m */; };
 		84F053F11B121BED00C441AC /* HomeDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053F01B121BED00C441AC /* HomeDataHelper.m */; };
 		84F053F31B14B5D600C441AC /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053F21B14B5D600C441AC /* folder.png */; };
+		96E257551B522EAE00E509EC /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E257541B522EAE00E509EC /* SystemSettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,6 +313,8 @@
 		84F053F01B121BED00C441AC /* HomeDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataHelper.m; path = Source/Modles/CoreDataModle/HomeDataHelper.m; sourceTree = "<group>"; };
 		84F053F21B14B5D600C441AC /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder.png; path = Images/folder.png; sourceTree = "<group>"; };
 		84F053F51B14BFB800C441AC /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonDefine.h; path = Source/Modles/CommonDefine.h; sourceTree = "<group>"; };
+		96E257531B522EAE00E509EC /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemSettingViewController.h; path = Source/ViewControllers/SystemSettingController/SystemSettingViewController.h; sourceTree = "<group>"; };
+		96E257541B522EAE00E509EC /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemSettingViewController.m; path = Source/ViewControllers/SystemSettingController/SystemSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -621,6 +624,7 @@
 		84B5D77E1B0B8895006F413D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				96E257521B522E8200E509EC /* SystemSettingController */,
 				84B5D79E1B0B8A08006F413D /* EBSBaseViewController.h */,
 				84B5D79F1B0B8A08006F413D /* EBSBaseViewController.m */,
 				84F053C51B10B2AB00C441AC /* EBSMainViewController.h */,
@@ -762,6 +766,15 @@
 			name = CoreDataModle;
 			sourceTree = "<group>";
 		};
+		96E257521B522E8200E509EC /* SystemSettingController */ = {
+			isa = PBXGroup;
+			children = (
+				96E257531B522EAE00E509EC /* SystemSettingViewController.h */,
+				96E257541B522EAE00E509EC /* SystemSettingViewController.m */,
+			);
+			name = SystemSettingController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -895,6 +908,7 @@
 				844395D31B402E6500C92AD5 /* ASIDataDecompressor.m in Sources */,
 				84B5D7A31B0B8A08006F413D /* EBSTabBarViewController.m in Sources */,
 				84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */,
+				96E257551B522EAE00E509EC /* SystemSettingViewController.m in Sources */,
 				844395D41B402E6500C92AD5 /* ASIDownloadCache.m in Sources */,
 				8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */,
 				84EFF6741B4AB98400080783 /* ThumbsViewController.m in Sources */,

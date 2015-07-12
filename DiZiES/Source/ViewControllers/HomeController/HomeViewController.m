@@ -253,7 +253,7 @@
     {
         requestID                               = [floderId substringFromIndex:floderId.length-1];
     }
-    [DataRequest requestSyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
+    [DataRequest requestAsyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
         if ([data isKindOfClass:[FlorderResponseParse class]])
         {
             NSMutableArray *flordersArray   = [NSMutableArray array];
