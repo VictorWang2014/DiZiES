@@ -60,6 +60,7 @@
 		84B5D7A61B0B8A2C006F413D /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7A51B0B8A2C006F413D /* PersonalCenterViewController.m */; };
 		84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7A81B0B8A3C006F413D /* FileManagerViewController.m */; };
 		84B5D7AC1B0B8A4F006F413D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B5D7AB1B0B8A4F006F413D /* HomeViewController.m */; };
+		84CEADA01B5547E40024D0D5 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CEAD9F1B5547E40024D0D5 /* SystemSettingViewController.m */; };
 		84EFF6631B4AB98400080783 /* CGPDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFF63E1B4AB98400080783 /* CGPDFDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84EFF6641B4AB98400080783 /* ReaderConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFF6401B4AB98400080783 /* ReaderConstants.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84EFF6651B4AB98400080783 /* ReaderContentPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFF6421B4AB98400080783 /* ReaderContentPage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -112,7 +113,6 @@
 		84F053EE1B121BC000C441AC /* HomeListDataModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053ED1B121BC000C441AC /* HomeListDataModle.m */; };
 		84F053F11B121BED00C441AC /* HomeDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F053F01B121BED00C441AC /* HomeDataHelper.m */; };
 		84F053F31B14B5D600C441AC /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F053F21B14B5D600C441AC /* folder.png */; };
-		96E257551B522EAE00E509EC /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E257541B522EAE00E509EC /* SystemSettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,6 +230,8 @@
 		84B5D7A81B0B8A3C006F413D /* FileManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileManagerViewController.m; path = Source/ViewControllers/FileDownloadController/FileManagerViewController.m; sourceTree = "<group>"; };
 		84B5D7AA1B0B8A4F006F413D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Source/ViewControllers/HomeController/HomeViewController.h; sourceTree = "<group>"; };
 		84B5D7AB1B0B8A4F006F413D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Source/ViewControllers/HomeController/HomeViewController.m; sourceTree = "<group>"; };
+		84CEAD9E1B5547E40024D0D5 /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemSettingViewController.h; path = Source/ViewControllers/SystemSettingViewController/SystemSettingViewController.h; sourceTree = "<group>"; };
+		84CEAD9F1B5547E40024D0D5 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemSettingViewController.m; path = Source/ViewControllers/SystemSettingViewController/SystemSettingViewController.m; sourceTree = "<group>"; };
 		84EFF63D1B4AB98400080783 /* CGPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGPDFDocument.h; path = ThirthParty/PDF/CGPDFDocument.h; sourceTree = "<group>"; };
 		84EFF63E1B4AB98400080783 /* CGPDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CGPDFDocument.m; path = ThirthParty/PDF/CGPDFDocument.m; sourceTree = "<group>"; };
 		84EFF63F1B4AB98400080783 /* ReaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaderConstants.h; path = ThirthParty/PDF/ReaderConstants.h; sourceTree = "<group>"; };
@@ -313,8 +315,6 @@
 		84F053F01B121BED00C441AC /* HomeDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeDataHelper.m; path = Source/Modles/CoreDataModle/HomeDataHelper.m; sourceTree = "<group>"; };
 		84F053F21B14B5D600C441AC /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder.png; path = Images/folder.png; sourceTree = "<group>"; };
 		84F053F51B14BFB800C441AC /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonDefine.h; path = Source/Modles/CommonDefine.h; sourceTree = "<group>"; };
-		96E257531B522EAE00E509EC /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemSettingViewController.h; path = Source/ViewControllers/SystemSettingController/SystemSettingViewController.h; sourceTree = "<group>"; };
-		96E257541B522EAE00E509EC /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemSettingViewController.m; path = Source/ViewControllers/SystemSettingController/SystemSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -769,8 +769,8 @@
 		96E257521B522E8200E509EC /* SystemSettingController */ = {
 			isa = PBXGroup;
 			children = (
-				96E257531B522EAE00E509EC /* SystemSettingViewController.h */,
-				96E257541B522EAE00E509EC /* SystemSettingViewController.m */,
+				84CEAD9E1B5547E40024D0D5 /* SystemSettingViewController.h */,
+				84CEAD9F1B5547E40024D0D5 /* SystemSettingViewController.m */,
 			);
 			name = SystemSettingController;
 			sourceTree = "<group>";
@@ -908,7 +908,7 @@
 				844395D31B402E6500C92AD5 /* ASIDataDecompressor.m in Sources */,
 				84B5D7A31B0B8A08006F413D /* EBSTabBarViewController.m in Sources */,
 				84B5D7A91B0B8A3C006F413D /* FileManagerViewController.m in Sources */,
-				96E257551B522EAE00E509EC /* SystemSettingViewController.m in Sources */,
+				84CEADA01B5547E40024D0D5 /* SystemSettingViewController.m in Sources */,
 				844395D41B402E6500C92AD5 /* ASIDownloadCache.m in Sources */,
 				8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */,
 				84EFF6741B4AB98400080783 /* ThumbsViewController.m in Sources */,
