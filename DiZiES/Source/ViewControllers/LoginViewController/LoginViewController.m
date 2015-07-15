@@ -65,7 +65,7 @@
             LoginResponseParse *da              = (LoginResponseParse *)data;
             if (da.success == 0)
             {
-                AppUserInfo.userName            = _userNameTextFeild.text;
+                AppUserInfo.userID            = _userNameTextFeild.text;
                 AppUserInfo.password            = _passwordTextFeild.text;
                 AppUserInfo.isLogin             = YES;
                 UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];

@@ -34,8 +34,9 @@
             NSDictionary *dataDic   = [dic objectForKey:@"data"];
             if ([dataDic isKindOfClass:[NSDictionary class]])
             {
-                AppUserInfo.capital = [dataDic objectForKey:@"capital"];
-                AppUserInfo.department = [dataDic objectForKey:@"department"];
+                AppUserInfo.userID = [dataDic objectForKey:@"login"];
+                AppUserInfo.capital = [dataDic objectForKey:@"no"];
+//                AppUserInfo.department = [dataDic objectForKey:@"department"];
                 AppUserInfo.userName= [dataDic objectForKey:@"fullname"];
             }
         }else

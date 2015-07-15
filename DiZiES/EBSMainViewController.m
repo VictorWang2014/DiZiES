@@ -88,8 +88,9 @@
 {
     if (AppUserInfo.isLogin == YES)
     {
-        NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", AppUserInfo.userName, AppUserInfo.password];
+        NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", AppUserInfo.userID, AppUserInfo.password];
         [DataRequest requestAsyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
+
         } failure:^(id data) {
             
         }];

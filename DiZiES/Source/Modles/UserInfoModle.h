@@ -13,6 +13,8 @@
 @interface UserInfoModle : NSObject
 /**姓名*/
 @property (nonatomic, strong) NSString *userName;
+/**用户名*/
+@property (nonatomic, strong) NSString *userID;
 /**密码*/
 @property (nonatomic, strong) NSString *password;
 /**部门*/
