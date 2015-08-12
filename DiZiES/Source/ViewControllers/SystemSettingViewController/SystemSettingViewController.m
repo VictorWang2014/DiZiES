@@ -16,6 +16,7 @@
 @interface SystemSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *signIn;
 
 @end
 
@@ -106,5 +107,10 @@
     }
 }
 
+#pragma mark - 签到
+- (IBAction)signInButtonClick:(UIBarButtonItem *)sender
+{
+    
+}
 
 @end

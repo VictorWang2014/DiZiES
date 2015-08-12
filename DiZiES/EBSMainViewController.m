@@ -19,6 +19,8 @@
 #import "DataRequestPackage.h"
 #import "CommonDefine.h"
 #import "Tools.h"
+#import <AMapSearchKit/AMapSearchAPI.h>
+#import <MAMapKit/MAMapKit.h>
 
 #import "TestViewController.h"
 
