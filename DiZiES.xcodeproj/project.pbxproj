@@ -13,6 +13,8 @@
 		8427AFFF1B1B51EE002CA442 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427AFFE1B1B51EE002CA442 /* DataRequest.m */; };
 		8427B0051B1DE9A3002CA442 /* NSJSONSerialization+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */; };
 		8427B0081B241A80002CA442 /* NSString+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427B0071B241A80002CA442 /* NSString+Tool.m */; };
+		842E02B31B7CD1EB00BCDE5F /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 842E02B21B7CD1EB00BCDE5F /* AMap.bundle */; };
+		842E02B41B7CD1FE00BCDE5F /* AMap.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 842E02B21B7CD1EB00BCDE5F /* AMap.bundle */; };
 		844395D11B402E6500C92AD5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395B91B402E6500C92AD5 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		844395D21B402E6500C92AD5 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395BC1B402E6500C92AD5 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		844395D31B402E6500C92AD5 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844395BE1B402E6500C92AD5 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -150,6 +152,7 @@
 		8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSJSONSerialization+Tool.m"; path = "Utiles/NSJSONSerialization+Tool.m"; sourceTree = "<group>"; };
 		8427B0061B241A80002CA442 /* NSString+Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Tool.h"; path = "Utiles/NSString+Tool.h"; sourceTree = "<group>"; };
 		8427B0071B241A80002CA442 /* NSString+Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Tool.m"; path = "Utiles/NSString+Tool.m"; sourceTree = "<group>"; };
+		842E02B21B7CD1EB00BCDE5F /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = ThirthParty/AMap/AMap.bundle; sourceTree = "<group>"; };
 		844395B81B402E6500C92AD5 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = ThirthParty/ASIHttpRequest/ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		844395B91B402E6500C92AD5 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = ThirthParty/ASIHttpRequest/ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		844395BA1B402E6500C92AD5 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = ThirthParty/ASIHttpRequest/ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -347,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842E02B41B7CD1FE00BCDE5F /* AMap.bundle in Frameworks */,
 				849FD00C1B7B844D001A805C /* Security.framework in Frameworks */,
 				849FD00A1B7B8446001A805C /* libstdc++.6.0.9.dylib in Frameworks */,
 				849FD0081B7B843B001A805C /* libz.dylib in Frameworks */,
@@ -511,6 +515,7 @@
 		849FCFF61B7B834E001A805C /* AMap */ = {
 			isa = PBXGroup;
 			children = (
+				842E02B21B7CD1EB00BCDE5F /* AMap.bundle */,
 				849FCFF71B7B838D001A805C /* AMapSearchKit.framework */,
 				849FCFF81B7B838D001A805C /* MAMapKit.framework */,
 			);
@@ -937,6 +942,7 @@
 				84F053DF1B11A5EB00C441AC /* lefttab_select_2.png in Resources */,
 				84EFF6871B4C1D8A00080783 /* Reader-Button-H@2x.png in Resources */,
 				84EFF68B1B4C1D8A00080783 /* Reader-Email@2x.png in Resources */,
+				842E02B31B7CD1EB00BCDE5F /* AMap.bundle in Resources */,
 				84B5D79A1B0B8967006F413D /* Main.storyboard in Resources */,
 				84F053DA1B1171C100C441AC /* lefttab_3.png in Resources */,
 				84B5D7991B0B8967006F413D /* LaunchScreen.xib in Resources */,
