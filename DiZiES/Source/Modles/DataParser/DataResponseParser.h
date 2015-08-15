@@ -29,3 +29,10 @@
 @property (nonatomic, strong) NSMutableArray *flordListArray;
 
 @end
+
+@interface SignInResponseParse : DataResponseParser
+
+@property (nonatomic) int success;
+
+@end
+

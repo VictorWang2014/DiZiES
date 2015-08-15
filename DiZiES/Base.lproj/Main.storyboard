@@ -515,11 +515,6 @@
                                 <action selector="cancelSignInButtonClick:" destination="3cK-BW-tyZ" id="Oon-09-VwE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="vpG-P3-YrP">
-                            <connections>
-                                <action selector="completeSignInButtonClick:" destination="3cK-BW-tyZ" id="EQJ-zs-1Hn"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapContainerView" destination="azz-wV-RZ4" id="otZ-RE-mUA"/>

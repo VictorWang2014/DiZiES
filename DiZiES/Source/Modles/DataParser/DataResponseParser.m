@@ -20,6 +20,25 @@
 
 @end
 
+@implementation SignInResponseParse
+
+- (void)parserFromData:(NSString *)jsonString
+{
+    NSDictionary *dic               = [NSJSONSerialization jsonDictionaryWithString:jsonString];
+    if (dic)
+    {
+        int success           = [[dic objectForKey:@"success"] boolValue];
+        if (success == 1)
+        {
+            self.success                = 0;
+        }else
+        {
+            self.success                = 1;
+        }
+    }
+}
+
+@end
 @implementation LoginResponseParse
 
 - (void)parserFromData:(NSString *)jsonString
@@ -34,6 +53,7 @@
             NSDictionary *dataDic   = [dic objectForKey:@"data"];
             if ([dataDic isKindOfClass:[NSDictionary class]])
             {
+                AppUserInfo.userIdentifier = [dataDic objectForKey:@"id"];
                 AppUserInfo.userID = [dataDic objectForKey:@"login"];
                 AppUserInfo.capital = [dataDic objectForKey:@"no"];
 //                AppUserInfo.department = [dataDic objectForKey:@"department"];

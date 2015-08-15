@@ -55,6 +55,16 @@
     _userInforDic               = userInforDic;
 }
 
+- (void)setUserIdentifier:(NSString *)userIdentifier
+{
+    [_userInforDic setObject:userIdentifier forKey:@"useridentifier"];
+}
+
+- (NSString *)userIdentifier
+{
+    return [_userInforDic objectForKey:@"useridentifier"];
+}
+
 - (void)setUserName:(NSString *)userName
 {
     [_userInforDic setObject:userName forKey:KEY_UserName];

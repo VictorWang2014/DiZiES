@@ -20,6 +20,8 @@
 
 #define DownloadDir [FileManager getDownloadDirPath] // 用户下载保存目录
 
+#define SignInUrl   @"http://ebsctgmgt.padccc.net/restapi/index.php/regis"//用户签到url
+
 #endif
 
 

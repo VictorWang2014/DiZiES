@@ -11,6 +11,7 @@
 #define AppUserInfo     [UserInfoModle shareInstance]
 
 @interface UserInfoModle : NSObject
+@property (nonatomic, strong) NSString *userIdentifier;
 /**姓名*/
 @property (nonatomic, strong) NSString *userName;
 /**用户名*/

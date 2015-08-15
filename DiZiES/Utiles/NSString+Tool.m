@@ -31,4 +31,11 @@
     return currentDateStr;
 }
 
+- (NSString *)encodeCNString
+{
+    NSString *urlString = (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)self, NULL,(CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8 ));
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return urlString;
+}
+
 @end

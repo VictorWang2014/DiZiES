@@ -16,4 +16,6 @@
 
 + (NSString *)stringWithDateFormate:(NSString *)formate dateString:(NSString *)dateString;
 
+- (NSString *)encodeCNString;
+
 @end
