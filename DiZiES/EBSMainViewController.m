@@ -81,20 +81,25 @@
     data4.selectImageNaemStr        = @"lefttab_select_2.png";
     [_tabListArray addObject:data4];
 
+    MainDataModle *data5            = [[MainDataModle alloc] init];
+    data5.titleStr                  = @"test";
+    data5.imageNameStr              = @"lefttab_2.png";
+    data5.selectImageNaemStr        = @"lefttab_select_2.png";
+    [_tabListArray addObject:data5];
+
     [_tabTableView reloadData];
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
     if (AppUserInfo.isLogin == YES)
     {
         NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", AppUserInfo.userID, AppUserInfo.password];
+        NSLog(@"======start login");
         [DataRequest requestAsyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
-
+            NSLog(@"======log success");
         } failure:^(id data) {
-            
+            NSLog(@"======log failure");
         }];
     }
 
@@ -117,6 +122,12 @@
         [self.navigationController presentViewController:vc animated:YES completion:nil];
         return;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [SingleDownloadQueue shareInstance];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

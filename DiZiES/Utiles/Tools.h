@@ -17,5 +17,6 @@
 #import "NSJSONSerialization+Tool.h"
 #import "NSString+Tool.h"
 #import "DownloadManager.h"
+#import "SexOperator.h"
 
 #endif

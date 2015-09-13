@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="a53-B5-85b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="a53-B5-85b">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -472,7 +472,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UAf-2U-ffD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1051" y="3079"/>
+            <point key="canvasLocation" x="-1061" y="3373"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="O83-Zv-2z9">
@@ -483,11 +483,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FDe-TJ-mC8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bcI-Uw-FvM">
-                        <rect key="frame" x="0.0" y="0.0" width="591" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azz-wV-RZ4">
-                                <rect key="frame" x="0.0" y="44" width="591" height="297"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="azz-wV-RZ4">
+                                <rect key="frame" x="89" y="44" width="591" height="297"/>
                                 <color key="backgroundColor" red="0.78035053453947367" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="297" id="CbZ-Og-Pqp"/>
@@ -931,6 +931,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="xaH-Ud-ZJN"/>
+        <segue reference="Px2-Mv-qSJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,7 @@
 #import "HomeListDataModle.h"
 #import "HomeDataHelper.h"
 #import "DownloadManager.h"
+#import "SexOperator.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, ReaderViewControllerDelegate>
 
@@ -42,7 +43,7 @@
 
 #pragma mark - View Lifecycle
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self _initView];// 视图初始化
@@ -234,6 +235,7 @@
         {
             FloderDataModel *model = [_tempArray objectAtIndex:i];
             NSLog(@"filetype %@", model.fileType);
+            NSLog(@"file url %@", model.url);
         }
         for (FloderDataModel *data in self.tempArray) {
             [HomeDataHelperContext addHomeData:data];

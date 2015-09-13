@@ -17,5 +17,11 @@
 @dynamic isExpand;
 @dynamic fileNameStr;
 @dynamic index;
+@dynamic date;
+@dynamic fileSize;
+@dynamic isDownloaded;
+@dynamic fileType;
+@dynamic isBookmarked;
+@dynamic fileID;
 
 @end

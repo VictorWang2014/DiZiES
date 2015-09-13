@@ -42,6 +42,10 @@ typedef NS_ENUM(NSInteger, DownloadState)
 @property (nonatomic, strong) NSNumber *isExpand;
 @property (nonatomic, strong) NSNumber *isDownloaded;
 
+@property long long int totalSize;
+
+@property long long int tmpSize;
+
 @property (nonatomic) DownloadState downloadState;
 
 @property (nonatomic) NSInteger index;

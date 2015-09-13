@@ -11,6 +11,8 @@
 
 #define AppDelegateContext  [[UIApplication sharedApplication] delegate]
 
+extern NSRecursiveLock *gLock;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         fileModel.fileType                  = model.fileType;
         fileModel.date                      = model.date;
         fileModel.currentNode               = model.currentNode;
-        
+        NSLog(@"file url %@", fileModel.url);
         NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@", model.fileNameStr]];
         if (![FileManager fileIsExistAtPath:filePath])// 树状结构只显示没有下载的文件
             [_listArray insertObject:fileModel atIndex:(_listArray.count )];
@@ -124,16 +124,17 @@ typedef NS_ENUM(NSInteger, FileManagerType)
     NSMutableArray *array       = [NSMutableArray arrayWithArray:[HomeDataHelperContext fetchItemsMatching:nil forAttribute:nil]];
     for (HomeListDataModle *model in array)
     {
-        NSString *filePath                  = [NSString stringWithFormat:@"%@/%@", [FileManager getDownloadDirPath], [NSString stringWithFormat:@"%@", model.fileNameStr]];
-        if ([FileManager fileIsExistAtPath:filePath])
-        {
-            FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
-            fileModel.fileNameStr           = model.fileNameStr;
-            fileModel.fatherNode            = model.fatherNode;
-            fileModel.fileSize              = model.fileSize;
-            fileModel.currentNode           = model.currentNode;
-            fileModel.date                      = model.date;
-            fileModel.url                   = [NSString stringWithFormat:@"%@/%@/content", ContentUrl, model.fileID];
+        FloderDataModel *fileModel      = [[FloderDataModel alloc] init];
+        fileModel.fileNameStr           = model.fileNameStr;
+        fileModel.fatherNode            = model.fatherNode;
+        fileModel.fileSize              = model.fileSize;
+        fileModel.currentNode           = model.currentNode;
+        fileModel.date                  = model.date;
+        fileModel.url                   = [NSString stringWithFormat:@"%@%@/content", ContentUrl, model.fileID];
+        
+        NSString *filePath                  = [FileManager downloadFilePathWithFileModel:fileModel];
+        if ([FileManager fileIsExistAtPath:filePath]) {
+            NSLog(@"+++++++++%@", filePath);
             [_listArray addObject:fileModel];
         }
     }
@@ -265,8 +266,12 @@ typedef NS_ENUM(NSInteger, FileManagerType)
         FloderDataModel *model                      = [_listArray objectAtIndex:indexPath.row];
         if ([model.fileNameStr rangeOfString:@".pdf"].location != NSNotFound)
         {
-            NSString *filePath                      = [FileManager getDownloadDirPathWithFloderModel:model];
+            NSString *filePath                      = [FileManager downloadFilePathWithFileModel:model];
             ReaderDocument *document                = [ReaderDocument withDocumentFilePath:filePath password:nil];
+            if (document == nil) {
+                NSLog(@"读取pdf文件出错");
+                return;
+            }
             ReaderViewController *readerViewController              = [[ReaderViewController alloc] initWithReaderDocument:document];
             readerViewController.delegate           = self;
             readerViewController.model              = model;
@@ -355,27 +360,28 @@ typedef NS_ENUM(NSInteger, FileManagerType)
 - (void)downloadedCellDelete:(DownloadedCell *)cell
 {
     [_listArray removeObjectAtIndex:cell.indexPath.row];
-    [FileManager deleteDownloadFileWithFloderModel:cell.fileModel];
+    [FileManager deleteFileAtFilePath:[FileManager downloadFilePathWithFileModel:cell.fileModel]];
     [_tableView reloadData];
 }
 
 #pragma mark - DownloadingCellDelegate
 - (void)downloadingCell:(DownloadingCell *)cell data:(FloderDataModel *)model
 {
-    if (model.downloadState == DownloadStateNone)
-    {
-//        cell.downloadState = DownloadStateDownloadWait;
-        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
-//    }else if (model.downloadState == DownloadStateDownloading)
+    [[SingleDownloadQueue shareInstance] downloadFileModel:model];
+//    if (model.downloadState == DownloadStateNone)
 //    {
-//        cell.downloadState = DownloadStateSuspend;
-//        cell.fileModel.downloadState = DownloadStateSuspend;
-//        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
-    }else if (model.downloadState == DownloadStateSuspend)
-    {
-//        cell.downloadState = DownloadStateDownloading;
-        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
-    }
+////        cell.downloadState = DownloadStateDownloadWait;
+//        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
+////    }else if (model.downloadState == DownloadStateDownloading)
+////    {
+////        cell.downloadState = DownloadStateSuspend;
+////        cell.fileModel.downloadState = DownloadStateSuspend;
+////        [[DownloadManager shareInstance] suspendRequestWithFileModel:model];
+//    }else if (model.downloadState == DownloadStateSuspend)
+//    {
+////        cell.downloadState = DownloadStateDownloading;
+//        [[DownloadManager shareInstance] downloadFileWithFileModel:model delegate:self];
+//    }
 }
 
 @end

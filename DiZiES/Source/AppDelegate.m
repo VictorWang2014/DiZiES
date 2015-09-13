@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 
+
+NSRecursiveLock *gLock = nil;
+
+
 @interface AppDelegate ()
 
 @end
@@ -18,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+    gLock = [[NSRecursiveLock alloc] init];
     return YES;
 }
 
