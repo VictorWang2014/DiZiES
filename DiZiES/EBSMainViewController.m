@@ -94,9 +94,9 @@
 {
     if (AppUserInfo.isLogin == YES)
     {
-        NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", AppUserInfo.userID, AppUserInfo.password];
         NSLog(@"======start login");
-        [DataRequest requestAsyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
+        NSString *queryString                   = [NSString stringWithFormat:@"&username=%@&password=%@&", AppUserInfo.userID, AppUserInfo.password];
+        [DataRequest requestSyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
             NSLog(@"======log success");
         } failure:^(id data) {
             NSLog(@"======log failure");
@@ -228,6 +228,24 @@
 - (IBAction)userRowSelect:(UIButton *)sender
 {
 //    NSLog(@"!------row select");
+}
+
+
+- (void)test
+{
+    /*
+    NSString *queryString = @"&username=yangsl&password=123580&";
+    [DataRequest requestSyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
+        
+        [DataRequest requestSyncUrl:FloderUrl responseClass:[LoginResponseParse class] success:^(id data) {
+            
+        } failure:^(id data) {
+            
+        }];
+    } failure:^(id data) {
+        
+    }];
+     */
 }
 
 @end

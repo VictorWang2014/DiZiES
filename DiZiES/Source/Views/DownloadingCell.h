@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DownloadManager.h"
+#import "HomeDataModle.h"
 
 @class DownloadingCell;
 @protocol DownloadingCellDelegate <NSObject>

@@ -43,24 +43,18 @@
 
 - (void)parserFromData:(NSString *)jsonString
 {
-    NSDictionary *dic               = [NSJSONSerialization jsonDictionaryWithString:jsonString];
-    if (dic)
-    {
-        int success           = [[dic objectForKey:@"success"] boolValue];
-        if (success == 1)
-        {
-            self.success                = 0;
-            NSDictionary *dataDic   = [dic objectForKey:@"data"];
-            if ([dataDic isKindOfClass:[NSDictionary class]])
-            {
-                AppUserInfo.userIdentifier = [dataDic objectForKey:@"id"];
-                AppUserInfo.userID = [dataDic objectForKey:@"login"];
-                AppUserInfo.capital = [dataDic objectForKey:@"no"];
-//                AppUserInfo.department = [dataDic objectForKey:@"department"];
-                AppUserInfo.userName= [dataDic objectForKey:@"fullname"];
+    NSDictionary *dic = [NSJSONSerialization jsonDictionaryWithString:jsonString];
+    if (dic) {
+        int success = [[dic objectForKey:@"status"] boolValue];
+        if (success == 0) {
+            self.success = 0;
+            NSDictionary *dataDic = [dic objectForKey:@"user"];
+            if ([dataDic isKindOfClass:[NSDictionary class]]) {
+                AppUserInfo.userID = [dataDic objectForKey:@"id"];
+                AppUserInfo.capital = [dataDic objectForKey:@"device_id"];
+                AppUserInfo.userName = [dataDic objectForKey:@"username"];
             }
-        }else
-        {
+        } else {
             self.success                = 1;
         }
     }
@@ -75,19 +69,14 @@
 {
     NSDictionary *dic               = [NSJSONSerialization jsonDictionaryWithString:jsonString];
     self.flordListArray             = [NSMutableArray array];
-    if (dic)
-    {
-        self.success                = [[dic objectForKey:@"success"] intValue];
-        if (_success)
-        {
+    if (dic) {
+        self.success                = [[dic objectForKey:@"status"] intValue];
+        if (_success == 0) {
             NSArray *dataArray      = [dic objectForKey:@"data"];
             NSLog(@"%@", dataArray);
-            if ([dataArray isKindOfClass:[NSArray class]])
-            {
-                if (dataArray.count >= 1)
-                {
-                    for (int i = 0; i < dataArray.count; i++)
-                    {
+            if ([dataArray isKindOfClass:[NSArray class]]) {
+                if (dataArray.count >= 1) {
+                    for (int i = 0; i < dataArray.count; i++) {
                         NSDictionary *subDic            = [dataArray objectAtIndex:i];
                         FloderDataModel *dataModel      = [[FloderDataModel alloc] init];
                         dataModel.fileNameStr           = [subDic objectForKey:@"name"];
@@ -96,12 +85,9 @@
                         dataModel.date                  = [NSString stringWithDateFormateWithDateString:[subDic objectForKey:@"date"]];
                         dataModel.fileType              = [subDic objectForKey:@"type"];
                         
-                        if ([[subDic objectForKey:@"type"] isEqualToString:@"folder"])
-                        {
+                        if ([[subDic objectForKey:@"type"] isEqualToString:@"folder"]) {
                             dataModel.canExpand         = [NSNumber numberWithBool:YES];
-                        }
-                        else
-                        {
+                        } else {
                             dataModel.canExpand         = [NSNumber numberWithBool:NO];
                         }
                         dataModel.isExpand              = [NSNumber numberWithBool:NO];

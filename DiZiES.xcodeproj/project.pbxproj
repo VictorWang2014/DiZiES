@@ -230,7 +230,6 @@
 		849FD0101B7B8C1B001A805C /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Source/ViewControllers/SignInViewController/SignInViewController.m; sourceTree = "<group>"; };
 		84B15E1F1B273291004761F9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ThirthParty/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		84B15E201B273291004761F9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ThirthParty/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		84B15E3F1B2F120B004761F9 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadManager.h; path = Utiles/DownloadManager.h; sourceTree = "<group>"; };
 		84B15E401B2F120B004761F9 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloadManager.m; path = Utiles/DownloadManager.m; sourceTree = "<group>"; };
 		84B5D7481B0B8608006F413D /* DiZiES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiZiES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B5D74C1B0B8608006F413D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -654,7 +653,6 @@
 				8427B0041B1DE9A3002CA442 /* NSJSONSerialization+Tool.m */,
 				8427B0061B241A80002CA442 /* NSString+Tool.h */,
 				8427B0071B241A80002CA442 /* NSString+Tool.m */,
-				84B15E3F1B2F120B004761F9 /* DownloadManager.h */,
 				84B15E401B2F120B004761F9 /* DownloadManager.m */,
 				848990281B9187FC00D1E769 /* SexOperator.h */,
 				848990291B9187FC00D1E769 /* SexOperator.m */,
@@ -706,14 +704,14 @@
 		84B5D77E1B0B8895006F413D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				849FD00E1B7B8BD2001A805C /* SignInViewController */,
-				96E257521B522E8200E509EC /* SystemSettingController */,
 				84B5D79E1B0B8A08006F413D /* EBSBaseViewController.h */,
 				84B5D79F1B0B8A08006F413D /* EBSBaseViewController.m */,
-				84F053C51B10B2AB00C441AC /* EBSMainViewController.h */,
-				84F053C61B10B2AB00C441AC /* EBSMainViewController.m */,
 				84B5D7A01B0B8A08006F413D /* EBSTabBarViewController.h */,
 				84B5D7A11B0B8A08006F413D /* EBSTabBarViewController.m */,
+				84F053C51B10B2AB00C441AC /* EBSMainViewController.h */,
+				84F053C61B10B2AB00C441AC /* EBSMainViewController.m */,
+				849FD00E1B7B8BD2001A805C /* SignInViewController */,
+				96E257521B522E8200E509EC /* SystemSettingController */,
 				84F053E11B11BC8500C441AC /* LoginViewController */,
 				84B5D79D1B0B89B3006F413D /* PersonalCenterViewController */,
 				84B5D79C1B0B899C006F413D /* FileDownloadViewController */,

@@ -19,7 +19,7 @@
 #import "HomeDataModle.h"
 #import "HomeListDataModle.h"
 #import "HomeDataHelper.h"
-#import "DownloadManager.h"
+
 #import "SexOperator.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, ReaderViewControllerDelegate>
@@ -47,7 +47,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self _initView];// 视图初始化
-    
     [self _loadData];// 首页数据初始化
 }
 
@@ -72,14 +71,13 @@
 - (void)viewWillAppear:(BOOL)animated//http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4 http://x1.zhuti.com/down/2012/11/29-win7/3D-1.jpg
 {
     [super viewWillAppear:animated];
-//    FileModel *file = [[FileModel alloc] init];
-//    file.filename = @"ceshi.mp4";
-//    file.url = @"http://videodbcdn.gw.com.cn/tv/20150615jsldb1.mp4";
-//    [[DownloadManager shareInstance] downloadWithFile:file];
-//    
-//    NSURLSessionDownloadTask *task = [[[DownloadManager shareInstance] downloadTasksDic] objectForKey:[file.filename stringByDeletingPathExtension]];
-//    self.task = task;
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [DataRequest requestAsyncUrl:@"http://ebsctgmgt.padccc.net/frontend/web/index.php?r=api/filelist&fid=0" responseClass:[FlorderResponseParse class] success:^(id data) {
+            NSLog(@"id=0");
+        } failure:^(id data) {
+            
+        }];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,10 +100,8 @@
 - (NSArray *)arrayWithCurrentNode:(NSString *)currentNode
 {
     NSMutableArray *array               = [NSMutableArray array];
-    for (HomeListDataModle *data in _listDataSourceArray)
-    {
-        if ([data.fatherNode rangeOfString:currentNode].location != NSNotFound)
-        {
+    for (HomeListDataModle *data in _listDataSourceArray) {
+        if ([data.fatherNode rangeOfString:currentNode].location != NSNotFound) {
             data.isExpand               = [NSNumber numberWithBool:NO];
             [array addObject:data];
         }
@@ -123,8 +119,7 @@
     cell.dataLabel.text             = data.date;
     
     float fileSize                  = [data.fileSize floatValue];
-    if (fileSize > 0)
-    {
+    if (fileSize > 0) {
         NSString *fileS             = [NSString stringWithFormat:@"%.2fB", fileSize];
         if (fileSize/1024.0 >= 1) {
             fileSize                = fileSize/1024.0;
@@ -224,8 +219,7 @@
     [self.tempArray removeAllObjects];
     [_hud show:NO];
     
-    
-    [self requestWithFloderId:@"1" callBack:^(id data) {
+    [self requestWithFloderId:@"0" callBack:^(id data) {
         
         [_hud hide:YES];
         [self.listArray removeAllObjects];
@@ -251,11 +245,11 @@
 {
     NSString *requestID                         = floderId;
     
-    if (floderId.length > 1)
-    {
+    if (floderId.length > 1) {
         requestID                               = [floderId substringFromIndex:floderId.length-1];
     }
-    [DataRequest requestAsyncUrl:[NSString stringWithFormat:@"%@%@/children", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
+    NSLog(@"floder id %@", floderId);
+    [DataRequest requestAsyncUrl:[NSString stringWithFormat:@"%@&fid=%@", FloderUrl, requestID] responseClass:[FlorderResponseParse class] success:^(id data) {
         if ([data isKindOfClass:[FlorderResponseParse class]])
         {
             NSMutableArray *flordersArray   = [NSMutableArray array];
@@ -263,14 +257,13 @@
             if (florderData.flordListArray.count >= 1)
             {
                 NSString *fatherNode            = @"";
-                if ([floderId isEqualToString:@"1"])
+                if ([floderId isEqualToString:@"0"])
                     fatherNode                  = @"node_0";
                 else
                     fatherNode                  = floderId;
                 //                NSLog(@"!+++++++++++++++");
                 //                NSLog(@"fathernode %@", fatherNode);
-                for (int i = 0; i < florderData.flordListArray.count; i++)
-                {
+                for (int i = 0; i < florderData.flordListArray.count; i++) {
                     FloderDataModel *data   = [florderData.flordListArray objectAtIndex:i];
                     data.fatherNode         = fatherNode;
                     data.currentNode        = [NSString stringWithFormat:@"%@_%@", fatherNode, data.fileID];
@@ -278,8 +271,7 @@
                     //                    NSLog(@"currentnode %@", data.currentNode);
                     //                    NSLog(@"filename %@", data.fileNameStr);
                     [self.tempArray addObject:data];
-                    if ([data.canExpand boolValue])
-                    {
+                    if ([data.canExpand boolValue]) {
                         NSLog(@"!-----is florder %@", data.currentNode);
                         [self.nodeArray addObject:data.currentNode];
                         [flordersArray addObject:data.currentNode];

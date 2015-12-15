@@ -17,7 +17,7 @@
 
 @interface LoginResponseParse : DataResponseParser
 
-@property (nonatomic) int success;
+@property (nonatomic) int success;// 0 成功  1 失败
 
 @end
 
@@ -25,7 +25,6 @@
 @interface FlorderResponseParse : DataResponseParser
 
 @property (nonatomic) int success;
-
 @property (nonatomic, strong) NSMutableArray *flordListArray;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "SexOperator.h"
 
-
 typedef NS_ENUM(NSInteger, DownloadQueueState)
 {
     DownloadQueueStateNone,
@@ -250,8 +249,7 @@ typedef NS_ENUM(NSInteger, DownloadQueueState)
 
 - (void)main
 {
-    while (1)
-    {
+    while (1) {
         if (_state == DownloadQueueStateNone) {
             [gLock lock];
             NSMutableArray *downloadArray = [FileManager getDownloadingFileModelOfPlist];

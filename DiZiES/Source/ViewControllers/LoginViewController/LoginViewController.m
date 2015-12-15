@@ -53,37 +53,30 @@
 
 - (void)loginRequest
 {
-    NSString *queryString                   = [NSString stringWithFormat:@"&user=%@&pass=%@", _userNameTextFeild.text, _passwordTextFeild.text];
+    NSString *queryString = [NSString stringWithFormat:@"&username=%@&password=%@&", _userNameTextFeild.text, _passwordTextFeild.text];
     [DataRequest requestSyncUrl:LoginUrl queryString:queryString responseClass:[LoginResponseParse class] success:^(id data) {
         NSString *alertString;
-        if (![data isKindOfClass:[LoginResponseParse class]])
-        {
-            alertString                     = @"登陆出错";
-        }
-        else
-        {
-            LoginResponseParse *da              = (LoginResponseParse *)data;
-            if (da.success == 0)
-            {
-                AppUserInfo.userID            = _userNameTextFeild.text;
-                AppUserInfo.password            = _passwordTextFeild.text;
-                AppUserInfo.isLogin             = YES;
-                UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        if (![data isKindOfClass:[LoginResponseParse class]]) {
+            alertString = @"登陆出错";
+        } else {
+            LoginResponseParse *da = (LoginResponseParse *)data;
+            if (da.success == 0) {
+                AppUserInfo.userName = _userNameTextFeild.text;
+                AppUserInfo.password = _passwordTextFeild.text;
+                AppUserInfo.isLogin = YES;
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
                 [alertView show];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alertView dismissWithClickedButtonIndex:0 animated:NO];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
-            }else
-            {
-                UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录失败" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+            } else {
+                UIAlertView *alertView              = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户登录失败,请重新登录" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
                 [alertView show];
             }
         }
-    } failure:^(id data) {
-        
-    }];
+    } failure:^(id data) {}];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

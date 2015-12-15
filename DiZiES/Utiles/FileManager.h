@@ -63,15 +63,15 @@
 
 
 @interface FileManager (DownloadFileManger)
-
+// 下载文件，下载中临时存放的路径
 + (NSString *)tempDownloadFilePathWithFileModel:(FloderDataModel *)model;
-
+// 下载文件，下载完成保存的路径
 + (NSString *)downloadFilePathWithFileModel:(FloderDataModel *)model;
-
+// 删除暂停文件列表
 + (BOOL)deleteSuspendPlistFileModel:(FloderDataModel *)model;
 
 + (BOOL)deleteDownloadingPlistFileModel:(FloderDataModel *)model;
-
+//
 + (BOOL)addSuspendPlistFileModel:(FloderDataModel *)model;
 
 + (BOOL)addDownloadingPlistFileModel:(FloderDataModel *)model;

@@ -50,6 +50,7 @@
     dispatch_async(queue, ^{
         NSError *error;
         NSString *responseString            = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] usedEncoding:nil error:&error];
+        NSLog(@"%@", responseString);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error)
             {
